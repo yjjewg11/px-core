@@ -145,4 +145,12 @@ public class User extends IdEntity {
 		create_time = createTime;
 	}
 
+	public String getOffice() {
+		return office;
+	}
+
+	public void setOffice(String office) {
+		this.office = office;
+	}
+
 }

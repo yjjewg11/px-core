@@ -26,10 +26,16 @@ public class CookbookPlan extends IdEntity{
 	  private String time_5;//早餐
 	  @Column
 	  private Date plandate;
-	  
-	  
+	  @Column
+	  private String analysis;
 
 
+	public String getAnalysis() {
+		return analysis;
+	}
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
+	}
 	public Date getPlandate() {
 		return plandate;
 	}
