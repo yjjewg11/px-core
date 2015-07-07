@@ -1,6 +1,6 @@
 package com.company.news.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,17 +28,17 @@ public class Student extends IdEntity {
 	@Column
 	private Integer sex;// 0:男,1:女
 	@Column
-	private Timestamp login_time;// 最后一次登录时间。
+	private Date login_time;// 最后一次登录时间。
 	@Column
-	private Timestamp create_time;
+	private Date create_time;
 	
 	@Column
-	private Timestamp last_login_time;// 上一次登录时间
-	public Timestamp getLast_login_time() {
+	private Date last_login_time;// 上一次登录时间
+	public Date getLast_login_time() {
 		return last_login_time;
 	}
 
-	public void setLast_login_time(Timestamp last_login_time) {
+	public void setLast_login_time(Date last_login_time) {
 		this.last_login_time = last_login_time;
 	}
 
@@ -76,6 +76,83 @@ public class Student extends IdEntity {
 	@Column
 	private String classuuid;// email
 	
+	@Column
+	private String ma_name;// email
+
+	@Column
+	private String ba_name;// email
+
+	@Column
+	private String address;// email
+
+	@Column
+	private String note;// email
+	
+	@Column
+	private String idcard;// email
+	
+	@Column
+	private String ma_work;// email
+
+	@Column
+	private String ba_work;// email
+	
+	public String getMa_name() {
+		return ma_name;
+	}
+
+	public void setMa_name(String ma_name) {
+		this.ma_name = ma_name;
+	}
+
+	public String getBa_name() {
+		return ba_name;
+	}
+
+	public void setBa_name(String ba_name) {
+		this.ba_name = ba_name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public String getIdcard() {
+		return idcard;
+	}
+
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+
+	public String getMa_work() {
+		return ma_work;
+	}
+
+	public void setMa_work(String ma_work) {
+		this.ma_work = ma_work;
+	}
+
+	public String getBa_work() {
+		return ba_work;
+	}
+
+	public void setBa_work(String ba_work) {
+		this.ba_work = ba_work;
+	}
+
 	public String getLoginname() {
 		return loginname;
 	}
@@ -116,19 +193,19 @@ public class Student extends IdEntity {
 		this.sex = sex;
 	}
 
-	public Timestamp getLogin_time() {
+	public Date getLogin_time() {
 		return login_time;
 	}
 
-	public void setLogin_time(Timestamp login_time) {
+	public void setLogin_time(Date login_time) {
 		this.login_time = login_time;
 	}
 
-	public Timestamp getCreate_time() {
+	public Date getCreate_time() {
 		return create_time;
 	}
 
-	public void setCreate_time(Timestamp create_time) {
+	public void setCreate_time(Date create_time) {
 		this.create_time = create_time;
 	}
 
