@@ -25,7 +25,9 @@ public class SystemConstants {
 	static public final Integer Ann_type_3 = Integer.valueOf(3);//
 	static public final Integer Ann_type_4 = Integer.valueOf(4);//
 
-	
+	static public final Integer Sms_type_1 = Integer.valueOf(1);//注册短信类型.
+	static public final Integer Sms_type_2 = Integer.valueOf(2);//找回密码短信类型
+
 	
 	//	
 //    static public final String UploadFile_type_myhead = "head";//我的头像
