@@ -11,7 +11,23 @@ public class SystemConstants {
 	static public final Integer UploadFile_type_head = Integer.valueOf(1);//我的头像
 	static public final Integer UploadFile_type_cook = Integer.valueOf(2);//菜谱图片
 	static public final Integer UploadFile_type_xheditorimg = Integer.valueOf(3);//xheditor编辑器菜单图片上�?
-//	
+
+	/**
+	 * 		ann_type_0:"全校公告",
+		ann_type_1:"老师通知",
+		ann_type_2:"班级通知",
+		ann_type_3:"招生计划",
+		ann_type_4:"文章分享",
+	 */
+	static public final Integer Ann_type_0 = Integer.valueOf(0);//
+	static public final Integer Ann_type_1 = Integer.valueOf(1);//
+	static public final Integer Ann_type_2 = Integer.valueOf(2);//
+	static public final Integer Ann_type_3 = Integer.valueOf(3);//
+	static public final Integer Ann_type_4 = Integer.valueOf(4);//
+
+	
+	
+	//	
 //    static public final String UploadFile_type_myhead = "head";//我的头像
 //    static public final String UploadFile_type_identity_card ="identity";//身份�?
 //    static public final String UploadFile_type_marathon = "marathon";//马拉松认证照�?
