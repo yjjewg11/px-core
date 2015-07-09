@@ -38,6 +38,16 @@ public class User extends IdEntity {
 	@Column
 	private String office;// 职位。
 	@Column
+	private String img;// 头像。
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	@Column
 	private Timestamp last_login_time;// 上一次登录时间
 	public Timestamp getLast_login_time() {
 		return last_login_time;
