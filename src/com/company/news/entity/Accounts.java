@@ -30,7 +30,27 @@ public class Accounts extends IdEntity {
 	@Column
 	private String classuuid;// 坐标
 	@Column
+	private String studentuuid;// 学生uuid
+	@Column
+	private String studentname;// 学生名
+	@Column
 	private Integer type;// 坐标
+
+	public String getStudentuuid() {
+		return studentuuid;
+	}
+
+	public void setStudentuuid(String studentuuid) {
+		this.studentuuid = studentuuid;
+	}
+
+	public String getStudentname() {
+		return studentname;
+	}
+
+	public void setStudentname(String studentname) {
+		this.studentname = studentname;
+	}
 
 	public Integer getType() {
 		return type;

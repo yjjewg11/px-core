@@ -20,6 +20,8 @@ public class RestConstants {
   static public String Return_ResponseMessage_success="success";
   //请求list
   static public String Return_ResponseMessage_list="list";
+  //请求md5
+  static public String Return_ResponseMessage_md5="md5";
   //请求返回状态-失败
   static public String Return_ResponseMessage_failed="failed";
   //请求返回状态-无权限
