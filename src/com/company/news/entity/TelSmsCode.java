@@ -22,8 +22,18 @@ public class TelSmsCode extends IdEntity{
   private String code;//验证码
   @Column
   private Timestamp createtime;//创建时间
+  @Column
+  private Integer type;//0:老师账号 1：家长账号
+  
+  public Integer getType() {
+	return type;
+}
 
-  public String getTel() {
+public void setType(Integer type) {
+	this.type = type;
+}
+
+public String getTel() {
     return tel;
   }
 
