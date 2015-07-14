@@ -20,18 +20,53 @@ public class Student extends IdEntity {
 	@Column
 	private String loginname;// 登录名。手机号码或邮箱
 	@Column
-	private String name;// 昵称
+	private String name;// 姓名.
 	@Column
 	private String password;// 密码，md5加密。（UTF-8）
 	@Column
-	private String nickname;// 电话号码。
+	private String nickname;// 昵称
 	@Column
 	private Integer sex;// 0:男,1:女
 	@Column
 	private Date login_time;// 最后一次登录时间。
 	@Column
-	private Date create_time;
-	
+	private Date create_time;//创建时间
+	@Column
+	private String headimg;// 头像
+	@Column
+	private String birthday;// 生日.2015-07-14
+	@Column
+	private String ma_tel;// 妈妈电话
+	@Column
+	private String ba_tel;// 爸爸电话
+	@Column
+	private String nai_tel;// 奶奶电话
+	@Column
+	private String ye_tel;// 爷爷电话
+	@Column
+	private String waipo_tel;// 外婆电话
+	@Column
+	private String waigong_tel;//外公电话
+	@Column
+	private String other_tel;// 其他人电话
+	@Column
+	private String groupuuid;// 关联学校
+	@Column
+	private String classuuid;//关联班级
+	@Column
+	private String ma_name;// 妈妈姓名
+	@Column
+	private String ba_name;// 爸爸姓名
+	@Column
+	private String address;// 家庭住址
+	@Column
+	private String note;// 备注
+	@Column
+	private String idcard;// 
+	@Column
+	private String ma_work;// 妈妈工作单位
+	@Column
+	private String ba_work;// 爸爸工作单位
 	@Column
 	private Date last_login_time;// 上一次登录时间
 	public Date getLast_login_time() {
@@ -42,60 +77,7 @@ public class Student extends IdEntity {
 		this.last_login_time = last_login_time;
 	}
 
-	@Column
-	private String headimg;// 用户类型。0:普通用户(默认)；1:组织管理员
-
-	@Column
-	private String birthday;// email
-
-
-	@Column
-	private String ma_tel;// email
-
-	@Column
-	private String ba_tel;// email
-
-	@Column
-	private String nai_tel;// email
-
-	@Column
-	private String ye_tel;// email
-
-	@Column
-	private String waipo_tel;// email
-
-	@Column
-	private String waigong_tel;// email
-
-	@Column
-	private String other_tel;// email
-
-	@Column
-	private String groupuuid;// email
 	
-	@Column
-	private String classuuid;// email
-	
-	@Column
-	private String ma_name;// email
-
-	@Column
-	private String ba_name;// email
-
-	@Column
-	private String address;// email
-
-	@Column
-	private String note;// email
-	
-	@Column
-	private String idcard;// email
-	
-	@Column
-	private String ma_work;// email
-
-	@Column
-	private String ba_work;// email
 	
 	public String getMa_name() {
 		return ma_name;
