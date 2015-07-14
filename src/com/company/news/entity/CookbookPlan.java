@@ -13,21 +13,21 @@ public class CookbookPlan extends IdEntity{
 	
 
 	  @Column
-	  private String groupuuid;//机构ID
+	  private String groupuuid;//幼儿园id(显示名称)
 	  @Column
 	  private String time_1;//早餐
 	  @Column
-	  private String time_2;//早餐
+	  private String time_2;//早上加餐
 	  @Column
-	  private String time_3;//早餐
+	  private String time_3;//午餐
 	  @Column
-	  private String time_4;//早餐
+	  private String time_4;//下午加餐
 	  @Column
-	  private String time_5;//早餐
+	  private String time_5;//晚餐
 	  @Column
-	  private Date plandate;
+	  private Date plandate;//日期(年月日)
 	  @Column
-	  private String analysis;
+	  private String analysis;//营养分析(纯文本)
 
 
 	public String getAnalysis() {

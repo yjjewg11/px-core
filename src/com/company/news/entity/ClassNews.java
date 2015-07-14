@@ -9,23 +9,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "px_classnews")
 public class ClassNews extends IdEntity {
-
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
-	private Timestamp reply_time;// 创建时间
+	private Timestamp reply_time;// 回复时间
 	@Column
-	private Timestamp update_time;// 创建时间
+	private Timestamp update_time;// 更新时间
 	@Column
-	private String classuuid;// 品牌名称
+	private String classuuid;// 关联班级uuid(显示班级名称)
 	@Column
-	private String title;// 品牌名称
+	private String title;// 标题
 	@Column
-	private String content;// 公司全称
+	private String content;// 内容(HTML格式)
 	@Column
-	private String create_user;// 品牌名称
+	private String create_user;// 创建人
 	@Column
-	private String create_useruuid;// 公司全称
+	private String create_useruuid;// 创建人uuid
 
 	public Timestamp getReply_time() {
 		return reply_time;

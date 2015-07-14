@@ -11,14 +11,13 @@ import javax.persistence.Table;
 @Table(name="px_teachingplan") 
 public class Teachingplan extends IdEntity{
 	  @Column
-	  private Date plandate;//创建时间
+	  private Date plandate;//日期.年月日
 	  @Column
-	  private String morning;//品牌名称
+	  private String morning;//上午课程
 	  @Column
-	  private String afternoon;//公司全称
-	  
+	  private String afternoon;//下午课程
 	  @Column
-	  private String classuuid;//品牌名称
+	  private String classuuid;//关联班级uuid(显示班级名)
 	  public String getClassuuid() {
 		return classuuid;
 	}

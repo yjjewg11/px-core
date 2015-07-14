@@ -14,19 +14,19 @@ public class Announcements extends IdEntity{
 	  @Column
 	  private Timestamp create_time;//创建时间
 	  @Column
-	  private String create_user;//品牌名称
+	  private String create_user;//创建人
 	  @Column
-	  private String create_useruuid;//公司全称
+	  private String create_useruuid;//创建人uuid
 	  @Column
 	  private Integer isimportant;//类型：'0:普通 1：重要',
 	  @Column
-	  private String title;//坐标
+	  private String title;//标题
 	  @Column
-	  private String message;//电话
+	  private String message;//内容(HTML)
 	  @Column
 	  private Integer type;//类型'0:普通通知 1:内部通知 2：班级通知',
 	  @Column
-	  private String groupuuid;//坐标	 
+	  private String groupuuid;//关联学校uuid(显示需要名称)
 	  
 	  
 	public Timestamp getCreate_time() {

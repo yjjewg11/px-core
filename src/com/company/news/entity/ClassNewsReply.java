@@ -13,13 +13,13 @@ public class ClassNewsReply extends IdEntity {
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
-	private String newsuuid;// 品牌名称
+	private String newsuuid;// 关联互动id
 	@Column
-	private String content;// 公司全称
+	private String content;// 内容(HTML)
 	@Column
-	private String create_user;// 品牌名称
+	private String create_user;// 回复人
 	@Column
-	private String create_useruuid;// 公司全称
+	private String create_useruuid;// 回复人(uuid)
 	@Column
 	private Timestamp update_time;// 创建时间
 
