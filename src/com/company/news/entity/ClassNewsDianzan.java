@@ -20,6 +20,26 @@ public class ClassNewsDianzan extends IdEntity {
 	private String create_user;// 品牌名称
 	@Column
 	private String create_useruuid;// 公司全称
+	@Column
+	private Integer type;//点赞类型 0：互动 1：公告 2：课程表 3：食谱
+	
+	
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	@Column
+	private Integer usertype;//0:老师 1：家长
+
+	public Integer getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(Integer usertype) {
+		this.usertype = usertype;
+	}
 	public Timestamp getCreate_time() {
 		return create_time;
 	}

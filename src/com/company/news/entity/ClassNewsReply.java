@@ -22,7 +22,25 @@ public class ClassNewsReply extends IdEntity {
 	private String create_useruuid;// 回复人(uuid)
 	@Column
 	private Timestamp update_time;// 创建时间
+	@Column
+	private Integer type;//点赞类型 0：互动 1：公告 2：课程表 3：食谱
+	@Column
+	private Integer usertype;//0:老师 1：家长
 
+	public Integer getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(Integer usertype) {
+		this.usertype = usertype;
+	}
+	
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
 	public Timestamp getUpdate_time() {
 		return update_time;
 	}

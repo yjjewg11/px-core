@@ -25,6 +25,16 @@ public class ClassNews extends IdEntity {
 	private String create_user;// 创建人
 	@Column
 	private String create_useruuid;// 创建人uuid
+	@Column
+	private Integer usertype;//0:老师 1：家长
+
+	public Integer getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(Integer usertype) {
+		this.usertype = usertype;
+	}
 
 	public Timestamp getReply_time() {
 		return reply_time;
