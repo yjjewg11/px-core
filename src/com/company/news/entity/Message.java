@@ -26,7 +26,7 @@ public class Message extends IdEntity{
 	  @Column
 	  private String message;//电话
 	  @Column
-	  private Integer type;//类型'0:普通通知 1:内部通知 2：班级通知',
+	  private Integer type;//类型'0:推送消息 1：站内信
 	  @Column
 	  private Integer isread;//坐标	
 	  @Column
