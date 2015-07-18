@@ -12,6 +12,22 @@ public class DBUtil {
 	
 	
 	/**
+	 * 将逗号分割的多个数据组织成 where条件 in 需要的值
+	 * uuid1,uuid2=>','uuid1','uuid2','
+	 * @return
+	 */
+	public static String stringsToWhereInValue(String strs){
+		String rstr="";
+		if(strs==null)return rstr;
+		String[] strArr=strs.split(",");
+		for(int i=0;i<strArr.length;i++){
+			rstr+="'"+strArr[i]+"',";
+		}
+		return StringOperationUtil.trimSeparatorChars(rstr);
+		
+	}
+	
+	/**
 	 * 时间字符串转成数据库时间字符串
 	 *<p><code>stringToDateByDBType</code></p>
 	 *Description:

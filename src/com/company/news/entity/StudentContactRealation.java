@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="px_rolerightrelation") 
+@Table(name="px_studentcontactrealation") 
 /**
  * 用于邀请家长,和家长注册时关联用
  * @author liumingquan
@@ -30,6 +30,10 @@ public class StudentContactRealation extends IdEntity {
 	  private Integer isreg;//0.表示该手机还没注册,可以发起邀请家长.1表示,已经注册了不能发起邀请
 	  @Column
 	private Timestamp update_time;// 更新时间,修改学生资料时如果tel有变化,就更新该时间.
+	  @Column
+	private Timestamp invite_time;// 邀请时间记录
+	  @Column
+	  private Integer invite_count;//邀请次数记录
 	public Integer getType() {
 		return type;
 	}
@@ -59,6 +63,18 @@ public class StudentContactRealation extends IdEntity {
 	}
 	public void setStudent_uuid(String student_uuid) {
 		this.student_uuid = student_uuid;
+	}
+	public Timestamp getInvite_time() {
+		return invite_time;
+	}
+	public void setInvite_time(Timestamp invite_time) {
+		this.invite_time = invite_time;
+	}
+	public Integer getInvite_count() {
+		return invite_count;
+	}
+	public void setInvite_count(Integer invite_count) {
+		this.invite_count = invite_count;
 	}
 	
 }

@@ -6,9 +6,10 @@ public class RestConstants {
   static public String LOGIN_TYPE="type";
   static public String CENSOR_DEVICE="censordevice";
   static public String Return_access_token="access_token";
-  static public String Session_UserInfo="Session_UserInfo";
+  static public String Session_UserInfo="S_UserInfo";
   static public String Session_UserInfo_rights="S_User_rights";
-  static public String Session_isAdmin="Session_isAdmin";
+  static public String Session_isAdmin="S_isAdmin";
+  static public String Session_StudentslistOfParent="S_Stus";
   static public String Popedom_RESULT_RETURN="isPower";
   static public String Popedom_RESULT_MENULIST="menulist";
   static public String Return_UserInfo="userinfo";
