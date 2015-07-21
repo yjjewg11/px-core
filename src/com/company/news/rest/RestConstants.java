@@ -19,6 +19,8 @@ public class RestConstants {
   static public String Return_ResponseMessage="ResMsg";
   //请求返回状态-成功
   static public String Return_ResponseMessage_success="success";
+  //总数
+  static public String Return_ResponseMessage_count="count";
   //请求list
   static public String Return_ResponseMessage_list="list";
   //请求md5
