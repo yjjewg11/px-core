@@ -34,17 +34,18 @@ public class SystemConstants {
 	static public final Integer UploadFile_type_xheditorimg = Integer.valueOf(3);//xheditor编辑器菜单图片上�?
 
 	/**
-	 * 		ann_type_0:"全校公告",
-		ann_type_1:"老师通知",
-		ann_type_2:"班级通知",
-		ann_type_3:"招生计划",
-		ann_type_4:"文章分享",
+	 * 		回复，浏览量，点赞，通知通用类型
 	 */
-	static public final Integer Ann_type_0 = Integer.valueOf(0);//
-	static public final Integer Ann_type_1 = Integer.valueOf(1);//
-	static public final Integer Ann_type_2 = Integer.valueOf(2);//
-	static public final Integer Ann_type_3 = Integer.valueOf(3);//
-	static public final Integer Ann_type_4 = Integer.valueOf(4);//
+
+	public static final int common_type_gonggao = 0;// 公告
+	public static final int common_type_neibutongzhi = 1;// 内部通知（教师可见）
+	public static final int common_type_banjitongzhi = 2;// 班级通知
+	public static final int common_type_jingpinwenzhang = 3;// 精品文章
+	public static final int common_type_zhaoshengjihua = 4;// 招生计划
+	public static final int common_type_jiaoxuejihua = 5;// 教学计划
+	public static final int common_type_shipu = 6;// 食谱
+	public static final int common_type_hudong = 99;// 互动类
+	
 
 	static public final Integer Sms_type_1 = Integer.valueOf(1);//注册短信类型.
 	static public final Integer Sms_type_2 = Integer.valueOf(2);//找回密码短信类型

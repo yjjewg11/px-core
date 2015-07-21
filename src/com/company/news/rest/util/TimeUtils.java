@@ -292,6 +292,40 @@ public class TimeUtils
     public static final String YYYY_MM_DD_FORMAT = "yyyy-MM-dd";
     public static final long DEFAULT_DATE = -5364691200000L;
     public static final String DEFAULTFORMAT = "yyyy-MM-dd HH:mm:ss";
+    
+    /**
+     * 当前时间本月最后一天
+     * @param sDate1
+     * @return
+     */
+    public static Date getLastDayOfMonth(Date sDate1) { 
+    	Calendar cDay1 = Calendar.getInstance(); 
+    	cDay1.setTime(sDate1); 
+    	final int lastDay = cDay1.getActualMaximum(Calendar.DAY_OF_MONTH); 
+    	Date date = cDay1.getTime(); 
+    	date.setDate(lastDay);
+    	date.setHours(23);
+    	date.setMinutes(59);
+    	date.setSeconds(59);
+    	return date; 
+    } 
+    
+    /**
+     * 当前时间本月最后一天
+     * @param sDate1
+     * @return
+     */
+    public static Date getFirstDayOfMonth(Date sDate1) { 
+    	Calendar cDay1 = Calendar.getInstance(); 
+    	cDay1.setTime(sDate1); 
+    	final int first = cDay1.getActualMinimum(Calendar.DAY_OF_MONTH); 
+    	Date date = cDay1.getTime(); 
+    	date.setDate(first);
+    	date.setHours(0);
+    	date.setMinutes(0);
+    	date.setSeconds(0);
+    	return date; 
+    } 
 }
 
 
