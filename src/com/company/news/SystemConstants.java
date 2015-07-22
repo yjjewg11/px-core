@@ -67,6 +67,10 @@ public class SystemConstants {
     
     static public String Charset="UTF-8";
     
+    //及时消息模块
+    static public final Integer Message_type_0 = Integer.valueOf(0);//推送消息.
+	static public final Integer Message_type_1 = Integer.valueOf(1);//给老师写信.
+
 }
 
 

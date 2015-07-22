@@ -14,17 +14,17 @@ public class Message extends IdEntity{
 	  @Column
 	  private Timestamp create_time;//创建时间
 	  @Column
-	  private String send_user;//品牌名称
+	  private String send_user;//发送人
 	  @Column
-	  private String send_useruuid;//公司全称
+	  private String send_useruuid;//发送人
 	  @Column
-	  private String revice_user;//品牌名称
+	  private String revice_user;//接收人
 	  @Column
-	  private String revice_useruuid;//公司全称
+	  private String revice_useruuid;//接收人
 	  @Column
-	  private String title;//坐标
+	  private String title;//标题
 	  @Column
-	  private String message;//电话
+	  private String message;//内容
 	  @Column
 	  private Integer type;//类型'0:推送消息 1：站内信
 	  @Column

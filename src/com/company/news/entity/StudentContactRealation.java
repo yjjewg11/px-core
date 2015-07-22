@@ -23,7 +23,11 @@ public class StudentContactRealation extends IdEntity {
 	 @Column
 	  private String student_uuid;//学生关联uuid
 	 @Column
+	  private String student_name;//学生关联姓名
+	 @Column
 	  private Integer type;////1:妈妈,2:爸爸,3:爷爷,4:奶奶,5:外公,6:外婆,7:其他
+	 @Column
+	  private String typename;////1:妈妈,2:爸爸,3:爷爷,4:奶奶,5:外公,6:外婆,7:其他
 	  @Column
 	  private String tel;//权限名
 	  @Column
@@ -75,6 +79,18 @@ public class StudentContactRealation extends IdEntity {
 	}
 	public void setInvite_count(Integer invite_count) {
 		this.invite_count = invite_count;
+	}
+	public String getStudent_name() {
+		return student_name;
+	}
+	public void setStudent_name(String student_name) {
+		this.student_name = student_name;
+	}
+	public String getTypename() {
+		return typename;
+	}
+	public void setTypename(String typename) {
+		this.typename = typename;
 	}
 	
 }
