@@ -70,7 +70,7 @@ public class SystemConstants {
     //及时消息模块
     static public final Integer Message_type_0 = Integer.valueOf(0);//推送消息.
 	static public final Integer Message_type_1 = Integer.valueOf(1);//给老师写信.
-
+	static public final String Message_title_xinxiang = "老师来信";//给老师写信.
 }
 
 
