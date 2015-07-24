@@ -27,6 +27,16 @@ public class DoorRecord extends IdEntity {
 	private String errcode;// 错误类型
 	@Column
 	private Date dt;// 刷卡时间
+	@Column
+	private String groupuuid;// 机构UUID
+	
+	
+	public String getGroupuuid() {
+		return groupuuid;
+	}
+	public void setGroupuuid(String groupuuid) {
+		this.groupuuid = groupuuid;
+	}
 	public String getCardid() {
 		return cardid;
 	}
