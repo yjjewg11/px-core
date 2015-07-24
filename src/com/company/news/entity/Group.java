@@ -24,8 +24,15 @@ public class Group extends IdEntity{
 	  private String link_tel;//电话
 	  @Column
 	  private String description;//  
-	  
+	  @Column
+	  private String private_key;// 密钥
 
+	public String getPrivate_key() {
+		return private_key;
+	}
+	public void setPrivate_key(String private_key) {
+		this.private_key = private_key;
+	}
 	public String getDescription() {
 		return description;
 	}
