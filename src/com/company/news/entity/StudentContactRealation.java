@@ -23,6 +23,9 @@ public class StudentContactRealation extends IdEntity {
 	 @Column
 	  private String student_uuid;//学生关联uuid
 	 @Column
+	  private String parent_uuid;//家长关联uuid
+	 
+	 @Column
 	  private String student_name;//学生关联姓名
 	 @Column
 	  private Integer type;////1:妈妈,2:爸爸,3:爷爷,4:奶奶,5:外公,6:外婆,7:其他
@@ -91,6 +94,12 @@ public class StudentContactRealation extends IdEntity {
 	}
 	public void setTypename(String typename) {
 		this.typename = typename;
+	}
+	public String getParent_uuid() {
+		return parent_uuid;
+	}
+	public void setParent_uuid(String parent_uuid) {
+		this.parent_uuid = parent_uuid;
 	}
 	
 }
