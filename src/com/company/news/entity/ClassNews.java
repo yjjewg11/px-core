@@ -5,10 +5,13 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "px_classnews")
 public class ClassNews extends IdEntity {
+	@Transient
+	private String share_url;// 分享地址.//非数据库字段.
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
@@ -98,6 +101,14 @@ public class ClassNews extends IdEntity {
 
 	public void setCreate_useruuid(String create_useruuid) {
 		this.create_useruuid = create_useruuid;
+	}
+	@Transient
+	public String getShare_url() {
+		return share_url;
+	}
+
+	public void setShare_url(String share_url) {
+		this.share_url = share_url;
 	}
 
 }

@@ -1,17 +1,17 @@
 package com.company.news.entity;
 
-import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="px_cookbookplan") 
 public class CookbookPlan extends IdEntity{
 	
-
 	  @Column
 	  private String groupuuid;//幼儿园id(显示名称)
 	  @Column
@@ -28,6 +28,16 @@ public class CookbookPlan extends IdEntity{
 	  private Date plandate;//日期(年月日)
 	  @Column
 	  private String analysis;//营养分析(纯文本)
+	  @Transient
+	  private List list_time_1;//早餐
+	@Transient
+	  private List list_time_2;//早上加餐
+	@Transient
+	  private List list_time_3;//午餐
+	@Transient
+	  private List list_time_4;//下午加餐
+	@Transient
+	  private List list_time_5;//晚餐
 
 
 	public String getAnalysis() {
@@ -77,6 +87,41 @@ public class CookbookPlan extends IdEntity{
 	}
 	public void setGroupuuid(String groupuuid) {
 		this.groupuuid = groupuuid;
+	}
+	@Transient
+	public List getList_time_1() {
+		return list_time_1;
+	}
+	public void setList_time_1(List list_time_1) {
+		this.list_time_1 = list_time_1;
+	}
+	@Transient
+	public List getList_time_2() {
+		return list_time_2;
+	}
+	public void setList_time_2(List list_time_2) {
+		this.list_time_2 = list_time_2;
+	}
+	@Transient
+	public List getList_time_3() {
+		return list_time_3;
+	}
+	public void setList_time_3(List list_time_3) {
+		this.list_time_3 = list_time_3;
+	}
+	@Transient
+	public List getList_time_4() {
+		return list_time_4;
+	}
+	public void setList_time_4(List list_time_4) {
+		this.list_time_4 = list_time_4;
+	}
+	@Transient
+	public List getList_time_5() {
+		return list_time_5;
+	}
+	public void setList_time_5(List list_time_5) {
+		this.list_time_5 = list_time_5;
 	}
 
 

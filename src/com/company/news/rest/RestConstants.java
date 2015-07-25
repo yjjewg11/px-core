@@ -21,6 +21,8 @@ public class RestConstants {
   static public String Return_ResponseMessage_success="success";
   //总数
   static public String Return_ResponseMessage_count="count";
+  //分享地址
+  static public String Return_ResponseMessage_share_url="share_url";
   //请求list
   static public String Return_ResponseMessage_list="list";
   //请求md5
@@ -51,6 +53,8 @@ public class RestConstants {
   
   //请求返回结果中业务对象
   static public String Return_G_entity="data";
+  //请求返回图片地址
+  static public String Return_G_imgUrl="imgUrl";
   
 //请求返回结果中业务对象,产生的主键id
   static public String Return_G_entity_id="data_id";
