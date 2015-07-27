@@ -32,6 +32,7 @@ public class SystemConstants {
 	static public final Integer UploadFile_type_head = Integer.valueOf(1);//我的头像
 	static public final Integer UploadFile_type_cook = Integer.valueOf(2);//菜谱图片
 	static public final Integer UploadFile_type_xheditorimg = Integer.valueOf(3);//xheditor编辑器菜单图片上�?
+	static public final Integer UploadFile_type_nocut = Integer.valueOf(4);//放在html里的图片,不裁剪只压缩上传
 
 	/**
 	 * 		回复，浏览量，点赞，通知通用类型
