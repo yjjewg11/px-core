@@ -11,7 +11,10 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="px_cookbookplan") 
 public class CookbookPlan extends IdEntity{
-	
+	@Transient
+	private String share_url;// 分享地址.//非数据库字段.
+	@Transient
+	private Integer count;// 统计浏览次数.//非数据库字段.
 	  @Column
 	  private String groupuuid;//幼儿园id(显示名称)
 	  @Column
@@ -123,6 +126,21 @@ public class CookbookPlan extends IdEntity{
 	public void setList_time_5(List list_time_5) {
 		this.list_time_5 = list_time_5;
 	}
+	@Transient
+	public String getShare_url() {
+		return share_url;
+	}
 
+	public void setShare_url(String share_url) {
+		this.share_url = share_url;
+	}
+	@Transient
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 
 }

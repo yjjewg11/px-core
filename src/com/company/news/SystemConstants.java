@@ -70,6 +70,7 @@ public class SystemConstants {
     //及时消息模块
     static public final Integer Message_type_0 = Integer.valueOf(0);//推送消息.
 	static public final Integer Message_type_1 = Integer.valueOf(1);//给老师写信.
+	static public final Integer Message_type_2 = Integer.valueOf(2);//给园长写信.
 	static public final String Message_title_xinxiang = "老师来信";//给老师写信.
 	static public final String Message_title_xinxiangjiazhang = "家长来信";//
 	
@@ -78,9 +79,12 @@ public class SystemConstants {
 	static public final Integer PushMsgDevice_type_1 = Integer.valueOf(1);//老师
 	
 	//设备注册的类型
-		static public final String PushMsgDevice_device_type_android = "android";//家长
-		static public final String PushMsgDevice_device_type_ios = "ios";//老师
-		
+	static public final String PushMsgDevice_device_type_android = "android";//
+	static public final String PushMsgDevice_device_type_ios = "ios";//
+
+	//老师通信录类型
+	static public final Integer TeacherPhone_type_0 = Integer.valueOf(0);//园长
+	static public final Integer TeacherPhone_type_1 = Integer.valueOf(1);//老师	
 		
 }
 

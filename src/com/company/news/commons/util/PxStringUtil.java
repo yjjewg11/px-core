@@ -48,6 +48,24 @@ public class PxStringUtil {
 		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
+	 * 将图片http地址替换成uuid,用于保存.
+	 * @param uuid
+	 * http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}
+	 * =>{uuid}
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String imgUrlToUuid(String url){
+		if(url==null)return null;
+		if(url.startsWith("http://")){
+			String[] st=url.split("uuid=");
+			if(st.length>0){
+				return st[st.length-1];
+			}
+		}
+		return url;
+	}
+	/**
 	 * 分享公告地址
 	 * @param str
 	 * @return

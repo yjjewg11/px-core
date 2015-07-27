@@ -9,6 +9,7 @@ public class RestConstants {
   static public String Session_UserInfo="S_UserInfo";
   static public String Session_UserInfo_rights="S_User_rights";
   static public String Session_isAdmin="S_isAdmin";
+  static public String Session_MygroupUuids="S_Mygroups";
   static public String Session_StudentslistOfParent="S_Stus";
   static public String Popedom_RESULT_RETURN="isPower";
   static public String Popedom_RESULT_MENULIST="menulist";
@@ -21,12 +22,12 @@ public class RestConstants {
   static public String Return_ResponseMessage_success="success";
   //总数
   static public String Return_ResponseMessage_count="count";
-  //分享地址
-  static public String Return_ResponseMessage_share_url="share_url";
   //请求list
   static public String Return_ResponseMessage_list="list";
   //请求md5
   static public String Return_ResponseMessage_md5="md5";
+  //分享地址.
+  static public String Return_ResponseMessage_share_url="share_url";
   //请求返回状态-失败
   static public String Return_ResponseMessage_failed="failed";
   //请求返回状态-无权限

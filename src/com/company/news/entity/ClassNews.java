@@ -12,6 +12,8 @@ import javax.persistence.Transient;
 public class ClassNews extends IdEntity {
 	@Transient
 	private String share_url;// 分享地址.//非数据库字段.
+	@Transient
+	private Integer count;// 统计浏览次数.//非数据库字段.
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
@@ -109,6 +111,14 @@ public class ClassNews extends IdEntity {
 
 	public void setShare_url(String share_url) {
 		this.share_url = share_url;
+	}
+	@Transient
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 
 }
