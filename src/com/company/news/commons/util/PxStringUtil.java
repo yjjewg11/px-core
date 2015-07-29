@@ -45,6 +45,9 @@ public class PxStringUtil {
 	 */
 	public static String imgUrlByUuid(String uuid){
 		if(uuid==null)return null;
+		if(uuid.startsWith("http://")){
+			return uuid;
+		}
 		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
@@ -76,6 +79,17 @@ public class PxStringUtil {
 		return ProjectProperties.getProperty("share_url_getAnn", "http://localhost:8080/px-rest/rest/share/getAnn.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	
+	
+	/**
+	 * 分享精品地址
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String getArticleByUuid(String uuid){
+		if(uuid==null)return null;
+		return ProjectProperties.getProperty("share_url_getArticle", "http://localhost:8080/px-rest/rest/share/getArticle.html?uuid={uuid}").replace("{uuid}", uuid);
+	}
 	/**
 	 * 分享班级互动
 	 * @param str
