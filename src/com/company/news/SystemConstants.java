@@ -45,6 +45,7 @@ public class SystemConstants {
 	public static final int common_type_zhaoshengjihua = 4;// 招生计划
 	public static final int common_type_jiaoxuejihua = 5;// 教学计划
 	public static final int common_type_shipu = 6;// 食谱
+	public static final int common_type_jingpinkecheng = 7;// 精品课程
 	public static final int common_type_hudong = 99;// 互动类
 	
 

@@ -31,7 +31,24 @@ public class Message extends IdEntity{
 	  private Integer isread;//坐标	
 	  @Column
 	  private Integer isdelete;//坐标	
+	  @Column
+	  private String group_uuid;//标题
+	  @Column
+	  private String group_name;//内容
 	  
+	  
+	public String getGroup_uuid() {
+		return group_uuid;
+	}
+	public void setGroup_uuid(String group_uuid) {
+		this.group_uuid = group_uuid;
+	}
+	public String getGroup_name() {
+		return group_name;
+	}
+	public void setGroup_name(String group_name) {
+		this.group_name = group_name;
+	}
 	public Integer getIsdelete() {
 		return isdelete;
 	}
