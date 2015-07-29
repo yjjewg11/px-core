@@ -8,9 +8,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "px_pushmsgdevice")
 public class PushMsgDevice extends IdEntity {
-
 	@Column
-	private String user_uuid;// 权限名
+	private String group_uuid;// 组织名
+	@Column
+	private String user_uuid;// 关联用户名
 	@Column
 	private Integer type;//1:表示家长版本,2表示老师版本.
 	@Column
@@ -48,6 +49,12 @@ public class PushMsgDevice extends IdEntity {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public String getGroup_uuid() {
+		return group_uuid;
+	}
+	public void setGroup_uuid(String group_uuid) {
+		this.group_uuid = group_uuid;
 	}
 	
 	
