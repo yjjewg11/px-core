@@ -18,21 +18,21 @@ import javax.persistence.Table;
 public class StudentBind extends IdEntity {
 
 	@Column
-	private String studentuuid;// 登录名。手机号码或邮箱
+	private String studentuuid;// 学生guuid
 	@Column
-	private String cardid;// 姓名.
+	private String cardid;// 卡号id.
 	@Column
-	private String create_user;// 密码，md5加密。（UTF-8）
+	private String create_user;// 绑定人 
 	@Column
-	private String create_useruuid;// 昵称
+	private String create_useruuid;// 绑定人 uuid
 	@Column
-	private Integer type;// 0:男,1:女
+	private Integer type;// 
 	@Column
 	private Date createtime;// 最后一次登录时间。
 	@Column
-	private String note;// 头像
+	private String note;// 
 	@Column
-	private String name;// 生日.2015-07-14
+	private String name;// 卡号绑定的用户名
 	public String getStudentuuid() {
 		return studentuuid;
 	}

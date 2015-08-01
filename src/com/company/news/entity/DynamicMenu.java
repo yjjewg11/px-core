@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "px_DynamicMenu")
+@Table(name = "px_dynamicmenu")
 public class DynamicMenu extends IdEntity {
 
 	@Column

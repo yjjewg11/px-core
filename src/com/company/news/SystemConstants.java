@@ -88,6 +88,13 @@ public class SystemConstants {
 	static public final Integer TeacherPhone_type_0 = Integer.valueOf(0);//园长
 	static public final Integer TeacherPhone_type_1 = Integer.valueOf(1);//老师	
 		
+	
+	
+	//type;//0:老师签到,1:家长打卡,2:家长签到.
+	static public final Integer StudentSignRecord_type_0 = Integer.valueOf(0);//老师签到
+	static public final Integer StudentSignRecord_type_1 = Integer.valueOf(1);//家长打卡
+	static public final Integer StudentSignRecord_type_2 = Integer.valueOf(2);//家长签到	
+	
 }
 
 

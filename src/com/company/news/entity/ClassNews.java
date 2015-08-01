@@ -1,6 +1,7 @@
 package com.company.news.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,14 +26,18 @@ public class ClassNews extends IdEntity {
 	@Column
 	private String title;// 标题
 	@Column
-	private String content;// 内容(HTML格式)
+	private String content;// 内容(ubb格式)
+
 	@Column
 	private String create_user;// 创建人
 	@Column
 	private String create_useruuid;// 创建人uuid
 	@Column
 	private Integer usertype;//0:老师 1：家长
-
+	@Column
+	private String imgs;// img 的uuid多个逗号分割.
+	@Transient
+	private List imgsList;// 统计浏览次数.//非数据库字段.
 	public Integer getUsertype() {
 		return usertype;
 	}
@@ -119,6 +124,22 @@ public class ClassNews extends IdEntity {
 
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+
+	public String getImgs() {
+		return imgs;
+	}
+
+	public void setImgs(String imgs) {
+		this.imgs = imgs;
+	}
+	@Transient
+	public List getImgsList() {
+		return imgsList;
+	}
+
+	public void setImgsList(List imgsList) {
+		this.imgsList = imgsList;
 	}
 
 }
