@@ -1,5 +1,8 @@
 package com.company.news.commons.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.company.news.ProjectProperties;
@@ -67,6 +70,28 @@ public class PxStringUtil {
 			}
 		}
 		return url;
+	}
+	
+	/**
+	 * 将图片uuid替换成可以下载的http地址.
+	 * 
+	 * @param uuids
+	 * @return List
+	 *   a,b,c=>http://img/a.jpg
+	 * date&author: 2009-3-25 
+	 */
+	public static List uuids_to_imgurlList(String uuids){
+		List list=new ArrayList();
+		if(StringUtils.isBlank(uuids))return list;
+		
+		for(String uuid:uuids.split(",")){
+			if(uuid.startsWith("http://")){
+				list.add(uuid);
+			}else{
+				list.add(ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid));
+			}
+		}
+		return list;
 	}
 	/**
 	 * 分享公告地址
