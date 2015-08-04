@@ -345,5 +345,5 @@ package com.company.news;
 ".x_t"="application/x-x_t"
  */
 public class ContentTypeConstants {
-    static public String Image_gif="image/gif";
+    static public String Image_png="image/png";
 }
