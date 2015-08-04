@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.company.news.ProjectProperties;
+import com.company.news.cache.CommonsCache;
+import com.company.news.entity.UploadFile4Q;
+import com.company.news.service.UploadFileService;
 
 public class PxStringUtil {
 	/**
@@ -40,6 +43,29 @@ public class PxStringUtil {
 		return StringDecComma(str,null);
 	}
 	
+	
+
+	/**
+	 * 将图片uuid替换成可以下载的http地址.
+	 * @param uuid
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String imgSmallUrlByUuid(String uuid){
+		if(uuid==null)return null;
+		if(uuid.startsWith("http://")){
+			return uuid;
+		}
+		if (UploadFileService.uploadfiletype.equals("oss")) {
+			UploadFile4Q q=(UploadFile4Q)CommonsCache.get(uuid, UploadFile4Q.class);
+			if(q==null)return "";
+			String s= ProjectProperties.getProperty("oss_Small_img_down_url", "http://img.wenjienet.com/{object}@60h").replace("{object}",q.getFile_path() );
+			s+="?uuid="+uuid;//必须添加用于保存时,转为uuid保存.
+			return s;
+		}
+		
+		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
+	}
 	/**
 	 * 将图片uuid替换成可以下载的http地址.
 	 * @param uuid
@@ -51,6 +77,14 @@ public class PxStringUtil {
 		if(uuid.startsWith("http://")){
 			return uuid;
 		}
+		if (UploadFileService.uploadfiletype.equals("oss")) {
+			UploadFile4Q q=(UploadFile4Q)CommonsCache.get(uuid, UploadFile4Q.class);
+			if(q==null)return "";
+			String s= ProjectProperties.getProperty("oss_img_down_url", "http://img.wenjienet.com/{object}@60h").replace("{object}",q.getFile_path() );
+			s+="?uuid="+uuid;//必须添加用于保存时,转为uuid保存.
+			return s;
+		}
+		
 		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
@@ -85,11 +119,7 @@ public class PxStringUtil {
 		if(StringUtils.isBlank(uuids))return list;
 		
 		for(String uuid:uuids.split(",")){
-			if(uuid.startsWith("http://")){
-				list.add(uuid);
-			}else{
-				list.add(ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid));
-			}
+				list.add(imgUrlByUuid(uuid));
 		}
 		return list;
 	}
