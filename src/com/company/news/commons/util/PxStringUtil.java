@@ -66,14 +66,18 @@ public class PxStringUtil {
 		
 		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
+	
 	/**
 	 * 将图片uuid替换成可以下载的http地址.
 	 * @param uuid
 	 * @return
+	 * uuid1,uuid2
+	 * =>
+	 * http://ddd/uuid1,http://ddd/uuid1,
 	 * date&author: 2009-3-25 
 	 */
-	public static String imgUrlByUuid(String uuid){
-		if(uuid==null)return null;
+	private static String imgUrlByUuid_sub(String uuid){
+		if(uuid==null)return "";
 		if(uuid.startsWith("http://")){
 			return uuid;
 		}
@@ -88,22 +92,53 @@ public class PxStringUtil {
 		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
+	 * 将图片uuid替换成可以下载的http地址.
+	 * @param uuid
+	 * @return
+	 * uuid1,uuid2
+	 * =>
+	 * http://ddd/uuid1,http://ddd/uuid1,
+	 * date&author: 2009-3-25 
+	 */
+	public static String imgUrlByUuid(String urls){
+		if(urls==null)return null;
+		urls=PxStringUtil.StringDecComma(urls);
+		String uuids="";
+		for(String url:urls.split(",")){
+				String tmp=imgUrlByUuid_sub(url);
+				if(StringUtils.isNotBlank(tmp))uuids+=","+tmp;
+		}
+		return PxStringUtil.StringDecComma(uuids);
+	}
+	/**
 	 * 将图片http地址替换成uuid,用于保存.
 	 * @param uuid
-	 * http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}
+	 * http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid},http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid},
 	 * =>{uuid}
+	 * 
+	 * or
+	 * 	 * uuid1,uuid2
+	 * =>uuid1,uuid2
+	 * 
 	 * @return
 	 * date&author: 2009-3-25 
 	 */
-	public static String imgUrlToUuid(String url){
-		if(url==null)return null;
-		if(url.startsWith("http://")){
-			String[] st=url.split("uuid=");
-			if(st.length>0){
-				return st[st.length-1];
+	public static String imgUrlToUuid(String urls){
+		if(urls==null)return null;
+		urls=PxStringUtil.StringDecComma(urls);
+		String uuids="";
+		for(String url:urls.split(",")){
+			if(url.startsWith("http://")){
+				String[] st=url.split("uuid=");
+				if(st.length>0){
+					uuids+=","+ st[st.length-1];
+				}
+			}else{
+				uuids+=","+url;
 			}
 		}
-		return url;
+		
+		return PxStringUtil.StringDecComma(uuids);
 	}
 	
 	/**
