@@ -36,6 +36,15 @@ public class Parent extends IdEntity {
 
 	@Column
 	private Timestamp last_login_time;// 上一次登录时间
+	@Column
+	private Integer type;// '1:妈妈' 2:爸爸 3：爷爷 4：奶奶 5：外公 6：外婆
+
+	@Column
+	private String email;// email
+	
+	@Column
+	private String img;// 头像。
+	
 	public Timestamp getLast_login_time() {
 		return last_login_time;
 	}
@@ -44,11 +53,6 @@ public class Parent extends IdEntity {
 		this.last_login_time = last_login_time;
 	}
 
-	@Column
-	private Integer type;// '1:妈妈' 2:爸爸 3：爷爷 4：奶奶 5：外公 6：外婆
-
-	@Column
-	private String email;// email
 
 	public String getEmail() {
 		return email;
@@ -133,6 +137,14 @@ public class Parent extends IdEntity {
 
 	public void setCreate_time(Timestamp createTime) {
 		create_time = createTime;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 }

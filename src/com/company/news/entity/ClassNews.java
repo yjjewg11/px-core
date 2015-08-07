@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.company.news.query.PageQueryResult;
+import com.company.news.vo.DianzanListVO;
+
 @Entity
 @Table(name = "px_classnews")
 public class ClassNews extends IdEntity {
@@ -38,6 +41,26 @@ public class ClassNews extends IdEntity {
 	private String imgs;// img 的uuid多个逗号分割.
 	@Transient
 	private List imgsList;// 统计浏览次数.//非数据库字段.
+	@Transient
+	private PageQueryResult replyPage;// 回复第一页数据
+	@Transient
+	private DianzanListVO dianzan;// 点赞数据
+	@Transient
+	public DianzanListVO getDianzan() {
+		return dianzan;
+	}
+
+	public void setDianzan(DianzanListVO dianzan) {
+		this.dianzan = dianzan;
+	}
+	@Transient
+	public PageQueryResult getReplyPage() {
+		return replyPage;
+	}
+
+	public void setReplyPage(PageQueryResult replyPage) {
+		this.replyPage = replyPage;
+	}
 	public Integer getUsertype() {
 		return usertype;
 	}
@@ -141,5 +164,6 @@ public class ClassNews extends IdEntity {
 	public void setImgsList(List imgsList) {
 		this.imgsList = imgsList;
 	}
+	
 
 }
