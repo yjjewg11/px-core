@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.company.news.query.PageQueryResult;
+import com.company.news.vo.DianzanListVO;
+
 @Entity
 @Table(name="px_announcements") 
 public class Announcements extends IdEntity{
@@ -28,7 +31,26 @@ public class Announcements extends IdEntity{
 	  @Column
 	  private String groupuuid;//关联学校uuid(显示需要名称)
 	  
-	  
+	  @Transient
+		private PageQueryResult replyPage;// 回复第一页数据
+		@Transient
+		private DianzanListVO dianzan;// 点赞数据
+		@Transient
+		public DianzanListVO getDianzan() {
+			return dianzan;
+		}
+
+		public void setDianzan(DianzanListVO dianzan) {
+			this.dianzan = dianzan;
+		}
+		@Transient
+		public PageQueryResult getReplyPage() {
+			return replyPage;
+		}
+
+		public void setReplyPage(PageQueryResult replyPage) {
+			this.replyPage = replyPage;
+		}
 	public Timestamp getCreate_time() {
 		return create_time;
 	}

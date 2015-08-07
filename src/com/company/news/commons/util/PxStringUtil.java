@@ -51,8 +51,28 @@ public class PxStringUtil {
 	 * @return
 	 * date&author: 2009-3-25 
 	 */
-	public static String imgSmallUrlByUuid(String uuid){
-		if(uuid==null)return null;
+	public static String imgSmallUrlByUuid(String urls){
+		if(urls==null)return null;
+		urls=PxStringUtil.StringDecComma(urls);
+		String uuids="";
+		for(String url:urls.split(",")){
+				String tmp=imgUrlByUuid_sub(url);
+				if(StringUtils.isNotBlank(tmp))uuids+=","+tmp;
+		}
+		return PxStringUtil.StringDecComma(uuids);
+	}
+	
+	/**
+	 * 将图片uuid替换成可以下载的http地址.
+	 * @param uuid
+	 * @return
+	 * uuid1,uuid2
+	 * =>
+	 * http://ddd/uuid1,http://ddd/uuid1,
+	 * date&author: 2009-3-25 
+	 */
+	private static String imgSmallUrlByUuid_sub(String uuid){
+		if(uuid==null)return "";
 		if(uuid.startsWith("http://")){
 			return uuid;
 		}

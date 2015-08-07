@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.company.news.query.PageQueryResult;
+import com.company.news.vo.DianzanListVO;
+
 @Entity
 @Table(name="px_teachingplan") 
 public class Teachingplan extends IdEntity{
@@ -21,9 +24,31 @@ public class Teachingplan extends IdEntity{
 	  private String afternoon;//下午课程
 	  @Column
 	  private String classuuid;//关联班级uuid(显示班级名)
-	  
 		@Column
 		  private String create_useruuid;
+		
+		
+
+		@Transient
+		private PageQueryResult replyPage;// 回复第一页数据
+		@Transient
+		private DianzanListVO dianzan;// 点赞数据
+		@Transient
+		public DianzanListVO getDianzan() {
+			return dianzan;
+		}
+
+		public void setDianzan(DianzanListVO dianzan) {
+			this.dianzan = dianzan;
+		}
+		@Transient
+		public PageQueryResult getReplyPage() {
+			return replyPage;
+		}
+
+		public void setReplyPage(PageQueryResult replyPage) {
+			this.replyPage = replyPage;
+		}
 	  public String getClassuuid() {
 		return classuuid;
 	}

@@ -299,15 +299,19 @@ public class TimeUtils
      * @return
      */
     public static Date getLastDayOfMonth(Date sDate1) { 
-    	Calendar cDay1 = Calendar.getInstance(); 
-    	cDay1.setTime(sDate1); 
-    	final int lastDay = cDay1.getActualMaximum(Calendar.DAY_OF_MONTH); 
-    	Date date = cDay1.getTime(); 
-    	date.setDate(lastDay);
-    	date.setHours(23);
-    	date.setMinutes(59);
-    	date.setSeconds(59);
-    	return date; 
+//    	Calendar cDay1 = Calendar.getInstance(); 
+//    	cDay1.setTime(sDate1); 
+//    	final int lastDay = cDay1.getActualMaximum(Calendar.DAY_OF_MONTH); 
+//    	Date date = cDay1.getTime(); 
+//    	date.setDate(lastDay);
+//    	date.setHours(23);
+//    	date.setMinutes(59);
+//    	date.setSeconds(59);
+    	
+    	 Calendar calendar = Calendar.getInstance();     
+    	    calendar.set(Calendar.DAY_OF_MONTH, calendar     
+    	            .getActualMaximum(Calendar.DAY_OF_MONTH));   
+    	return calendar.getTime(); 
     } 
     
     /**
@@ -316,15 +320,19 @@ public class TimeUtils
      * @return
      */
     public static Date getFirstDayOfMonth(Date sDate1) { 
-    	Calendar cDay1 = Calendar.getInstance(); 
-    	cDay1.setTime(sDate1); 
-    	final int first = cDay1.getActualMinimum(Calendar.DAY_OF_MONTH); 
-    	Date date = cDay1.getTime(); 
-    	date.setDate(first);
-    	date.setHours(0);
-    	date.setMinutes(0);
-    	date.setSeconds(0);
-    	return date; 
+//    	Calendar cDay1 = Calendar.getInstance(); 
+//    	cDay1.setTime(sDate1); 
+//    	final int first = cDay1.getActualMinimum(Calendar.DAY_OF_MONTH); 
+//    	Date date = cDay1.getTime(); 
+//    	date.setDate(first);
+//    	date.setHours(0);
+//    	date.setMinutes(0);
+//    	date.setSeconds(0);
+    	
+    	Calendar calendar = Calendar.getInstance();     
+        calendar.set(Calendar.DAY_OF_MONTH, calendar     
+                .getActualMinimum(Calendar.DAY_OF_MONTH));     
+    	return calendar.getTime(); 
     } 
 }
 
