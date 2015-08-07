@@ -13,7 +13,7 @@ public class DBUtil {
 	
 	/**
 	 * 将逗号分割的多个数据组织成 where条件 in 需要的值
-	 * uuid1,uuid2=>','uuid1','uuid2','
+	 * uuid1,uuid2=>'uuid1','uuid2'
 	 * @return
 	 */
 	public static String stringsToWhereInValue(String strs){
