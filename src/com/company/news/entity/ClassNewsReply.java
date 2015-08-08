@@ -5,6 +5,9 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.company.news.vo.DianzanListVO;
 
 @Entity
 @Table(name = "px_classnewsreply")
@@ -18,14 +21,28 @@ public class ClassNewsReply extends IdEntity {
 	private String content;// 内容(HTML)
 	@Column
 	private String create_user;// 回复人
+	
 	@Column
 	private String create_useruuid;// 回复人(uuid)
+	@Column
+	private String create_img;// 创建人头像
+	
 	@Column
 	private Timestamp update_time;// 创建时间
 	@Column
 	private Integer type;//点赞类型 0：互动 1：公告 2：课程表 3：食谱
 	@Column
 	private Integer usertype;//0:老师 1：家长
+	@Transient
+	private DianzanListVO dianzan;// 点赞数据
+	@Transient
+	public DianzanListVO getDianzan() {
+		return dianzan;
+	}
+
+	public void setDianzan(DianzanListVO dianzan) {
+		this.dianzan = dianzan;
+	}
 
 	public Integer getUsertype() {
 		return usertype;
@@ -87,6 +104,14 @@ public class ClassNewsReply extends IdEntity {
 
 	public void setCreate_useruuid(String create_useruuid) {
 		this.create_useruuid = create_useruuid;
+	}
+
+	public String getCreate_img() {
+		return create_img;
+	}
+
+	public void setCreate_img(String create_img) {
+		this.create_img = create_img;
 	}
 
 }
