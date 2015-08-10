@@ -78,7 +78,7 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
     String listhql = hql;
     if (StringUtils.isNotBlank(pData.getOrderFiled())) {
       if (StringUtils.isBlank(pData.getOrderType())) pData.setOrderType(PaginationData.SORT_DESC);
-      listhql += "order by " + pData.getOrderFiled() + " " + pData.getOrderType();
+      listhql += " order by " + pData.getOrderFiled() + " " + pData.getOrderType();
     }
     long startTime = 0;
     long endTime = 0;
@@ -110,10 +110,24 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
   }
 
 
+  /**
+   * 用户或老师资料修改时变更数据.
+   * @param uuid
+   * @param name
+   * @param img
+   */
+  public void updateUserInfoToBusinessData(String uuid,String name,String img) {
+	  int count=0;
+	  
+	  count= this.getHibernateTemplate().bulkUpdate(
+				"update ClassNewsReply set create_user=?,create_img=? where uuid =?",
+				name,img, uuid);
+	  this.logger.info("update ClassNewsReply count="+count);
+	  
+	  
+  }
 
-
-
-
+	
 
   /**
    * @param className
