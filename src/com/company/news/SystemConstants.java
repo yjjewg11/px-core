@@ -97,6 +97,9 @@ public class SystemConstants {
 	static public final Integer StudentSignRecord_type_1 = Integer.valueOf(1);//家长打卡
 	static public final Integer StudentSignRecord_type_2 = Integer.valueOf(2);//家长签到	
 	
+	//男女类型
+	static public final Integer User_sex_male = Integer.valueOf(0);//男
+	static public final Integer User_sex_female = Integer.valueOf(1);//女
 }
 
 
