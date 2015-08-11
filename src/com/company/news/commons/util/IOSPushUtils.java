@@ -35,10 +35,10 @@ public class IOSPushUtils {
 			 
 			 host=ProjectProperties.getProperty("ios_push_host", "gateway.sandbox.push.apple.com");
 			int port = 2195;
-			String filePath = IOSPushUtils.class.getClassLoader()
-					.getResource("").getFile();
-			filePath = filePath.split("WEB-INF")[0];
+			String filePath="";
 			try {
+				String filePathtmp = IOSPushUtils.class.getResource("").getFile();
+				filePath = filePathtmp.split("WEB-INF")[0];
 				filePath = URLDecoder.decode(filePath, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				logger.error("", e);
