@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.ObjectMetadata;
-import com.company.common.StringUtils;
+import com.company.common.PxStringUtils;
 import com.company.news.ProjectProperties;
 
 public class OssIUploadFile implements IUploadFile {
@@ -19,7 +19,7 @@ public class OssIUploadFile implements IUploadFile {
 	
 	static{
 		 client = new OSSClient(ACCESS_ID, ACCESS_KEY);
-		 if(!StringUtils.isNullOrEmpty(endpoint))
+		 if(!PxStringUtils.isNullOrEmpty(endpoint))
 	     client.setEndpoint("http://oss-cn-shenzhen.aliyuncs.com");
 	}
 	

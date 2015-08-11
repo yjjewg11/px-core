@@ -52,7 +52,7 @@ public class PropertyUtils {
      */
     public static String getProperty(String key,boolean changeEncoding) {
        initProperties();
-       if(StringUtils.isNullOrEmpty(key)){
+       if(PxStringUtils.isNullOrEmpty(key)){
            System.out.println("PropertyUtils.java中方法getProperty传入参数key为NULL或空字符串,返回NULL");
            return null;
        }
@@ -60,7 +60,7 @@ public class PropertyUtils {
        try {
         if(properties.getProperty(key)!=null){
           if(changeEncoding==true){
-             result =StringUtils.unicodeToChinese(properties.getProperty(key));
+             result =PxStringUtils.unicodeToChinese(properties.getProperty(key));
           }
           else{
              result=properties.getProperty(key);
