@@ -26,6 +26,9 @@ public class Group extends IdEntity{
 	  private String description;//  
 	  @Column
 	  private String private_key;// 密钥
+	  
+	  @Column
+	  private String img;//组织logo
 
 	public String getPrivate_key() {
 		return private_key;
@@ -84,6 +87,12 @@ public class Group extends IdEntity{
 	}
 	public void setMap_point(String mapPoint) {
 		map_point = mapPoint;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 

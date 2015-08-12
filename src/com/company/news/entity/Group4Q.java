@@ -23,7 +23,8 @@ public class Group4Q extends IdEntity{
 	  @Column
 	  private String link_tel;//电话
  
-	  
+	  @Column
+	  private String img;//组织logo
 
 	public String getLink_tel() {
 		return link_tel;
@@ -70,6 +71,12 @@ public class Group4Q extends IdEntity{
 	}
 	public void setMap_point(String mapPoint) {
 		map_point = mapPoint;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 
