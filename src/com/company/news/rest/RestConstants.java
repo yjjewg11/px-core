@@ -22,6 +22,8 @@ public class RestConstants {
   static public String Return_ResponseMessage_success="success";
   //总数
   static public String Return_ResponseMessage_count="count";
+  //总数
+  static public String Return_ResponseMessage_isFavorites="isFavor";
   //请求list
   static public String Return_ResponseMessage_list="list";
   //请求md5
