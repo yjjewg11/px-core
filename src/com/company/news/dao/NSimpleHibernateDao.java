@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.company.news.entity.Parent;
 import com.company.news.entity.User;
+import com.company.news.interfaces.SessionUserInfoInterface;
 import com.company.news.json.JSONUtils;
 import com.company.news.query.PageQueryResult;
 import com.company.news.query.PaginationData;
@@ -125,6 +126,27 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
 	  this.logger.info("update ClassNewsReply count="+count);
 	  
 	  
+  }
+
+  
+  /**
+   * 用户或老师资料修改时变更数据.
+   * @param uuid
+   * @param name
+   * @param img
+   */
+  public void updateUserInfoToBusinessData(SessionUserInfoInterface user) {
+	  int count=0;
+	  
+	  count= this.getHibernateTemplate().bulkUpdate(
+				"update ClassNewsReply set create_user=?,create_img=? where create_uuid =?",
+				user.getName(),user.getImg(), user.getUuid());
+	  this.logger.info("update ClassNewsReply count="+count);
+	  
+	  count= this.getHibernateTemplate().bulkUpdate(
+				"update ClassNews set create_user=?,create_img=? where create_uuid =?",
+				user.getName(),user.getImg(), user.getUuid());
+	  this.logger.info("update ClassNews count="+count);
   }
 
 	

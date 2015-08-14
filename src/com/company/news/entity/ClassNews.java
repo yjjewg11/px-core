@@ -8,12 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.company.news.interfaces.CreateUserInterface;
 import com.company.news.query.PageQueryResult;
 import com.company.news.vo.DianzanListVO;
 
 @Entity
 @Table(name = "px_classnews")
-public class ClassNews extends IdEntity {
+public class ClassNews extends IdEntity implements CreateUserInterface{
 	@Transient
 	private String share_url;// 分享地址.//非数据库字段.
 	@Transient
@@ -35,6 +36,8 @@ public class ClassNews extends IdEntity {
 	private String create_user;// 创建人
 	@Column
 	private String create_useruuid;// 创建人uuid
+	@Column
+	private String create_img;// 创建人头像
 	@Column
 	private Integer usertype;//0:老师 1：家长
 	@Column
@@ -163,6 +166,14 @@ public class ClassNews extends IdEntity {
 
 	public void setImgsList(List imgsList) {
 		this.imgsList = imgsList;
+	}
+
+	public String getCreate_img() {
+		return create_img;
+	}
+
+	public void setCreate_img(String create_img) {
+		this.create_img = create_img;
 	}
 	
 

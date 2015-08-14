@@ -6,9 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.company.news.interfaces.CreateUserInterface;
+
 @Entity
 @Table(name = "px_classnews")
-public class ClassNews4Q extends IdEntity {
+public class ClassNews4Q extends IdEntity implements CreateUserInterface{
 
 	@Column
 	private Timestamp create_time;// 创建时间
@@ -23,6 +25,8 @@ public class ClassNews4Q extends IdEntity {
 
 	@Column
 	private String create_user;// 品牌名称
+	@Column
+	private String create_img;// 创建人头像
 	@Column
 	private String create_useruuid;// 公司全称
 
@@ -81,6 +85,14 @@ public class ClassNews4Q extends IdEntity {
 
 	public void setCreate_useruuid(String create_useruuid) {
 		this.create_useruuid = create_useruuid;
+	}
+
+	public String getCreate_img() {
+		return create_img;
+	}
+
+	public void setCreate_img(String create_img) {
+		this.create_img = create_img;
 	}
 
 }
