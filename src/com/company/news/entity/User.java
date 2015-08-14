@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.company.news.interfaces.SessionUserInfoInterface;
+
 
 /**
  * 用户基本信息表
@@ -15,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "px_user")
-public class User extends IdEntity {
+public class User extends IdEntity implements SessionUserInfoInterface{
 
 	@Column
 	private String loginname;// 登录名。手机号码或邮箱

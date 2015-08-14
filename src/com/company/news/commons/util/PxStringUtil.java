@@ -8,6 +8,8 @@ import org.apache.commons.lang.StringUtils;
 import com.company.news.ProjectProperties;
 import com.company.news.cache.CommonsCache;
 import com.company.news.entity.UploadFile4Q;
+import com.company.news.interfaces.CreateUserInterface;
+import com.company.news.interfaces.SessionUserInfoInterface;
 import com.company.news.service.UploadFileService;
 
 public class PxStringUtil {
@@ -32,6 +34,20 @@ public class PxStringUtil {
 			str =StringUtils.substring(str, 0, str.length()-1);//new String(str.substring(0,str.length()-1));
 		}		
 		return str;
+	}
+	
+	/**
+	 * desc: 给当前数据设置创建人信息.
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static void addCreateUser(SessionUserInfoInterface user,CreateUserInterface createuser){
+		if(user==null||createuser==null)return;
+		createuser.setCreate_user(user.getName());
+		createuser.setCreate_useruuid(user.getUuid());
+		createuser.setCreate_img(user.getImg());
+		
 	}
 	/**
 	 * desc: StringDecComma 去掉给定字符串前后的sep，默认','

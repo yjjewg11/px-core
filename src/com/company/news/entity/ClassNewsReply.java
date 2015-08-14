@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.company.news.interfaces.CreateUserInterface;
 import com.company.news.vo.DianzanListVO;
 
 @Entity
 @Table(name = "px_classnewsreply")
-public class ClassNewsReply extends IdEntity {
+public class ClassNewsReply extends IdEntity implements CreateUserInterface {
 
 	@Column
 	private Timestamp create_time;// 创建时间
