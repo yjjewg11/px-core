@@ -23,8 +23,12 @@ public class Favorites extends IdEntity {
 	private Date createtime;//收藏时间
 	@Column
 	private String url;//收藏的外部URL
-
-	
+	@Column
+	private String show_uuid;//发布者uuid
+	@Column
+	private String show_name;//发布者姓名
+	@Column
+	private String show_img;//发布者头像
 	
 	public String getUser_uuid() {
 		return user_uuid;
@@ -61,6 +65,24 @@ public class Favorites extends IdEntity {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public String getShow_uuid() {
+		return show_uuid;
+	}
+	public void setShow_uuid(String show_uuid) {
+		this.show_uuid = show_uuid;
+	}
+	public String getShow_name() {
+		return show_name;
+	}
+	public void setShow_name(String show_name) {
+		this.show_name = show_name;
+	}
+	public String getShow_img() {
+		return show_img;
+	}
+	public void setShow_img(String show_img) {
+		this.show_img = show_img;
 	}
 	
 	

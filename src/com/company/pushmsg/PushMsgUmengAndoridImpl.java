@@ -1,8 +1,12 @@
 package com.company.pushmsg;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import push.android.AndroidUnicast;
 
 import com.company.news.ProjectProperties;
+import com.company.news.service.AbstractServcice;
 
 /**
  * www.umeng.com
@@ -11,7 +15,7 @@ import com.company.news.ProjectProperties;
  *
  */
 public class PushMsgUmengAndoridImpl implements PushMsgAndoridInterface {
-
+	  protected static Logger logger = LoggerFactory.getLogger(PushMsgUmengAndoridImpl.class);
 	
 	 /**
 	   * 广播所有android消息_给所有家长
@@ -21,10 +25,10 @@ public class PushMsgUmengAndoridImpl implements PushMsgAndoridInterface {
 	@Override
 	  public void androidPushMsgToSingleDevice_to_parentByChannelId(String title,String msg,String channelId)throws Exception{
 		  
-		String appkey  = ProjectProperties.getProperty("umeng_appkey_parent", "55be14c867e58ed6b800592e");
-		String appMasterSecret = ProjectProperties.getProperty("umeng_appMasterSecret_parent", "orsys1izcyjrdttcqnpgqzdazlgawxqu");
+		String appkey  = ProjectProperties.getProperty("android_umeng_appkey_parent", "55be14c867e58ed6b800592e");
+		String appMasterSecret = ProjectProperties.getProperty("android_umeng_appMasterSecret_parent", "orsys1izcyjrdttcqnpgqzdazlgawxqu");
 		String timestamp = Integer.toString((int)(System.currentTimeMillis() / 1000));
-		
+//		System.out.println("android_umeng_appkey_parent="+appkey);
 		  AndroidUnicast unicast = new AndroidUnicast();
 			unicast.setAppMasterSecret(appMasterSecret);
 			unicast.setPredefinedKeyValue("appkey", appkey);
@@ -42,6 +46,8 @@ public class PushMsgUmengAndoridImpl implements PushMsgAndoridInterface {
 			// Set customized fields
 //			unicast.setExtraField("test", "helloworld");
 			unicast.send();
+			
+			logger.info("Umeng send to parent ok!"+".title="+title+":"+msg);
 	  }
 	  
 
@@ -56,7 +62,7 @@ public class PushMsgUmengAndoridImpl implements PushMsgAndoridInterface {
 		String appkey  = ProjectProperties.getProperty("umeng_appkey_teacher", "55c1960867e58ec39000267d");
 		String appMasterSecret = ProjectProperties.getProperty("umeng_appMasterSecret_teacher", "iergffksfnffg2lx0uer7edf3zdlyv2f");
 		String timestamp = Integer.toString((int)(System.currentTimeMillis() / 1000));
-		
+//		System.out.println("umeng_appkey_teacher="+appkey);
 		  AndroidUnicast unicast = new AndroidUnicast();
 			unicast.setAppMasterSecret(appMasterSecret);
 			unicast.setPredefinedKeyValue("appkey", appkey);
@@ -74,6 +80,7 @@ public class PushMsgUmengAndoridImpl implements PushMsgAndoridInterface {
 			// Set customized fields
 //			unicast.setExtraField("test", "helloworld");
 			unicast.send();
+			logger.info("Umeng send to teacher ok!"+".title="+title+":"+msg);
 	  }
 	
 

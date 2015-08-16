@@ -48,6 +48,9 @@ public class SystemConstants {
 	public static final int common_type_jingpinkecheng = 7;// 精品课程
 	public static final int common_type_Kindergarten_introduction = 8;// 幼儿园介绍
 	public static final int common_type_html = 10;// 10:html类型,直接去url地址,调用浏览器显示.
+	public static final int common_type_messageTeaher = 11;//老师和家长交流信件
+	public static final int common_type_messageKD = 12;//老师和园长交流信件
+	public static final int common_type_signrecord = 13;//孩子签到记录
 	public static final int common_type_hudong = 99;// 互动类
 	
 
