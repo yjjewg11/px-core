@@ -43,9 +43,9 @@ public class SystemConstants {
 	public static final int common_type_banjitongzhi = 2;// 班级通知
 	public static final int common_type_jingpinwenzhang = 3;// 精品文章
 	public static final int common_type_zhaoshengjihua = 4;// 招生计划
-	public static final int common_type_jiaoxuejihua = 5;// 教学计划
+	public static final int common_type_jingpinkecheng = 5;// 培训机构精品课程
 	public static final int common_type_shipu = 6;// 食谱
-	public static final int common_type_jingpinkecheng = 7;// 精品课程
+	public static final int common_type_jiaoxuejihua = 7;//课程表
 	public static final int common_type_Kindergarten_introduction = 8;// 幼儿园介绍
 	public static final int common_type_html = 10;// 10:html类型,直接去url地址,调用浏览器显示.
 	public static final int common_type_messageTeaher = 11;//老师和家长交流信件
