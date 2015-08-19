@@ -42,7 +42,13 @@ public class StudentContactRealation extends IdEntity {
 	private Integer invite_count;// 邀请次数记录
 	@Column
 	private String groupuuid;// 权限名
-
+	@Column
+	private String student_img;// 学生头像
+	@Column
+	private String class_uuid;// 班级uuid
+	
+	
+	
 	public String getGroupuuid() {
 		return groupuuid;
 	}
@@ -129,6 +135,22 @@ public class StudentContactRealation extends IdEntity {
 
 	public void setParent_uuid(String parent_uuid) {
 		this.parent_uuid = parent_uuid;
+	}
+
+	public String getStudent_img() {
+		return student_img;
+	}
+
+	public void setStudent_img(String student_img) {
+		this.student_img = student_img;
+	}
+
+	public String getClass_uuid() {
+		return class_uuid;
+	}
+
+	public void setClass_uuid(String class_uuid) {
+		this.class_uuid = class_uuid;
 	}
 
 }

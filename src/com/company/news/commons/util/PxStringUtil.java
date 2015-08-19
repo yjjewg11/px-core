@@ -7,12 +7,35 @@ import org.apache.commons.lang.StringUtils;
 
 import com.company.news.ProjectProperties;
 import com.company.news.cache.CommonsCache;
+import com.company.news.entity.StudentContactRealation;
 import com.company.news.entity.UploadFile4Q;
 import com.company.news.interfaces.CreateUserInterface;
 import com.company.news.interfaces.SessionUserInfoInterface;
 import com.company.news.service.UploadFileService;
 
 public class PxStringUtil {
+	//html5 响应式布局模版,替换key定义
+	public static String Html5_Responsive_body_context="{body_context}";
+	//html5 响应式布局模版
+	public static String Html5_Responsive="<!doctype html>" +
+			"<html class=\"no-js\" ><head>"+
+			"<meta charset=\"utf-8\">"+
+			"<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">"+
+			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">"+
+			Html5_Responsive_body_context+
+			"{body_context}"+
+			"</body></html>";
+
+	/**
+	 * 传入格式:<div>内容</div>
+	 * @param str
+	 * @return
+	 */
+	public static String warpHtml5Responsive(String str){
+		if(str==null)return "";
+		return StringUtils.replace(Html5_Responsive, Html5_Responsive_body_context, str);
+	}
+	
 	/**
 	 * desc: StringDecComma 去掉给定字符串前后的sep，默认','
 	 * @param str
@@ -237,6 +260,18 @@ public class PxStringUtil {
 	public static String getCookbookPlanByUuid(String uuid){
 		if(uuid==null)return null;
 		return ProjectProperties.getProperty("share_url_getCookbookPlan", "http://localhost:8080/px-rest/rest/share/getClassNews.html?uuid={uuid}").replace("{uuid}", uuid);
+	}
+	
+	/**
+	 * 根据孩子关联信息,获取父母称呼
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String getParentNameByStudentContactRealation(StudentContactRealation sr){
+		if(sr==null)return "";
+		return sr.getStudent_name()+sr.getTypename();
+		
 	}
 	
 }
