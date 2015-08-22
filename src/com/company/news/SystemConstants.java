@@ -103,6 +103,11 @@ public class SystemConstants {
 	//男女类型
 	static public final Integer User_sex_male = Integer.valueOf(0);//男
 	static public final Integer User_sex_female = Integer.valueOf(1);//女
+	
+	
+	//教师每日任务类型
+	static public final Integer TeacherDailyTask_status_0 = Integer.valueOf(0);//完成
+	static public final Integer TeacherDailyTask_status_1 = Integer.valueOf(1);//待完成
 }
 
 

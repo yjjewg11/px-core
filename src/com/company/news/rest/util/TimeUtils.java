@@ -334,6 +334,35 @@ public class TimeUtils
                 .getActualMinimum(Calendar.DAY_OF_MONTH));     
     	return calendar.getTime(); 
     } 
+    
+    
+    /**
+     * 当前时间的00:00:00
+     * @param sDate1
+     * @return
+     */
+    public static Date getDate00(Date sDate1) { 
+    	Calendar cDay1 = Calendar.getInstance(); 
+    	cDay1.setTime(sDate1); 
+    	cDay1.add(Calendar.HOUR_OF_DAY, 0);
+    	cDay1.add(Calendar.MINUTE, 0);
+    	cDay1.add(Calendar.SECOND, 0);
+    	return cDay1.getTime();
+    } 
+    
+    /**
+     * 当前时间的23:59:59
+     * @param sDate1
+     * @return
+     */
+    public static Date getDate23(Date sDate1) { 
+    	Calendar cDay1 = Calendar.getInstance(); 
+    	cDay1.setTime(sDate1); 
+    	cDay1.add(Calendar.HOUR_OF_DAY,23);
+    	cDay1.add(Calendar.MINUTE, 59);
+    	cDay1.add(Calendar.SECOND, 59);
+    	return cDay1.getTime();
+    } 
 }
 
 
