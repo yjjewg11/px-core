@@ -18,6 +18,8 @@ public class Message extends IdEntity{
 	  @Column
 	  private String send_useruuid;//发送人
 	  @Column
+	  private String send_userimg;//发送人头像
+	  @Column
 	  private String revice_user;//接收人
 	  @Column
 	  private String revice_useruuid;//接收人
@@ -108,6 +110,12 @@ public class Message extends IdEntity{
 	}
 	public void setIsread(Integer isread) {
 		this.isread = isread;
+	}
+	public String getSend_userimg() {
+		return send_userimg;
+	}
+	public void setSend_userimg(String send_userimg) {
+		this.send_userimg = send_userimg;
 	}
 	  
 	  

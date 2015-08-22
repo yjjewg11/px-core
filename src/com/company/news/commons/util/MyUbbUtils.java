@@ -155,15 +155,12 @@ public class MyUbbUtils implements  CacheInterface {
      * <p>文字</p>	<img alt="大笑" src="/px-rest/w/xheditor/xheditor_emot/default/laugh.gif""/>
      */
 	public static String myUbbTohtml(String txt){
+		if(StringUtils.isBlank(txt))return txt;
 		 Pattern pattern1 = null; 
 	      try { 
+	    	  String html=text_to_Html(txt);
 	        pattern1 = Pattern.compile("\\[[^\\[]*\\]"); 
-	     //   pattern1 = Pattern.compile("<img\\b[^<]*(?:(?!<\\/img>)<[^<]*)*<\\/img>"); 
-	        
-	        
-	        String html=text_to_Html(txt);
 	        Matcher m = pattern1.matcher(html);
-
 	        StringBuffer sb = new StringBuffer(); 
 	        boolean result = m.find(); 
 	        //使用循环将句子里所有的kelvin找出并替换再将内容加到sb里 
