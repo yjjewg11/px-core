@@ -155,7 +155,7 @@ public class PushMsgIservice {
 		  }else if(type==SystemConstants.common_type_neibutongzhi){
 			  title="老师公告";
 		  }else if(type==SystemConstants.common_type_messageTeaher){
-			  title="老师信件";
+			  title="信件";
 		  }else if(type==SystemConstants.common_type_messageKD){
 			  title="园长信件";
 		  }
