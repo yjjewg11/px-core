@@ -117,16 +117,16 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
    * @param name
    * @param img
    */
-  public void updateUserInfoToBusinessData(String uuid,String name,String img) {
-	  int count=0;
-	  
-	  count= this.getHibernateTemplate().bulkUpdate(
-				"update ClassNewsReply set create_user=?,create_img=? where uuid =?",
-				name,img, uuid);
-	  this.logger.info("update ClassNewsReply count="+count);
-	  
-	  
-  }
+//  public void updateUserInfoToBusinessData(String uuid,String name,String img) {
+//	  int count=0;
+//	  
+//	  count= this.getHibernateTemplate().bulkUpdate(
+//				"update ClassNewsReply set create_user=?,create_img=? where create_useruuid =?",
+//				name,img, uuid);
+//	  this.logger.info("update ClassNewsReply count="+count);
+//	  
+//	  
+//  }
 
   
   /**
@@ -139,12 +139,12 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
 	  int count=0;
 	  
 	  count= this.getHibernateTemplate().bulkUpdate(
-				"update ClassNewsReply set create_user=?,create_img=? where create_uuid =?",
+				"update ClassNewsReply set create_user=?,create_img=? where create_useruuid =?",
 				user.getName(),user.getImg(), user.getUuid());
 	  this.logger.info("update ClassNewsReply count="+count);
 	  
 	  count= this.getHibernateTemplate().bulkUpdate(
-				"update ClassNews set create_user=?,create_img=? where create_uuid =?",
+				"update ClassNews set create_user=?,create_img=? where create_useruuid =?",
 				user.getName(),user.getImg(), user.getUuid());
 	  this.logger.info("update ClassNews count="+count);
   }

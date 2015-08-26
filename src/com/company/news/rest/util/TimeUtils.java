@@ -344,9 +344,9 @@ public class TimeUtils
     public static Date getDate00(Date sDate1) { 
     	Calendar cDay1 = Calendar.getInstance(); 
     	cDay1.setTime(sDate1); 
-    	cDay1.add(Calendar.HOUR_OF_DAY, 0);
-    	cDay1.add(Calendar.MINUTE, 0);
-    	cDay1.add(Calendar.SECOND, 0);
+    	cDay1.set(Calendar.HOUR_OF_DAY, 0);
+    	cDay1.set(Calendar.MINUTE, 0);
+    	cDay1.set(Calendar.SECOND, 0);
     	return cDay1.getTime();
     } 
     
@@ -358,9 +358,9 @@ public class TimeUtils
     public static Date getDate23(Date sDate1) { 
     	Calendar cDay1 = Calendar.getInstance(); 
     	cDay1.setTime(sDate1); 
-    	cDay1.add(Calendar.HOUR_OF_DAY,23);
-    	cDay1.add(Calendar.MINUTE, 59);
-    	cDay1.add(Calendar.SECOND, 59);
+    	cDay1.set(Calendar.HOUR_OF_DAY,23);
+    	cDay1.set(Calendar.MINUTE, 59);
+    	cDay1.set(Calendar.SECOND, 59);
     	return cDay1.getTime();
     } 
 }
