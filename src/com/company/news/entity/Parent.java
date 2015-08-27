@@ -46,6 +46,8 @@ public class Parent extends IdEntity implements SessionUserInfoInterface{
 	
 	@Column
 	private String img;// 头像。
+	@Column
+	private Long count;//记录登入次数
 	
 	public Timestamp getLast_login_time() {
 		return last_login_time;
@@ -147,6 +149,14 @@ public class Parent extends IdEntity implements SessionUserInfoInterface{
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public Long getCount() {
+		return count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
 	}
 
 }

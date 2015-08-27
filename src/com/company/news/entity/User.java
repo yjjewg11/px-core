@@ -41,6 +41,8 @@ public class User extends IdEntity implements SessionUserInfoInterface{
 	private String office;// 职位。
 	@Column
 	private String img;// 头像。
+	@Column
+	private Long count;//记录登入次数
 	public String getImg() {
 		return img;
 	}
@@ -163,6 +165,14 @@ public class User extends IdEntity implements SessionUserInfoInterface{
 
 	public void setOffice(String office) {
 		this.office = office;
+	}
+
+	public Long getCount() {
+		return count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "px_teacherjudge")
@@ -24,7 +25,8 @@ public class TeacherJudge extends IdEntity {
 	private Integer type;//点赞类型  1：满意 2：一般 3：不满意
 
 
-	
+	@Transient
+	private String teacher_name;// 关联教师teacheruuid
 	public String getTeacheruuid() {
 		return teacheruuid;
 	}
@@ -67,6 +69,13 @@ public class TeacherJudge extends IdEntity {
 
 	public void setCreate_useruuid(String create_useruuid) {
 		this.create_useruuid = create_useruuid;
+	}
+	@Transient
+	public String getTeacher_name() {
+		return teacher_name;
+	}
+	public void setTeacher_name(String teacher_name) {
+		this.teacher_name = teacher_name;
 	}
 
 }

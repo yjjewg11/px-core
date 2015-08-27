@@ -40,7 +40,13 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 	private String create_img;// 创建人头像
 	@Column
 	private Integer usertype;//0:老师 1：家长
-	@Column
+	
+	
+	 @Column
+	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
+	  @Column
+	  private Long illegal;//举报次数.用于优先审查
+	  @Column 
 	private String imgs;// img 的uuid多个逗号分割.
 	@Transient
 	private List imgsList;// 统计浏览次数.//非数据库字段.
@@ -174,6 +180,22 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 
 	public void setCreate_img(String create_img) {
 		this.create_img = create_img;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Long getIllegal() {
+		return illegal;
+	}
+
+	public void setIllegal(Long illegal) {
+		this.illegal = illegal;
 	}
 	
 

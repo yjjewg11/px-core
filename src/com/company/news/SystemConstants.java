@@ -8,6 +8,7 @@ public class SystemConstants {
 	static public final Integer Group_type_1 = Integer.valueOf(1);//幼儿园
 	static public final Integer Group_type_2 = Integer.valueOf(2);//培训机构
 	
+	static public final String Group_uuid_wjd = "group_wjd";//云代理幼儿园,所有注册的老师都默认关联它.
 	
 	//yongh 
 	// 20150610 去掉对用户表的TYPE定义，默认都为0
@@ -108,6 +109,11 @@ public class SystemConstants {
 	//教师每日任务类型
 	static public final Integer TeacherDailyTask_status_0 = Integer.valueOf(0);//完成
 	static public final Integer TeacherDailyTask_status_1 = Integer.valueOf(1);//待完成
+	
+	
+	static public final Integer Check_status_disable = Integer.valueOf(0);//禁止发布
+	static public final Integer Check_status_weifabu = Integer.valueOf(1);//未发布
+	static public final Integer Check_status_fabu = Integer.valueOf(2);//发布
 }
 
 

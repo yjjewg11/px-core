@@ -30,6 +30,10 @@ public class Announcements extends IdEntity{
 	  private Integer type;//类型'0:普通通知 1:内部通知 2：班级通知',
 	  @Column
 	  private String groupuuid;//关联学校uuid(显示需要名称)
+	  @Column
+	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
+	  @Column
+	  private Long illegal;//举报次数.用于优先审查
 	  
 	  @Transient
 		private PageQueryResult replyPage;// 回复第一页数据
@@ -98,6 +102,22 @@ public class Announcements extends IdEntity{
 	}
 	public void setGroupuuid(String groupuuid) {
 		this.groupuuid = groupuuid;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Long getIllegal() {
+		return illegal;
+	}
+
+	public void setIllegal(Long illegal) {
+		this.illegal = illegal;
 	}
 	  
 
