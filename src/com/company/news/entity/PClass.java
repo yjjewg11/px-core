@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="px_class") 
@@ -20,6 +21,10 @@ public class PClass extends IdEntity{
 	  private String create_user;//品牌名称
 	  @Column
 	  private String create_useruuid;//公司全称
+	  @Transient
+		private String headTeacher_name;//班主任
+	  @Transient
+		private String teacher_name;// 老师
 	  
 	public Timestamp getCreate_time() {
 		return create_time;
@@ -50,6 +55,20 @@ public class PClass extends IdEntity{
 	}
 	public void setCreate_useruuid(String create_useruuid) {
 		this.create_useruuid = create_useruuid;
+	}
+	 @Transient
+	public String getHeadTeacher_name() {
+		return headTeacher_name;
+	}
+	public void setHeadTeacher_name(String headTeacher_name) {
+		this.headTeacher_name = headTeacher_name;
+	}
+	 @Transient
+	public String getTeacher_name() {
+		return teacher_name;
+	}
+	public void setTeacher_name(String teacher_name) {
+		this.teacher_name = teacher_name;
 	}
 
 	  
