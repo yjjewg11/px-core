@@ -7,7 +7,7 @@ public class RestConstants {
   static public String CENSOR_DEVICE="censordevice";
   static public String Return_access_token="access_token";
   static public String Session_UserInfo="S_UserInfo";
-  static public String Session_UserInfo_rights="S_User_rights";
+  static public String Session_UserInfo_rights="S_User_rights";//数据量大不存缓存
   static public String Session_isAdmin="S_isAdmin";
   static public String Session_MygroupUuids="S_Mygroups";
   static public String Session_StudentslistOfParent="S_Stus";

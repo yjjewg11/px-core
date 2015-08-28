@@ -12,7 +12,10 @@ public class RoleUserRelation extends IdEntity{
 	  @Column
 	  private String roleuuid;//角色ID
 	  @Column
-	  private String useruuid;//权限ID
+	  private String useruuid;//用户id
+	  
+	  @Column
+	  private String groupuuid;//幼儿园id.角色关联到用户关联的幼儿园
 	public String getRoleuuid() {
 		return roleuuid;
 	}
@@ -24,6 +27,12 @@ public class RoleUserRelation extends IdEntity{
 	}
 	public void setUseruuid(String useruuid) {
 		this.useruuid = useruuid;
+	}
+	public String getGroupuuid() {
+		return groupuuid;
+	}
+	public void setGroupuuid(String groupuuid) {
+		this.groupuuid = groupuuid;
 	}
 	  
 
