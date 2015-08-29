@@ -15,7 +15,7 @@ public class Count extends IdEntity {
 	@Column
 	private Integer type;// 权限类型
 	@Column
-	private Integer count;// 权限类型
+	private Long count;// 权限类型
 	@Column
 	private Timestamp update_time;// 权限类型	
 	
@@ -27,11 +27,11 @@ public class Count extends IdEntity {
 		this.ext_uuid = ext_uuid;
 	}
 
-	public Integer getCount() {
+	public Long getCount() {
 		return count;
 	}
 
-	public void setCount(Integer count) {
+	public void setCount(Long count) {
 		this.count = count;
 	}
 

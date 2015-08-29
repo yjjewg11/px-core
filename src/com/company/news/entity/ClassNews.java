@@ -18,7 +18,7 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 	@Transient
 	private String share_url;// 分享地址.//非数据库字段.
 	@Transient
-	private Integer count;// 统计浏览次数.//非数据库字段.
+	private Long count;// 统计浏览次数.//非数据库字段.
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
@@ -150,11 +150,11 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 		this.share_url = share_url;
 	}
 	@Transient
-	public Integer getCount() {
+	public Long getCount() {
 		return count;
 	}
 
-	public void setCount(Integer count) {
+	public void setCount(Long count) {
 		this.count = count;
 	}
 

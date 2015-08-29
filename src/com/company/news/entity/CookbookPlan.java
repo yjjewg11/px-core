@@ -17,7 +17,7 @@ public class CookbookPlan extends IdEntity{
 	@Transient
 	private String share_url;// 分享地址.//非数据库字段.
 	@Transient
-	private Integer count;// 统计浏览次数.//非数据库字段.
+	private Long count;// 统计浏览次数.//非数据库字段.
 	  @Column
 	  private String groupuuid;//幼儿园id(显示名称)
 	  @Column
@@ -157,11 +157,11 @@ public class CookbookPlan extends IdEntity{
 		this.share_url = share_url;
 	}
 	@Transient
-	public Integer getCount() {
+	public Long getCount() {
 		return count;
 	}
 
-	public void setCount(Integer count) {
+	public void setCount(Long count) {
 		this.count = count;
 	}
 

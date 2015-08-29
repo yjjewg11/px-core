@@ -28,7 +28,8 @@ public class Announcements4Q extends IdEntity{
 	  private Integer type;//类型'0:普通通知 1:内部通知 2：班级通知',
 	  @Column
 	  private String groupuuid;//坐标	  
-	  
+	  @Transient
+		private Long count;//计数
 	  @Transient
 			private PageQueryResult replyPage;// 回复第一页数据
 			@Transient
@@ -91,6 +92,14 @@ public class Announcements4Q extends IdEntity{
 	}
 	public void setGroupuuid(String groupuuid) {
 		this.groupuuid = groupuuid;
+	}
+	@Transient
+	public Long getCount() {
+		return count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
 	}
 	  
 
