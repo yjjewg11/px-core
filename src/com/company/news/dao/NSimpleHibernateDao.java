@@ -136,17 +136,19 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
    * @param img
    */
   public void updateUserInfoToBusinessData(SessionUserInfoInterface user) {
-	  int count=0;
-	  
-	  count= this.getHibernateTemplate().bulkUpdate(
-				"update ClassNewsReply set create_user=?,create_img=? where create_useruuid =?",
-				user.getName(),user.getImg(), user.getUuid());
-	  this.logger.info("update ClassNewsReply count="+count);
-	  
-	  count= this.getHibernateTemplate().bulkUpdate(
-				"update ClassNews set create_user=?,create_img=? where create_useruuid =?",
-				user.getName(),user.getImg(), user.getUuid());
-	  this.logger.info("update ClassNews count="+count);
+	 
+//	  
+//	  int count=0;
+//	  
+//	  count= this.getHibernateTemplate().bulkUpdate(
+//				"update ClassNewsReply set create_user=?,create_img=? where create_useruuid =?",
+//				user.getName(),user.getImg(), user.getUuid());
+//	  this.logger.info("update ClassNewsReply count="+count);
+//	  
+//	  count= this.getHibernateTemplate().bulkUpdate(
+//				"update ClassNews set create_user=?,create_img=? where create_useruuid =?",
+//				user.getName(),user.getImg(), user.getUuid());
+//	  this.logger.info("update ClassNews count="+count);
   }
 
 	

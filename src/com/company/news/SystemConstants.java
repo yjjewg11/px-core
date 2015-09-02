@@ -54,6 +54,7 @@ public class SystemConstants {
 	public static final int common_type_messageTeaher = 11;//老师和家长交流信件
 	public static final int common_type_messageKD = 12;//老师和园长交流信件
 	public static final int common_type_signrecord = 13;//孩子签到记录
+	public static final int common_type_reply = 98;//评论
 	public static final int common_type_hudong = 99;// 互动类
 	
 

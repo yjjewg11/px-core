@@ -11,9 +11,6 @@ import org.hibernate.annotations.GenericGenerator;
 /**
  * 
  * @ClassName: IdEntity
- * @Description: 基础实体类  注：此类注解在方法上
- * @author wangchuan
- * @date 2013-3-11 上午10:01:31
  *
  */
 @MappedSuperclass

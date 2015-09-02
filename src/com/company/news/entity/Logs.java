@@ -21,6 +21,8 @@ public class Logs extends IdEntity {
 	private String modelname;// 模块名
 	@Column
 	private String target;// 操作对象
+	@Column
+	private String context;// 描述
 	public Timestamp getCreate_time() {
 		return create_time;
 	}
@@ -50,6 +52,12 @@ public class Logs extends IdEntity {
 	}
 	public void setTarget(String target) {
 		this.target = target;
+	}
+	public String getContext() {
+		return context;
+	}
+	public void setContext(String context) {
+		this.context = context;
 	}
 
 

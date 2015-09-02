@@ -34,6 +34,9 @@ public class ClassNewsReply extends IdEntity implements CreateUserInterface {
 	private Integer type;//点赞类型 0：互动 1：公告 2：课程表 3：食谱
 	@Column
 	private Integer usertype;//0:老师 1：家长
+	
+	@Column
+	private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
 	@Transient
 	private DianzanListVO dianzan;// 点赞数据
 	@Transient
@@ -113,6 +116,14 @@ public class ClassNewsReply extends IdEntity implements CreateUserInterface {
 
 	public void setCreate_img(String create_img) {
 		this.create_img = create_img;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }
