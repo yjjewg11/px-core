@@ -1,6 +1,5 @@
 package com.company.news.entity;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,7 +14,7 @@ import com.company.news.vo.DianzanListVO;
 @Table(name="px_teachingplan") 
 public class Teachingplan extends IdEntity{
 	@Transient
-	private Integer count;// 统计浏览次数.//非数据库字段.
+	private Long count;// 统计浏览次数.//非数据库字段.
 	  @Column
 	  private Date plandate;//日期.年月日
 	  @Column
@@ -81,11 +80,11 @@ public class Teachingplan extends IdEntity{
 	}
 
 	@Transient
-	public Integer getCount() {
+	public Long getCount() {
 		return count;
 	}
 
-	public void setCount(Integer count) {
+	public void setCount(Long count) {
 		this.count = count;
 	}
 	

@@ -28,6 +28,8 @@ public class Announcements4Q extends IdEntity{
 	  private Integer type;//类型'0:普通通知 1:内部通知 2：班级通知',
 	  @Column
 	  private String groupuuid;//坐标	  
+	  @Column
+	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
 	  @Transient
 		private Long count;//计数
 	  @Transient
@@ -100,6 +102,14 @@ public class Announcements4Q extends IdEntity{
 
 	public void setCount(Long count) {
 		this.count = count;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	  
 

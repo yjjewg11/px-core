@@ -47,7 +47,7 @@ public class PushMsgUmengAndoridImpl implements PushMsgAndoridInterface {
 //			unicast.setExtraField("test", "helloworld");
 			unicast.send();
 			
-			logger.info("Umeng send to parent ok!"+".title="+title+":"+msg);
+			logger.info("Umeng send to parent ok!channelId="+channelId+".title="+title+":"+msg);
 	  }
 	  
 
@@ -80,7 +80,7 @@ public class PushMsgUmengAndoridImpl implements PushMsgAndoridInterface {
 			// Set customized fields
 //			unicast.setExtraField("test", "helloworld");
 			unicast.send();
-			logger.info("Umeng send to teacher ok!"+".title="+title+":"+msg);
+			logger.info("Umeng send to teacher ok!channelId="+channelId+".title="+title+":"+msg);
 	  }
 	
 

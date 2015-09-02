@@ -59,6 +59,7 @@ public class PushMsgUmengIosInterfaceImpl implements PushMsgIosInterface {
 //		unicast.setCustomizedField("test", "helloworld");
 		unicast.send();
 		logger.info("Umeng IOS send to parent ok! list.size="+list.size()+".title="+title+":"+msg);
+		logger.info("deviceids:"+StringUtils.join(list, ","));
 	}
 
 	@Override
