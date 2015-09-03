@@ -28,6 +28,8 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 	@Column
 	private String classuuid;// 关联班级uuid(显示班级名称)
 	@Column
+	private String groupuuid;// 关联学校uuid(显示班级名称)
+	@Column
 	private String title;// 标题
 	@Column
 	private String content;// 内容(ubb格式)
@@ -196,6 +198,14 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 
 	public void setIllegal(Long illegal) {
 		this.illegal = illegal;
+	}
+
+	public String getGroupuuid() {
+		return groupuuid;
+	}
+
+	public void setGroupuuid(String groupuuid) {
+		this.groupuuid = groupuuid;
 	}
 	
 
