@@ -281,6 +281,12 @@ public class TimeUtils
         return new Timestamp(date.getTime());
     }
 
+    
+    public static String getDateTimeString(Date date)
+    {
+        SimpleDateFormat format = new SimpleDateFormat(DEFAULTFORMAT);
+        return format.format(date);
+    }
     public static String getDateString(Date date)
     {
         SimpleDateFormat format = new SimpleDateFormat(YYYY_MM_DD_FORMAT);
