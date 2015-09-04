@@ -70,6 +70,48 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
   }
 
 
+  
+  /**
+   * 分页查询,不查询总数提高效率
+   * 
+   * @param hql
+   * @param pData
+   * @return
+   */
+  public PageQueryResult findByPaginationToHqlNoTotal(String hql, PaginationData pData) {
+    String listhql = hql;
+    if (StringUtils.isNotBlank(pData.getOrderFiled())) {
+      if (StringUtils.isBlank(pData.getOrderType())) pData.setOrderType(PaginationData.SORT_DESC);
+      listhql += " order by " + pData.getOrderFiled() + " " + pData.getOrderType();
+    }
+    long startTime = 0;
+    long endTime = 0;
+    startTime = System.currentTimeMillis();
+    List list =
+        this.getSession().createQuery(listhql).setFirstResult(pData.getStartIndex()).setMaxResults(
+            pData.getPageSize()).list();
+    endTime = System.currentTimeMillis() - startTime;
+    this.logger.info("findByPaginationToHql list  count time(ms)="+endTime);
+   
+    long total = 999998;
+//    if(pData.getPageNo()==1){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
+//      if (list.size() < pData.getPageSize()) {// 小于当前页,就不用单独计算总数.
+//        total = list.size();
+//      } else {
+//        startTime = System.currentTimeMillis();
+//        total =
+//          Long.valueOf(this.getSession().createQuery("select count(*) " + hql).uniqueResult()
+//            .toString());
+//        this.logger.info("findByPaginationToHql total  count time(ms)="+endTime);
+//      }
+//    }else{
+//      total=999999;
+//    }
+//    endTime = System.currentTimeMillis() - startTime;
+   
+    return new PageQueryResult(pData.getPageSize(), pData.getPageNo(), list, total);
+  }
+
   /**
    * 分页查询
    * 
@@ -261,7 +303,7 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
 	  this.logger.info("relUpdate_studentChangeClass,student uuid="+student.getUuid());
 	  //更新家长学生联系表
 		this.getHibernateTemplate().bulkUpdate(
-				"update StudentContactRealation set  groupuuid=? and class_uuid=? where student_uuid=?",
+				"update StudentContactRealation set  groupuuid=?, class_uuid=? where student_uuid=?",
 				student.getGroupuuid(),student.getClassuuid(),student.getUuid());
 	  
 	  
