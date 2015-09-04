@@ -48,6 +48,10 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
 	  @Column
 	  private Long illegal;//举报次数.用于优先审查
+	  
+	  @Column
+		private Timestamp illegal_time;// 举报时间
+	  
 	  @Column 
 	private String imgs;// img 的uuid多个逗号分割.
 	@Transient
@@ -206,6 +210,14 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 
 	public void setGroupuuid(String groupuuid) {
 		this.groupuuid = groupuuid;
+	}
+
+	public Timestamp getIllegal_time() {
+		return illegal_time;
+	}
+
+	public void setIllegal_time(Timestamp illegal_time) {
+		this.illegal_time = illegal_time;
 	}
 	
 

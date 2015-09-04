@@ -34,7 +34,9 @@ public class Announcements extends IdEntity{
 	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
 	  @Column
 	  private Long illegal;//举报次数.用于优先审查
-	  
+
+	  @Column
+		private Timestamp illegal_time;// 举报时间
 	  @Transient
 		private PageQueryResult replyPage;// 回复第一页数据
 		@Transient
@@ -118,6 +120,14 @@ public class Announcements extends IdEntity{
 
 	public void setIllegal(Long illegal) {
 		this.illegal = illegal;
+	}
+
+	public Timestamp getIllegal_time() {
+		return illegal_time;
+	}
+
+	public void setIllegal_time(Timestamp illegal_time) {
+		this.illegal_time = illegal_time;
 	}
 	  
 
