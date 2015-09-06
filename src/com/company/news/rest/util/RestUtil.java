@@ -28,7 +28,7 @@ public class RestUtil {
 	 */
 	static public ResponseMessage addNoSessionForResponseMessage(ResponseMessage responseMessage) {
 		responseMessage.setStatus(RestConstants.Return_ResponseMessage_sessionTimeout);
-		responseMessage.setMessage("用户登录超时,请重新登录!");
+		responseMessage.setMessage("请注销后重新登录.");
 		return responseMessage;
 	}
 
