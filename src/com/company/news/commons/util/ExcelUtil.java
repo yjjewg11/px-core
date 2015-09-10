@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableCellFormat;
@@ -16,6 +18,7 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 import com.company.news.SystemConstants;
+import com.company.news.entity.PClass;
 import com.company.news.entity.Student;
 
 public class ExcelUtil {
@@ -33,6 +36,13 @@ public class ExcelUtil {
 		}// 单元格中的内容水平方向居中
 	}
 
+	/**
+	 * 默认导出花名册1
+	 * @param response
+	 * @param fname
+	 * @param list
+	 * @throws Exception
+	 */
 	public static void outputPrintWriterStream(HttpServletResponse response,
 			String fname, List<Student> list) throws Exception {
 		response.setHeader("Pragma", "no-cache");
@@ -47,6 +57,14 @@ public class ExcelUtil {
 		// out.close();
 	}
 
+	/**
+	 * 2
+	 * @param os
+	 * @param list
+	 * @throws IOException
+	 * @throws RowsExceededException
+	 * @throws WriteException
+	 */
 	public static void createExcel(OutputStream os, List<Student> list) throws IOException, RowsExceededException,
 			WriteException {
 		// 创建工作区
@@ -117,7 +135,7 @@ public class ExcelUtil {
 	}
 
 	/**
-	 * 
+	 * 3
 	 * @param sheet
 	 * @throws WriteException
 	 * @throws RowsExceededException
@@ -167,5 +185,203 @@ public class ExcelUtil {
 
 		}
 
+	}
+
+	/**
+	 * 金太阳国际新城幼儿园-花名册模版
+	 * @param response
+	 * @param fname
+	 * @param list
+	 * @param classlist
+	 * @throws Exception
+	 */
+	public static void outXLS_huaMingce(HttpServletResponse response,
+			String fname, List<Student> list,List<PClass> classlist) throws Exception{
+		response.setHeader("Pragma", "no-cache");
+		fname = java.net.URLEncoder.encode(fname,"UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ new String(fname.getBytes("UTF-8"),"GBK") + ".xls");
+		response.setContentType("application/msexcel");// 定义输出类型
+		response.setCharacterEncoding(SystemConstants.Charset);
+//		createExcel_huaMingce(response.getOutputStream(), list,classlist);
+		OutputStream os=response.getOutputStream();
+		
+		// 创建工作区
+				WritableWorkbook workbook = Workbook.createWorkbook(os);
+				// 创建新的一页，sheet只能在工作簿中使用
+				WritableSheet sheet = workbook.createSheet("幼儿园花名册", 0);
+
+				// 构造表头
+				sheet.mergeCells(0, 0, 9, 0);// 添加合并单元格，第一个参数是起始列，第二个参数是起始行，第三个参数是终止列，第四个参数是终止行
+				WritableFont bold = new WritableFont(WritableFont.ARIAL, 16,
+						WritableFont.BOLD);// 设置字体种类和黑体显示,字体为Arial,字号大小为10,采用黑体显示
+				WritableCellFormat titleFormate = new WritableCellFormat(bold);// 生成一个单元格样式控制对象
+				titleFormate.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+				titleFormate.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);// 单元格的内容垂直方向居中
+
+				sheet.setColumnView(0, 5);
+				sheet.setColumnView(1, 8);
+				sheet.setColumnView(2, 5);
+				sheet.setColumnView(3, 12);
+				sheet.setColumnView(4, 8);
+				sheet.setColumnView(5, 8);
+				sheet.setColumnView(6, 30);
+				sheet.setColumnView(7, 10);
+
+				Label title = new Label(0, 0, "幼儿园花名册", titleFormate);
+				sheet.setRowView(0, 600, false);// 设置第一行的高度
+				sheet.addCell(title);
+
+//				sheet.mergeCells(0, 1, 2, 1);
+				sheet.addCell(new Label(0, 0, "序号", cf));
+				sheet.addCell(new Label(0, 1, "学生姓名", cf));
+				sheet.addCell(new Label(0, 2, "性别", cf));
+				sheet.addCell(new Label(0, 3, "出生日期", cf));
+				sheet.addCell(new Label(0, 4, "年级/班级", cf));
+				sheet.addCell(new Label(0, 5, "家长姓名", cf));
+				sheet.addCell(new Label(0, 6, "家长联系电话", cf));
+				sheet.addCell(new Label(0, 7, "查验结果", cf));
+				
+				Integer index=0;
+				PClass clazz=null;
+				for (Student s : list) {
+					sheet.addCell(new Label(index, 0, (index+1)+"", cf));
+					sheet.addCell(new Label(index, 1, s.getName(), cf));
+					sheet.addCell(new Label(index, 2,  s.getSex() != 1 ? "男" : "女", cf));
+					sheet.addCell(new Label(index, 3, s.getBirthday(), cf));
+					//效率优化
+					if(clazz==null||!clazz.getUuid().equals( s.getClassuuid())){
+						clazz=getClassByuuid( s.getClassuuid(),classlist);
+					}
+					String className="";
+					if(clazz!=null){
+						className=clazz.getName();
+					}
+					sheet.addCell(new Label(index, 4, className, cf));
+					//优先取妈妈姓名.
+					String jiazhang=s.getMa_name();
+					String tel=s.getMa_tel();
+					if(StringUtils.isBlank(jiazhang)){
+						jiazhang=s.getBa_name();
+						tel=s.getBa_tel();
+					}
+					
+					sheet.addCell(new Label(index, 5,jiazhang, cf));
+					sheet.addCell(new Label(index, 6, tel, cf));
+					sheet.addCell(new Label(index, 7, "", cf));
+					
+				}
+				createStudentCell(sheet, list);
+				// 将内容写到输出流中，然后关闭工作区，最后关闭输出流
+				workbook.write();
+				workbook.close();
+				os.close();
+		
+	}
+	
+	/**
+	 * 金太阳国际新城幼儿园-新入托、转学生花名册
+	 * @param response
+	 * @param fname
+	 * @param list
+	 * @param classlist
+	 * @throws Exception
+	 */
+	public static void outXLS_rutuohuamingce(HttpServletResponse response,
+			String fname, List<Student> list,List<PClass> classlist) throws Exception{
+		response.setHeader("Pragma", "no-cache");
+		fname = java.net.URLEncoder.encode(fname,"UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ new String(fname.getBytes("UTF-8"),"GBK") + ".xls");
+		response.setContentType("application/msexcel");// 定义输出类型
+		response.setCharacterEncoding(SystemConstants.Charset);
+//		createExcel_huaMingce(response.getOutputStream(), list,classlist);
+		OutputStream os=response.getOutputStream();
+		
+		// 创建工作区
+				WritableWorkbook workbook = Workbook.createWorkbook(os);
+				// 创建新的一页，sheet只能在工作簿中使用
+				WritableSheet sheet = workbook.createSheet("幼儿园花名册", 0);
+
+				// 构造表头
+				sheet.mergeCells(0, 0, 9, 0);// 添加合并单元格，第一个参数是起始列，第二个参数是起始行，第三个参数是终止列，第四个参数是终止行
+				WritableFont bold = new WritableFont(WritableFont.ARIAL, 16,
+						WritableFont.BOLD);// 设置字体种类和黑体显示,字体为Arial,字号大小为10,采用黑体显示
+				WritableCellFormat titleFormate = new WritableCellFormat(bold);// 生成一个单元格样式控制对象
+				titleFormate.setAlignment(jxl.format.Alignment.CENTRE);// 单元格中的内容水平方向居中
+				titleFormate.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);// 单元格的内容垂直方向居中
+
+				sheet.setColumnView(0, 5);
+				sheet.setColumnView(1, 8);
+				sheet.setColumnView(2, 5);
+				sheet.setColumnView(3, 12);
+				sheet.setColumnView(4, 8);
+				sheet.setColumnView(5, 8);
+				sheet.setColumnView(6, 30);
+				sheet.setColumnView(7, 10);
+
+				Label title = new Label(0, 0, "幼儿园花名册", titleFormate);
+				sheet.setRowView(0, 600, false);// 设置第一行的高度
+				sheet.addCell(title);
+
+//				sheet.mergeCells(0, 1, 2, 1);
+				sheet.addCell(new Label(0, 0, "序号", cf));
+				sheet.addCell(new Label(0, 1, "学生姓名", cf));
+				sheet.addCell(new Label(0, 2, "性别", cf));
+				sheet.addCell(new Label(0, 3, "出生日期", cf));
+				sheet.addCell(new Label(0, 4, "年级/班级", cf));
+				sheet.addCell(new Label(0, 5, "家长姓名", cf));
+				sheet.addCell(new Label(0, 6, "家长联系电话", cf));
+				sheet.addCell(new Label(0, 7, "查验结果", cf));
+				
+				Integer index=0;
+				PClass clazz=null;
+				for (Student s : list) {
+					sheet.addCell(new Label(index, 0, (index+1)+"", cf));
+					sheet.addCell(new Label(index, 1, s.getName(), cf));
+					sheet.addCell(new Label(index, 2,  s.getSex() != 1 ? "男" : "女", cf));
+					sheet.addCell(new Label(index, 3, s.getBirthday(), cf));
+					//效率优化
+					if(clazz==null||!clazz.getUuid().equals( s.getClassuuid())){
+						clazz=getClassByuuid( s.getClassuuid(),classlist);
+					}
+					String className="";
+					if(clazz!=null){
+						className=clazz.getName();
+					}
+					sheet.addCell(new Label(index, 4, className, cf));
+					//优先取妈妈姓名.
+					String jiazhang=s.getMa_name();
+					String tel=s.getMa_tel();
+					if(StringUtils.isBlank(jiazhang)){
+						jiazhang=s.getBa_name();
+						tel=s.getBa_tel();
+					}
+					
+					sheet.addCell(new Label(index, 5,jiazhang, cf));
+					sheet.addCell(new Label(index, 6, tel, cf));
+					sheet.addCell(new Label(index, 7, "", cf));
+					
+				}
+				createStudentCell(sheet, list);
+				// 将内容写到输出流中，然后关闭工作区，最后关闭输出流
+				workbook.write();
+				workbook.close();
+				os.close();
+		
+	}
+	
+
+	
+	static public PClass getClassByuuid(String uuid,List<PClass> classlist){
+		if(StringUtils.isBlank(uuid))return null;
+		for (PClass s : classlist) {
+			if(uuid.equals(s.getUuid())){
+				return s;
+			}
+		}
+		return null;
+		
+		
 	}
 }
