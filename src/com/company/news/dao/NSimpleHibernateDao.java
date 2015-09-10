@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -151,6 +152,29 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
     }
     endTime = System.currentTimeMillis() - startTime;
    
+    return new PageQueryResult(pData.getPageSize(), pData.getPageNo(), list, total);
+  }
+
+  
+  /**
+   * 分页查询(no total)
+   * 
+   * @param hql
+   * @param pData
+   * @return
+   */
+  public PageQueryResult findByPageForSqlNoTotal(Query query, PaginationData pData) {
+    long startTime = 0;
+    long endTime = 0;
+    startTime = System.currentTimeMillis();
+    List list =
+    		query.setFirstResult(pData.getStartIndex()).setMaxResults(
+            pData.getPageSize()).list();
+    endTime = System.currentTimeMillis() - startTime;
+    this.logger.info("findByPageForSql list  count time(ms)="+endTime);
+   
+    long total = 99999;
+    
     return new PageQueryResult(pData.getPageSize(), pData.getPageNo(), list, total);
   }
 
