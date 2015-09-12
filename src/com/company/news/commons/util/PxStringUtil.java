@@ -188,7 +188,7 @@ public class PxStringUtil {
 		for(String url:urls.split(",")){
 			if(url.startsWith("http://")){
 				String[] st=url.split("uuid=");
-				if(st.length>0){
+				if(st.length>1){
 					uuids+=","+ st[st.length-1];
 				}
 			}else{
