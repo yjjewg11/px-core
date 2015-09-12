@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.commons.lang.StringUtils;
+
 
 public class TimeUtils
 {
@@ -292,8 +294,40 @@ public class TimeUtils
         SimpleDateFormat format = new SimpleDateFormat(YYYY_MM_DD_FORMAT);
         return format.format(date);
     }
-
+    public static String getDateFormatString(String date1)
+    {
+    	if(StringUtils.isBlank(date1))return "";
+//    	 System.out.print("old date1="+date1);
+    	 date1=date1.replaceAll("\\.", "-");
+    	 date1=date1.replaceAll("\\/", "-");
+    	 
+    	 try{
+    		 SimpleDateFormat format = new SimpleDateFormat(YYYY_MM_DD_FORMAT);
+ 	        Date date = (Date)format.parse(date1);
+ 	       date1=format.format(date);
+// 	       System.out.println("=>"+date1);
+ 	        return date1;
+ 	    }catch(Exception e){
+ 	    	
+ 	    }
+//    	  System.out.println("=>");
+        return "";
+    }
   
+    public static void main(String[] date1){
+    	String dd="2012-2-2";
+    	getDateFormatString(dd);
+    	dd="2012.2.";
+    	getDateFormatString(dd);
+    	dd="2012.2.2";
+    	getDateFormatString(dd);
+    	dd="2012/2/2";
+    	getDateFormatString(dd);
+    	dd="2012/2/222";
+    	getDateFormatString(dd);
+    	dd="2012/2.222";
+    	getDateFormatString(dd);
+    }
 
     public static final String YYYY_MM_DD_FORMAT = "yyyy-MM-dd";
     public static final long DEFAULT_DATE = -5364691200000L;

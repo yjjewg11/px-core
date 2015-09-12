@@ -394,4 +394,6 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
 	  this.logger.info("update Message count="+count);
 
   }
+  
+  
 }
