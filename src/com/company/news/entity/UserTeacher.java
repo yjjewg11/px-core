@@ -17,19 +17,23 @@ import javax.persistence.Table;
 @Table(name = "px_userteacher")
 public class UserTeacher extends IdEntity {
 	@Column
+	private String tel;// (继承user)电话号码。
+	@Column
+	private Integer sex;// (继承user)0:男,1:女
+	@Column
 	private String realname;// 姓名
 	@Column
 	private String idcard;// 身份证号码
 	@Column
 	private String introduction;// 电话号码。
 	@Column
-	private String useruuid;// 用户uuid
+	private String useruuid;// 关联用户uuid
 	@Column
 	private Timestamp birthday;// 最后一次登录时间。
 	@Column
-	private String zhiwu;// 职务.默认:老师
+	private String zhiwu;// 职务.默认:老师.50字符
 	@Column
-	private String xueli;// 学历.下拉选择,基础数据配置.1.本科,2.大专,3.中专,4.职高,5.硕士,
+	private Integer xueli;// 学历.下拉选择,基础数据配置.1.本科,2.大专,3.中专,4.职高,5.硕士,
 	@Column
 	private Integer youxueqianjiaoyu;//是否具有学前教育专业学历,基础数据配置(yesOrNo).0:否.1:是
 	@Column
@@ -39,7 +43,7 @@ public class UserTeacher extends IdEntity {
 	@Column
 	private String teaching_subject;// 所教学科.50个字.
 	@Column
-	private String professional_title;// 专业技术职称.50个字.
+	private String professional_title;// 专业技术职称.50个字.默认:无
 	@Column
 	private String teacher_certificate_number;// 教师资格证编号.20个字.
 	@Column
@@ -48,6 +52,8 @@ public class UserTeacher extends IdEntity {
 	private String address;// 家庭住址.100个字.
 	@Column
 	private String note;// 备注.100个字.
+	@Column
+	private Timestamp update_time;//最后更新时间
 	public String getRealname() {
 		return realname;
 	}
@@ -84,10 +90,10 @@ public class UserTeacher extends IdEntity {
 	public void setZhiwu(String zhiwu) {
 		this.zhiwu = zhiwu;
 	}
-	public String getXueli() {
+	public Integer getXueli() {
 		return xueli;
 	}
-	public void setXueli(String xueli) {
+	public void setXueli(Integer xueli) {
 		this.xueli = xueli;
 	}
 	public Integer getYouxueqianjiaoyu() {
@@ -143,6 +149,24 @@ public class UserTeacher extends IdEntity {
 	}
 	public void setWork_type(String work_type) {
 		this.work_type = work_type;
+	}
+	public Timestamp getUpdate_time() {
+		return update_time;
+	}
+	public void setUpdate_time(Timestamp update_time) {
+		this.update_time = update_time;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public Integer getSex() {
+		return sex;
+	}
+	public void setSex(Integer sex) {
+		this.sex = sex;
 	}
 
 
