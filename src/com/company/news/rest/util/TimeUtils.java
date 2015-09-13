@@ -403,7 +403,64 @@ public class TimeUtils
     	cDay1.set(Calendar.SECOND, 59);
     	return cDay1.getTime();
     } 
+    
+    
+
+/**
+
+  * @author jerry.chen
+
+  * @param brithday
+
+  * @return
+
+  * @throws ParseException
+
+  *             根据生日获取年龄;
+
+  */
+
+ public static String getCurrentAgeByBirthdate(Timestamp brithday) {
+  try {
+   Calendar cal = Calendar.getInstance();
+   
+   if (cal.before(brithday)) {
+	   return 0+"";
+	}
+   int yearNow = cal.get(Calendar.YEAR);
+	int monthNow = cal.get(Calendar.MONTH) + 1;
+	int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
+
+	cal.setTime(brithday);
+	int yearBirth = cal.get(Calendar.YEAR);
+	int monthBirth = cal.get(Calendar.MONTH) + 1;
+	int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
+
+	int age = yearNow - yearBirth;
+
+	if (monthNow <= monthBirth) {
+		if (monthNow == monthBirth) {
+			// monthNow==monthBirth 
+			if (dayOfMonthNow < dayOfMonthBirth) {
+				age--;
+			}
+		} else {
+			// monthNow>monthBirth 
+			age--;
+		}
+	}
+	return age+"";
+
+  } catch (Exception e) {
+
+   return 0+"";
+
+  }
+
+ }
 }
+
+
 
 
 /*
