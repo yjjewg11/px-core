@@ -3,10 +3,9 @@ package com.company.pushmsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import push.android.AndroidUnicast;
-
 import com.company.news.ProjectProperties;
-import com.company.news.service.AbstractServcice;
+
+import push.android.AndroidUnicast;
 
 /**
  * www.umeng.com
