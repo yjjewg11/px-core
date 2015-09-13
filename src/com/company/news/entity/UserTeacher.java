@@ -23,6 +23,8 @@ public class UserTeacher extends IdEntity {
 	@Column
 	private String realname;// 姓名
 	@Column
+	private String nation;// 民族
+	@Column
 	private String idcard;// 身份证号码
 	@Column
 	private String introduction;// 电话号码。
@@ -167,6 +169,12 @@ public class UserTeacher extends IdEntity {
 	}
 	public void setSex(Integer sex) {
 		this.sex = sex;
+	}
+	public String getNation() {
+		return nation;
+	}
+	public void setNation(String nation) {
+		this.nation = nation;
 	}
 
 

@@ -128,7 +128,7 @@ public class PushMsgIservice {
 	   */
 	  public void pushMsgToAll_to_teacher(int type,String type_uuid,String group_uuid,String msg) throws Exception{
 		  String title=this.getPushMsgTitleByType(type);
-		  List<String> list=(List<String>)this.nSimpleHibernateDao.getHibernateTemplate().find("select useruuid from UserGroupRelation where groupuuid=?", group_uuid);
+		  List<String> list=(List<String>)this.nSimpleHibernateDao.getHibernateTemplate().find("select DISTINCT useruuid from UserGroupRelation where groupuuid=?", group_uuid);
 		  
 		
 		  for(String o:list){
