@@ -52,8 +52,8 @@ public class PXStudent extends IdEntity {
 	private String other_tel;// 其他人电话
 	@Column
 	private String groupuuid;// 关联学校
-//	@Column
-//	private String classuuid;//关联班级.培训机构,可以关联多个班级.身份证号码
+	@Column
+	private String classuuid;//关联班级.培训机构,可以关联多个班级.身份证号码
 	@Column
 	private String ma_name;// 妈妈姓名
 	@Column

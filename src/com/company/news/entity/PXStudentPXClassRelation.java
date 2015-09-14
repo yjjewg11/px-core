@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "px_pxstudentpxclasrselation")
+@Table(name = "px_pxstudentpxclassrelation")
 public class PXStudentPXClassRelation extends IdEntity {
 
 	@Column
