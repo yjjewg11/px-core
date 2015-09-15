@@ -94,14 +94,14 @@ public class PxStringUtil {
 		urls=PxStringUtil.StringDecComma(urls);
 		String uuids="";
 		for(String url:urls.split(",")){
-				String tmp=imgUrlByUuid_sub(url);
+				String tmp=imgSMiddleUrlByUuid_sub(url);
 				if(StringUtils.isNotBlank(tmp))uuids+=","+tmp;
 		}
 		return PxStringUtil.StringDecComma(uuids);
 	}
 	
 	/**
-	 * 将图片uuid替换成可以下载的http地址.
+	 * 将图片uuid替换成可以下载的http地址.最小图片
 	 * @param uuid
 	 * @return
 	 * uuid1,uuid2
@@ -124,9 +124,33 @@ public class PxStringUtil {
 		
 		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
+	/**
+	 * 将图片uuid替换成可以下载的http地址.中等图片
+	 * @param uuid
+	 * @return
+	 * uuid1,uuid2
+	 * =>
+	 * http://ddd/uuid1,http://ddd/uuid1,
+	 * date&author: 2009-3-25 
+	 */
+	private static String imgSMiddleUrlByUuid_sub(String uuid){
+		if(uuid==null)return "";
+		if(uuid.startsWith("http://")){
+			return uuid;
+		}
+		if (UploadFileService.uploadfiletype.equals("oss")) {
+			UploadFile4Q q=(UploadFile4Q)CommonsCache.get(uuid, UploadFile4Q.class);
+			if(q==null)return "";
+			String s= ProjectProperties.getProperty("oss_middle_img_down_url", "http://img.wenjienet.com/{object}@108h").replace("{object}",q.getFile_path() );
+			s+="?uuid="+uuid;//必须添加用于保存时,转为uuid保存.
+			return s;
+		}
+		
+		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
+	}
 	
 	/**
-	 * 将图片uuid替换成可以下载的http地址.
+	 * 将图片uuid替换成可以下载的http地址.最大图片
 	 * @param uuid
 	 * @return
 	 * uuid1,uuid2
@@ -198,6 +222,26 @@ public class PxStringUtil {
 		
 		return PxStringUtil.StringDecComma(uuids);
 	}
+	
+
+	/**
+	 * 将图片uuid替换成可以下载的http地址.
+	 * 
+	 * @param uuids
+	 * @return List
+	 *   a,b,c=>http://img/a.jpg
+	 * date&author: 2009-3-25 
+	 */
+	public static List uuids_to_imgMiddleurlList(String uuids){
+		List list=new ArrayList();
+		if(StringUtils.isBlank(uuids))return list;
+		
+		for(String uuid:uuids.split(",")){
+				list.add(imgSMiddleUrlByUuid_sub(uuid));
+		}
+		return list;
+	}
+	
 	
 	/**
 	 * 将图片uuid替换成可以下载的http地址.
