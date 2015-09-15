@@ -1,10 +1,16 @@
 package com.company.news.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 
 /**
@@ -15,12 +21,31 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "px_studentbind")
-public class StudentBind extends IdEntity {
-
+public class StudentBind  implements Serializable {
+	private static final long serialVersionUID = 6030326789124757879L;
+	//门禁要求18未唯一用户标识
+	@Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  @Column(name = "userid", unique = true, nullable = false)
+	private Long userid;// 用户唯一标识
+	
+	
+	@Column
+	private String uuid;
+	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	
 	@Column
 	private String studentuuid;// 学生guuid
 	@Column
-	private String cardid;// 卡号id.
+	private String cardid;// 门禁系统,卡号id(卡上面显示的卡号).
+	@Column
+	private String card_factory;// 门禁系统,IC原始卡号.
 	@Column
 	private String create_user;// 绑定人 
 	@Column
@@ -80,6 +105,18 @@ public class StudentBind extends IdEntity {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getCard_factory() {
+		return card_factory;
+	}
+	public void setCard_factory(String card_factory) {
+		this.card_factory = card_factory;
+	}
+	public Long getUserid() {
+		return userid;
+	}
+	public void setUserid(Long userid) {
+		this.userid = userid;
 	}
 
 }
