@@ -11,9 +11,11 @@ import com.company.news.entity.StudentContactRealation;
 import com.company.news.entity.UploadFile4Q;
 import com.company.news.interfaces.CreateUserInterface;
 import com.company.news.interfaces.SessionUserInfoInterface;
-import com.company.news.service.UploadFileService;
 
 public class PxStringUtil {
+	
+	public static final String uploadfiletype = ProjectProperties.getProperty(
+			"uploadfiletype", "oss");
 	//html5 响应式布局模版,替换key定义
 	public static String Html5_Responsive_body_context="{body_context}";
 	//html5 响应式布局模版
@@ -114,7 +116,7 @@ public class PxStringUtil {
 		if(uuid.startsWith("http://")){
 			return uuid;
 		}
-		if (UploadFileService.uploadfiletype.equals("oss")) {
+		if (uploadfiletype.equals("oss")) {
 			UploadFile4Q q=(UploadFile4Q)CommonsCache.get(uuid, UploadFile4Q.class);
 			if(q==null)return "";
 			String s= ProjectProperties.getProperty("oss_Small_img_down_url", "http://img.wenjienet.com/{object}@60h").replace("{object}",q.getFile_path() );
@@ -138,7 +140,7 @@ public class PxStringUtil {
 		if(uuid.startsWith("http://")){
 			return uuid;
 		}
-		if (UploadFileService.uploadfiletype.equals("oss")) {
+		if (uploadfiletype.equals("oss")) {
 			UploadFile4Q q=(UploadFile4Q)CommonsCache.get(uuid, UploadFile4Q.class);
 			if(q==null)return "";
 			String s= ProjectProperties.getProperty("oss_middle_img_down_url", "http://img.wenjienet.com/{object}@108h").replace("{object}",q.getFile_path() );
@@ -163,7 +165,8 @@ public class PxStringUtil {
 		if(uuid.startsWith("http://")){
 			return uuid;
 		}
-		if (UploadFileService.uploadfiletype.equals("oss")) {
+		if (ProjectProperties.getProperty(
+				"uploadfiletype", "oss").equals("oss")) {
 			UploadFile4Q q=(UploadFile4Q)CommonsCache.get(uuid, UploadFile4Q.class);
 			if(q==null)return "";
 			String s= ProjectProperties.getProperty("oss_img_down_url", "http://img.wenjienet.com/{object}@60h").replace("{object}",q.getFile_path() );
@@ -317,4 +320,32 @@ public class PxStringUtil {
 		
 	}
 	
+	
+	 /**
+	   * 修复手机中复制粘贴导致的特殊号码
+	     String s1="180 123 123123";
+		  repairCellphone(s1);
+		  s1="180-123-123123";
+	   * @param cellphone
+	   * @return
+	   */
+	  public static String repairCellphone(String cellphone) {
+		  if(StringUtils.isBlank(cellphone))return cellphone;
+		 String tmp= cellphone.replaceAll("[\\s|\\-\\(\\)]", "");
+		 if(!cellphone.equals(tmp)) {
+			 System.out.println("repairCellphone="+cellphone+"==>"+tmp);
+		 }
+		 return tmp;
+	  }
+	
+	  
+	  public static void main(String[] s){
+		  String s1="180 123 123123";
+		  repairCellphone(s1);
+		  s1="180-123-123123";
+		  repairCellphone(s1);
+		  s1="(180) 123 123123";
+		  s1=repairCellphone(s1);
+		  s1=repairCellphone(s1);
+	  }
 }

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 
 /**
- * 用户基本信息表
+ * 学生绑定卡信息
  * 
  * @author Administrator
  * 
@@ -16,11 +16,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "px_studentbind")
 public class StudentBind extends IdEntity {
-
+	//门禁要求最大18未唯一用户标识
+	@Column
+	private String userid;// 用户唯一标识(同一学校唯一)
+	@Column
+	private String groupuuid;// 学校uuid
+	
 	@Column
 	private String studentuuid;// 学生guuid
 	@Column
-	private String cardid;// 卡号id.
+	private String cardid;// 门禁系统,卡号id(卡上面显示的卡号).
+	@Column
+	private String card_factory;// 门禁系统,IC原始卡号.
 	@Column
 	private String create_user;// 绑定人 
 	@Column
@@ -80,6 +87,24 @@ public class StudentBind extends IdEntity {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getCard_factory() {
+		return card_factory;
+	}
+	public void setCard_factory(String card_factory) {
+		this.card_factory = card_factory;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getGroupuuid() {
+		return groupuuid;
+	}
+	public void setGroupuuid(String groupuuid) {
+		this.groupuuid = groupuuid;
 	}
 
 }

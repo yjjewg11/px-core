@@ -14,9 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.company.news.entity.PClass;
 import com.company.news.entity.Parent;
-import com.company.news.entity.Student;
 import com.company.news.entity.User;
 import com.company.news.interfaces.SessionUserInfoInterface;
 import com.company.news.json.JSONUtils;
@@ -314,8 +312,6 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
     }
     
   }
-    
-
  
   
 }
