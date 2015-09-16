@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "px_pxteachingplan")
 public class PxTeachingplan extends IdEntity {
-	@Transient
+	
 	private Long count;// 统计浏览次数.//非数据库字段.
 	@Column
 	private Date plandate;// 时间.年月日,时分秒.
@@ -40,7 +40,7 @@ public class PxTeachingplan extends IdEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	@Transient
 	public Long getCount() {
 		return count;
 	}
