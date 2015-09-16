@@ -320,4 +320,32 @@ public class PxStringUtil {
 		
 	}
 	
+	
+	 /**
+	   * 修复手机中复制粘贴导致的特殊号码
+	     String s1="180 123 123123";
+		  repairCellphone(s1);
+		  s1="180-123-123123";
+	   * @param cellphone
+	   * @return
+	   */
+	  public static String repairCellphone(String cellphone) {
+		  if(StringUtils.isBlank(cellphone))return cellphone;
+		 String tmp= cellphone.replaceAll("[\\s|\\-\\(\\)]", "");
+		 if(!cellphone.equals(tmp)) {
+			 System.out.println("repairCellphone="+cellphone+"==>"+tmp);
+		 }
+		 return tmp;
+	  }
+	
+	  
+	  public static void main(String[] s){
+		  String s1="180 123 123123";
+		  repairCellphone(s1);
+		  s1="180-123-123123";
+		  repairCellphone(s1);
+		  s1="(180) 123 123123";
+		  s1=repairCellphone(s1);
+		  s1=repairCellphone(s1);
+	  }
 }

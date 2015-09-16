@@ -1,44 +1,26 @@
 package com.company.news.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 
 /**
- * 用户基本信息表
+ * 学生绑定卡信息
  * 
  * @author Administrator
  * 
  */
 @Entity
 @Table(name = "px_studentbind")
-public class StudentBind  implements Serializable {
-	private static final long serialVersionUID = 6030326789124757879L;
-	//门禁要求18未唯一用户标识
-	@Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
-  @Column(name = "userid", unique = true, nullable = false)
-	private Long userid;// 用户唯一标识
-	
-	
+public class StudentBind extends IdEntity {
+	//门禁要求最大18未唯一用户标识
 	@Column
-	private String uuid;
-	
-	public String getUuid() {
-		return uuid;
-	}
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
+	private String userid;// 用户唯一标识(同一学校唯一)
+	@Column
+	private String groupuuid;// 学校uuid
 	
 	@Column
 	private String studentuuid;// 学生guuid
@@ -112,11 +94,17 @@ public class StudentBind  implements Serializable {
 	public void setCard_factory(String card_factory) {
 		this.card_factory = card_factory;
 	}
-	public Long getUserid() {
+	public String getUserid() {
 		return userid;
 	}
-	public void setUserid(Long userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	public String getGroupuuid() {
+		return groupuuid;
+	}
+	public void setGroupuuid(String groupuuid) {
+		this.groupuuid = groupuuid;
 	}
 
 }
