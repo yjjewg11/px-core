@@ -15,7 +15,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "px_pxclass")
-public class PXClass extends AbstractClass {
+public class PxClass extends AbstractClass {
 
 	@Column
 	private String context;// 班级课程详细介绍.

@@ -12,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "px_pxstudent")
-public class PXStudent extends AbstractStudent {
+public class PxStudent extends AbstractStudent {
 
 
 }

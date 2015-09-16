@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "px_pxstudentpxclassrelation")
-public class PXStudentPXClassRelation extends IdEntity {
+public class PxStudentPXClassRelation extends IdEntity {
 
 	@Column
 	private String student_uuid;// 学生uuid
