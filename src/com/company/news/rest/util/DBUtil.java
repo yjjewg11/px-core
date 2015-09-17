@@ -37,14 +37,14 @@ public class DBUtil {
 	public static String stringToDateByDBType(String dateStr){
 		
 		String mysqlStringToDate="DATE_FORMAT('aaaa','%Y-%m-%d %H:%i:%s')";
-		String oracleStringToDate="to_date('aaaa','yyyy-mm-dd hh24:mi:ss')";
-		String db2StringToDate="TIMESTAMP('aaaa')";
-		String currStringToDate=oracleStringToDate;
-		if ("mysql".equals(dbtype)){
-			currStringToDate=mysqlStringToDate;
-		}else if("db2".equals(dbtype)){
-			currStringToDate=db2StringToDate;
-		}
+//		String oracleStringToDate="to_date('aaaa','yyyy-mm-dd hh24:mi:ss')";
+//		String db2StringToDate="TIMESTAMP('aaaa')";
+		String currStringToDate=mysqlStringToDate;
+//		if ("mysql".equals(dbtype)){
+//			currStringToDate=mysqlStringToDate;
+//		}else if("db2".equals(dbtype)){
+//			currStringToDate=db2StringToDate;
+//		}
 		
 		return StringUtils.replace(currStringToDate, "aaaa", dateStr);
 	}
