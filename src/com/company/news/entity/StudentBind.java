@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class StudentBind extends IdEntity {
 	//门禁要求最大18未唯一用户标识
 	@Column
-	private String userid;// 用户唯一标识(同一学校唯一)
+	private String userid;// 用户唯一标识(同一学校唯一)(userid,groupuuid唯一约束)
 	@Column
 	private String groupuuid;// 学校uuid
 	
