@@ -32,6 +32,8 @@ public class PxTeachingplan extends IdEntity {
 	private String duration;// 课程时长
 	@Column
 	private String name;// 课程名称
+	@Column
+	private String address;// 上课地点
 
 	public String getName() {
 		return name;
@@ -95,6 +97,14 @@ public class PxTeachingplan extends IdEntity {
 
 	public void setDuration(String duration) {
 		this.duration = duration;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

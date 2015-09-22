@@ -19,6 +19,9 @@ public class PxClass extends AbstractClass {
 
 	@Column
 	private String context;// 班级课程详细介绍.
+	
+	@Column
+	private String address;// 上课地点
 
 	public String getContext() {
 		return context;
@@ -26,6 +29,14 @@ public class PxClass extends AbstractClass {
 
 	public void setContext(String context) {
 		this.context = context;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	
