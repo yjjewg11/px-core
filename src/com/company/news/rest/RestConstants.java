@@ -3,7 +3,7 @@ package com.company.news.rest;
 public class RestConstants {
   //sessionid 标示
   static public String Return_JSESSIONID="JSESSIONID";
-  static public String LOGIN_TYPE="type";
+  static public String LOGIN_TYPE="S_type";
   static public String CENSOR_DEVICE="censordevice";
   static public String Return_access_token="access_token";
   static public String Session_UserInfo="S_UserInfo";
