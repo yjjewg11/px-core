@@ -27,6 +27,9 @@ public class GroupHeartBeat  extends IdEntity {
 	  private String frequency;//心跳频率
 	  @Column
 	  private String msg;//返回信息
+	  
+	  @Column
+	  private Timestamp updatetime;//更新时间
 	public String getGroup_uuid() {
 		return group_uuid;
 	}
@@ -50,6 +53,12 @@ public class GroupHeartBeat  extends IdEntity {
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	public Timestamp getUpdatetime() {
+		return updatetime;
+	}
+	public void setUpdatetime(Timestamp updatetime) {
+		this.updatetime = updatetime;
 	}
 
 }
