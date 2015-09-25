@@ -10,11 +10,11 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "px_studentcontactrealation")
+@Table(name = "px_pxstudentcontactrealation")
 /**
  * 用于邀请家长,和家长注册时关联用
  * @author liumingquan
  */
-public class StudentContactRealation extends AbstractStudentContactRealation {
+public class PxStudentContactRealation extends AbstractStudentContactRealation {
 
 }

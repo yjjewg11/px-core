@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.company.news.ProjectProperties;
 import com.company.news.cache.CommonsCache;
-import com.company.news.entity.StudentContactRealation;
+import com.company.news.entity.AbstractStudentContactRealation;
 import com.company.news.entity.UploadFile4Q;
 import com.company.news.interfaces.CreateUserInterface;
 import com.company.news.interfaces.SessionUserInfoInterface;
@@ -314,7 +314,7 @@ public class PxStringUtil {
 	 * @return
 	 * date&author: 2009-3-25 
 	 */
-	public static String getParentNameByStudentContactRealation(StudentContactRealation sr){
+	public static String getParentNameByStudentContactRealation(AbstractStudentContactRealation sr){
 		if(sr==null)return "";
 		return sr.getStudent_name()+sr.getTypename();
 		
