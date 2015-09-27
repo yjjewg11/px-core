@@ -16,7 +16,8 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "px_pxclass")
 public class PxClass extends AbstractClass {
-
+	@Column
+	private String courseuuid;// 关联对外发布课程
 	@Column
 	private String context;// 班级课程详细介绍.
 	
@@ -38,6 +39,14 @@ public class PxClass extends AbstractClass {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
+	public String getCourseuuid() {
+		return courseuuid;
+	}
+
+	public void setCourseuuid(String courseuuid) {
+		this.courseuuid = courseuuid;
+	}
+
 	
 }

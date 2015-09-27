@@ -21,7 +21,7 @@ public class DBUtil {
 		if(strs==null)return rstr;
 		String[] strArr=strs.split(",");
 		for(int i=0;i<strArr.length;i++){
-			rstr+="'"+strArr[i]+"',";
+			if(StringUtils.isNotBlank(strArr[i]))rstr+="'"+strArr[i]+"',";
 		}
 		return StringOperationUtil.trimSeparatorChars(rstr);
 		
