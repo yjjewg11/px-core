@@ -161,7 +161,8 @@ public class PxStringUtil {
 	 * date&author: 2009-3-25 
 	 */
 	private static String imgUrlByUuid_sub(String uuid){
-		if(uuid==null)return "";
+		if(StringUtils.isBlank(uuid))return "";
+		
 		if(uuid.startsWith("http://")){
 			return uuid;
 		}

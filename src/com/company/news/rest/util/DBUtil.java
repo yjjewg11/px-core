@@ -18,7 +18,7 @@ public class DBUtil {
 	 */
 	public static String stringsToWhereInValue(String strs){
 		String rstr="";
-		if(strs==null)return rstr;
+		if(strs==null)return "''";
 		String[] strArr=strs.split(",");
 		for(int i=0;i<strArr.length;i++){
 			if(StringUtils.isNotBlank(strArr[i]))rstr+="'"+strArr[i]+"',";
