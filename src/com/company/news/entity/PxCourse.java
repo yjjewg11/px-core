@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 对外发布课程
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "px_pxcourse")
 public class PxCourse extends IdEntity {
-	
+	@Transient
 	private Long count;// 统计浏览次数.//非数据库字段.
 	
 	@Column
@@ -31,19 +32,20 @@ public class PxCourse extends IdEntity {
 	@Column
 	private String context;//课程详细内容介绍.(html).
 	@Column
-	private String fees;//收费价格(可以不填写)
+	private Double fees;//收费价格(可以不填写)
 	@Column
-	private String discountfees;//优惠价格(可以不填写)
+	private Double discountfees;//优惠价格(可以不填写)
 	@Column
 	private String status;// 发布状态:0:发布.1:不发布.
 	@Column
 	private String update_useruuid;//创建人uuid.(后台设置)
 	@Column
 	private Timestamp updatetime;//更新时间
-	
+	@Transient
 	public Long getCount() {
 		return count;
 	}
+	@Transient
 	public void setCount(Long count) {
 		this.count = count;
 	}
@@ -83,16 +85,17 @@ public class PxCourse extends IdEntity {
 	public void setContext(String context) {
 		this.context = context;
 	}
-	public String getFees() {
+
+	public Double getFees() {
 		return fees;
 	}
-	public void setFees(String fees) {
+	public void setFees(Double fees) {
 		this.fees = fees;
 	}
-	public String getDiscountfees() {
+	public Double getDiscountfees() {
 		return discountfees;
 	}
-	public void setDiscountfees(String discountfees) {
+	public void setDiscountfees(Double discountfees) {
 		this.discountfees = discountfees;
 	}
 	public String getStatus() {
