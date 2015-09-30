@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.company.news.query.PageQueryResult;
+import com.company.news.vo.DianzanListVO;
+
 /**
  * 培训机构
  * 
@@ -34,6 +37,28 @@ public class PxTeachingplan extends IdEntity {
 	private String name;// 课程名称
 	@Column
 	private String address;// 上课地点
+	
+
+	@Transient
+	private PageQueryResult replyPage;// 回复第一页数据
+	@Transient
+	private DianzanListVO dianzan;// 点赞数据
+	@Transient
+	public DianzanListVO getDianzan() {
+		return dianzan;
+	}
+
+	public void setDianzan(DianzanListVO dianzan) {
+		this.dianzan = dianzan;
+	}
+	@Transient
+	public PageQueryResult getReplyPage() {
+		return replyPage;
+	}
+
+	public void setReplyPage(PageQueryResult replyPage) {
+		this.replyPage = replyPage;
+	}
 
 	public String getName() {
 		return name;
