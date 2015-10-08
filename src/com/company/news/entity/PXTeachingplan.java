@@ -18,7 +18,7 @@ import com.company.news.vo.DianzanListVO;
  */
 @Entity
 @Table(name = "px_pxteachingplan")
-public class PxTeachingplan extends IdEntity {
+public class PXTeachingplan extends IdEntity {
 	
 	private Long count;// 统计浏览次数.//非数据库字段.
 	@Column
