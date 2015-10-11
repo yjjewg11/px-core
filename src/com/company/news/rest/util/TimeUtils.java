@@ -458,6 +458,60 @@ public class TimeUtils
   }
 
  }
+ 
+
+/**
+
+  * @param brithday
+
+  * @return
+
+  * @throws ParseException
+
+  *             指定日期计算生日获取年龄;
+	学生安装
+	学年是指教育年度，即从每年的九月一日到第二年的八月三十一日。
+  */
+
+ public static int getStuentAgeByBirthdate(Timestamp brithday) {
+  try {
+   Calendar cal = Calendar.getInstance();
+   cal.set(Calendar.MONTH, 9-1);
+   cal.set(Calendar.DAY_OF_MONTH, 1);
+   if (cal.before(brithday)) {
+	   return 0;
+	}
+   int yearNow = cal.get(Calendar.YEAR);
+	int monthNow = cal.get(Calendar.MONTH) + 1;
+	int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
+
+	cal.setTime(brithday);
+	int yearBirth = cal.get(Calendar.YEAR);
+	int monthBirth = cal.get(Calendar.MONTH) + 1;
+	int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
+
+	int age = yearNow - yearBirth;
+
+	if (monthNow <= monthBirth) {
+		if (monthNow == monthBirth) {
+			// monthNow==monthBirth 
+			if (dayOfMonthNow < dayOfMonthBirth) {
+				age--;
+			}
+		} else {
+			// monthNow>monthBirth 
+			age--;
+		}
+	}
+	return age;
+
+  } catch (Exception e) {
+
+   return 0;
+
+  }
+
+ }
 }
 
 

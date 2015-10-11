@@ -8,6 +8,11 @@ public class SystemConstants {
 	static public final Integer Group_type_1 = Integer.valueOf(1);//幼儿园
 	static public final Integer Group_type_2 = Integer.valueOf(2);//培训机构
 	
+	static public final String Sex_male = "0";//男
+	static public final String Sex_female = "1";//女
+	
+	
+	
 	static public final String Group_uuid_wjd = "group_wjd";//云代理幼儿园,所有注册的老师都默认关联它.
 	
 	static public final String Group_uuid_wjkj = "wjkj";//管理后台uuid
