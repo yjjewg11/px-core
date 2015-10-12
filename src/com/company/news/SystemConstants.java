@@ -8,6 +8,11 @@ public class SystemConstants {
 	static public final Integer Group_type_1 = Integer.valueOf(1);//幼儿园
 	static public final Integer Group_type_2 = Integer.valueOf(2);//培训机构
 	
+	static public final String Sex_male = "0";//男
+	static public final String Sex_female = "1";//女
+	
+	
+	
 	static public final String Group_uuid_wjd = "group_wjd";//云代理幼儿园,所有注册的老师都默认关联它.
 	
 	static public final String Group_uuid_wjkj = "wjkj";//管理后台uuid
@@ -54,6 +59,8 @@ public class SystemConstants {
 	public static final int common_type_messageTeaher = 11;//老师和家长交流信件
 	public static final int common_type_messageKD = 12;//老师和园长交流信件
 	public static final int common_type_signrecord = 13;//孩子签到记录
+	public static final int common_type_KDHelp = 91;//幼儿园帮助文档。
+	public static final int common_type_PDHelp = 92;//培训机构帮助文档。增加2种文档通知类型。参考老师公告做。
 	public static final int common_type_reply = 98;//评论
 	public static final int common_type_hudong = 99;// 互动类
 	

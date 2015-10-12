@@ -406,7 +406,7 @@ public class PushMsgIservice {
 	   * @return
 	   */
 	  private void iosPushMsgToSingleDevice_to_TeacherByChannelId(String title,String msg,List deviceTokenList)throws Exception{
-		  //暂未开发.
+		  pushMsgIosInterface.iosPushMsgToSingleDevice_to_TeacherByChannelId(title, msg, deviceTokenList);
 		  if(true)return;
 		  String p12FileName = ProjectProperties.getProperty("iosCert_teacher", "wenjie_jiazhangtong_push_aps_dev.p12");
 		  String p12Pass = ProjectProperties.getProperty("iosCert_pwd_teacher", "wenjie_123456");

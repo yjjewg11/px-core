@@ -65,8 +65,47 @@ public class PushMsgUmengIosInterfaceImpl implements PushMsgIosInterface {
 	@Override
 	public void iosPushMsgToSingleDevice_to_TeacherByChannelId(String title,
 			String msg, List deviceTokenList) throws Exception {
-		// TODO Auto-generated method stub
-
+		String appkey  = ProjectProperties.getProperty("ios_umeng_appkey_teacher", "55cc8dece0f55a2379004ba7");
+		String appMasterSecret = ProjectProperties.getProperty("ios_umeng_appMasterSecret_teacher", "szskufilecewdjgrsyy2vnxr2df4gf6o");
+		String production_mode = ProjectProperties.getProperty("ios_umeng_production_mode_teacher", "true");
+		
+		String timestamp = Integer.toString((int)(System.currentTimeMillis() / 1000));
+		
+//		System.out.println("ios_umeng_appkey_teacher="+appkey);
+		IOSUnicast unicast = new IOSUnicast();
+		
+		if(deviceTokenList==null||deviceTokenList.size()<0){
+			logger.error("PushMsgUmengIosInterfaceImpl :deviceTokenList==0");
+			return;
+		}else if(deviceTokenList.size()>1){
+			unicast.setPredefinedKeyValue("type", "listcast");
+		}
+		List list=null;
+		//所谓的“非结构性修改”，是指不涉及到list的大小改变的修改。相反，结构性修改，指改变了list大小的修改。
+		if(deviceTokenList.size()>499){
+			list=deviceTokenList.subList(0, 499);
+			//递归调用发送完毕.
+			iosPushMsgToSingleDevice_to_TeacherByChannelId(title,msg,deviceTokenList.subList(500, deviceTokenList.size()-1));
+			
+		}else{
+			list=deviceTokenList;
+		}
+		String device_tokens=StringUtils.join(list, ",");
+		unicast.setAppMasterSecret(appMasterSecret);
+		unicast.setPredefinedKeyValue("appkey", appkey);
+		unicast.setPredefinedKeyValue("timestamp", timestamp);
+		// TODO Set your device token
+		unicast.setPredefinedKeyValue("device_tokens", device_tokens);
+		unicast.setPredefinedKeyValue("alert", title+":"+msg);
+		unicast.setPredefinedKeyValue("badge", 0);
+		unicast.setPredefinedKeyValue("sound", "chime");
+		// TODO set 'production_mode' to 'true' if your app is under production mode
+		unicast.setPredefinedKeyValue("production_mode", production_mode);
+		// Set customized fields
+//		unicast.setCustomizedField("test", "helloworld");
+		unicast.send();
+		logger.info("production_mode="+production_mode+",Umeng IOS send to teacher ok! list.size="+list.size()+".title="+title+":"+msg);
+		logger.info("deviceids:"+StringUtils.join(list, ","));
 	}
 
 }

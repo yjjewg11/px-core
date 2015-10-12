@@ -13,7 +13,15 @@ public class BaseDataListCacheVO  extends IdEntity {
 	  private String datavalue;//
 	  @Column
 	  private Integer datakey;//
+	  @Column
+	  private String description;//
 	  
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public String getTypeuuid() {
 		return typeuuid;
 	}
