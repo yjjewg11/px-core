@@ -18,6 +18,10 @@ public abstract class AbstractClass extends IdEntity {
 	private String create_user;// 创建人
 	@Column
 	private String create_useruuid;// 创建人id
+	@Column
+	private Timestamp disable_time;//结业时间
+	@Column
+	private Integer isdisable;// 是否已结业 1:已结业
 	
 	private String headTeacher_name;// 班主任
 	

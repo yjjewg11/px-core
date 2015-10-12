@@ -59,6 +59,10 @@ public class SystemConstants {
 	public static final int common_type_messageTeaher = 11;//老师和家长交流信件
 	public static final int common_type_messageKD = 12;//老师和园长交流信件
 	public static final int common_type_signrecord = 13;//孩子签到记录
+	public static final int common_type_pxgroup = 81;//培训机构
+	public static final int common_type_pxcourse = 82;//培训课程	
+	public static final int common_type_teacher = 83;//教师	
+	
 	public static final int common_type_KDHelp = 91;//幼儿园帮助文档。
 	public static final int common_type_PDHelp = 92;//培训机构帮助文档。增加2种文档通知类型。参考老师公告做。
 	public static final int common_type_reply = 98;//评论
