@@ -20,7 +20,14 @@ public class PxCourse4Q extends IdEntity {
 	private Group group;// 关联的机构
 	@Transient
 	private String distance;// 距离，KM单位
-	
+	@Column
+	private String logo;//
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
 	@Column
 	private String groupuuid;//培训机构uuid
 	@Column

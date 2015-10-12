@@ -16,7 +16,14 @@ import javax.persistence.Transient;
 public class PxCourse extends IdEntity {
 	@Transient
 	private Long count;// 统计浏览次数.//非数据库字段.
-	
+	@Column
+	private String logo;//
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
 	@Column
 	private String groupuuid;//培训机构uuid
 	@Column
