@@ -132,6 +132,11 @@ public class SystemConstants {
 	//班级模块
 	public static final int class_usertype_head = 1;// 班主任
 	public static final int class_usertype_teacher = 0;// 老师类型
+	
+
+	//结业
+	static public final Integer Class_isdisable_0 = Integer.valueOf(0);//未结业
+	static public final Integer Class_isdisable_1 = Integer.valueOf(1);//已结业
 }
 
 
