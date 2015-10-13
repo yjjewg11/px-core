@@ -26,15 +26,25 @@ public class Accounts extends IdEntity {
 	@Column
 	private double num;// 类型'0:普通通知 1:内部通知 2：班级通知',
 	@Column
-	private String groupuuid;// 坐标
+	private String groupuuid;// 
 	@Column
-	private String classuuid;// 坐标
+	private String classuuid;// 
 	@Column
 	private String studentuuid;// 学生uuid
 	@Column
 	private String studentname;// 学生名
 	@Column
 	private Integer type;// 坐标
+	@Column
+	private String invoice_num;// 发票号
+
+	public String getInvoice_num() {
+		return invoice_num;
+	}
+
+	public void setInvoice_num(String invoice_num) {
+		this.invoice_num = invoice_num;
+	}
 
 	public String getStudentuuid() {
 		return studentuuid;
