@@ -35,6 +35,22 @@ public abstract class AbstractClass extends IdEntity {
 		return headTeacher_name;
 	}
 
+	public Timestamp getDisable_time() {
+		return disable_time;
+	}
+
+	public void setDisable_time(Timestamp disable_time) {
+		this.disable_time = disable_time;
+	}
+
+	public Integer getIsdisable() {
+		return isdisable;
+	}
+
+	public void setIsdisable(Integer isdisable) {
+		this.isdisable = isdisable;
+	}
+
 	public void setHeadTeacher_name(String headTeacher_name) {
 		this.headTeacher_name = headTeacher_name;
 	}
