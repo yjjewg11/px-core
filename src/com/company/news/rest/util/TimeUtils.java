@@ -512,6 +512,30 @@ public class TimeUtils
   }
 
  }
+ 
+ 
+
+ /**
+  * 起始年月yyyy-MM与终止月yyyy-MM之间跨度的月数。
+  * 
+  * @param beginMonth
+  *            格式为yyyy-MM
+  * @param endMonth
+  *            格式为yyyy-MM
+  * @return 整数。
+  */
+ public static int getIntervalMonth(String beginMonth, String endMonth) {
+	 String[] beginMonthArr=beginMonth.split("-");
+	 String[] endMonthArr=endMonth.split("-");
+	 
+  int intBeginYear = Integer.parseInt(beginMonthArr[0]);
+  int intBeginMonth = Integer.parseInt(beginMonthArr[1]);
+  int intEndYear = Integer.parseInt(endMonthArr[0]);
+  int intEndMonth = Integer.parseInt(endMonthArr[1]);
+
+  return ((intEndYear - intBeginYear) * 12)+ (intEndMonth - intBeginMonth) ;
+ }
+
 }
 
 
