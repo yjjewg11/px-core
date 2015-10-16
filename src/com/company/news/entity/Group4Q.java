@@ -27,6 +27,10 @@ public class Group4Q extends IdEntity{
  
 	  @Column
 	  private String img;//组织logo
+	  @Column
+		private Integer ct_stars;//有效值,0-50.5星评价后计算平均值.(默认值30).
+		@Column
+		private Long ct_study_students;//统计已经学习过的学生数量
 
 	public String getLink_tel() {
 		return link_tel;
@@ -85,6 +89,18 @@ public class Group4Q extends IdEntity{
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public Integer getCt_stars() {
+		return ct_stars;
+	}
+	public void setCt_stars(Integer ct_stars) {
+		this.ct_stars = ct_stars;
+	}
+	public Long getCt_study_students() {
+		return ct_study_students;
+	}
+	public void setCt_study_students(Long ct_study_students) {
+		this.ct_study_students = ct_study_students;
 	}
 
 

@@ -52,6 +52,10 @@ public class PxCourse4Q extends IdEntity {
 	private String update_useruuid;//创建人uuid.(后台设置)
 	@Column
 	private Timestamp updatetime;//更新时间
+	@Column
+	private Integer ct_stars;//有效值,0-50.5星评价后计算平均值.(默认值30).
+	@Column
+	private Long ct_study_students;//统计已经学习过的学生数量
 	@Transient
 	public String getDistance() {
 		return distance;
@@ -148,6 +152,18 @@ public class PxCourse4Q extends IdEntity {
 	}
 	public void setGroupuuid(String groupuuid) {
 		this.groupuuid = groupuuid;
+	}
+	public Integer getCt_stars() {
+		return ct_stars;
+	}
+	public void setCt_stars(Integer ct_stars) {
+		this.ct_stars = ct_stars;
+	}
+	public Long getCt_study_students() {
+		return ct_study_students;
+	}
+	public void setCt_study_students(Long ct_study_students) {
+		this.ct_study_students = ct_study_students;
 	}
 
 }

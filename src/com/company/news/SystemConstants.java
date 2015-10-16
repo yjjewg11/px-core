@@ -62,6 +62,7 @@ public class SystemConstants {
 	public static final int common_type_pxgroup = 81;//培训机构
 	public static final int common_type_pxcourse = 82;//培训课程	
 	public static final int common_type_teacher = 83;//教师	
+	public static final int common_type_pxteachingPlan = 84;//培训机构-教学计划
 	
 	public static final int common_type_KDHelp = 91;//幼儿园帮助文档。
 	public static final int common_type_PDHelp = 92;//培训机构帮助文档。增加2种文档通知类型。参考老师公告做。
@@ -128,6 +129,10 @@ public class SystemConstants {
 	static public final Integer Check_status_disable = Integer.valueOf(2);//禁止发布
 	static public final Integer Check_status_weifabu = Integer.valueOf(1);//未发布
 	static public final Integer Check_status_fabu = Integer.valueOf(0);//发布]
+	
+	//培训机构课程发布
+	static public final Integer PxCourse_status_weifabu = Integer.valueOf(1);//未发布
+	static public final Integer PxCourse_status_fabu = Integer.valueOf(0);//发布]
 	
 	//班级模块
 	public static final int class_usertype_head = 1;// 班主任

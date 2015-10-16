@@ -35,6 +35,7 @@ public class DistanceUtil {
 	 * @return 换算为KM
 	 */
 	public static String getDistance(String point1, String point2) {
+		if(point1==null||point2==null)return null;
 		double lng1, lat1, lng2, lat2 = 0;
 		try {
 			String[] point1s = point1.split(",");
@@ -58,6 +59,6 @@ public class DistanceUtil {
 
 		//格式化为带1位小数的字符
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#.0");
-		return df.format(getDistance(lng1, lat1, lng2, lat2) / 1000);
+		return df.format(getDistance(lng1, lat1, lng2, lat2) / 1000)+"km";
 	}
 }
