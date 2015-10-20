@@ -14,7 +14,9 @@ public class Appraise extends IdEntity {
 	@Column
 	private Date create_time;// 评价时间
 	@Column
-	private String ext_uuid;// 关联教师teacheruuid
+	private String ext_uuid;// 关联uuid
+	@Column
+	private String class_uuid;// 关联具体课程班级
 	@Column
 	private String content;// 内容(HTML)
 	@Column
@@ -76,6 +78,12 @@ public class Appraise extends IdEntity {
 
 	public void setCreate_useruuid(String create_useruuid) {
 		this.create_useruuid = create_useruuid;
+	}
+	public String getClass_uuid() {
+		return class_uuid;
+	}
+	public void setClass_uuid(String class_uuid) {
+		this.class_uuid = class_uuid;
 	}
 
 

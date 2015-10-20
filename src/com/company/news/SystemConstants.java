@@ -137,8 +137,8 @@ public class SystemConstants {
 	static public final Integer PxCourse_status_fabu = Integer.valueOf(0);//发布]
 	
 	//班级模块
-	public static final int class_usertype_head = 1;// 班主任
-	public static final int class_usertype_teacher = 0;// 老师类型
+	public static final int class_usertype_head = 1;// 班主任(幼儿园),培训机构(管理员)
+	public static final int class_usertype_teacher = 0;// 其他老师(幼儿园),培训机构(授课老师)
 	
 
 	//结业
