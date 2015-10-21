@@ -34,7 +34,12 @@ public class Announcements extends IdEntity{
 	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
 	  @Column
 	  private Long illegal;//举报次数.用于优先审查
-
+	  @Column
+	  private String url;//支持直接复制url方式.长度限制256.
+	  @Column
+	  private Timestamp start_time;//开始时间
+	  @Column
+	  private Timestamp end_time;//结束时间
 	  @Column
 		private Timestamp illegal_time;// 举报时间
 	  @Transient
@@ -128,6 +133,30 @@ public class Announcements extends IdEntity{
 
 	public void setIllegal_time(Timestamp illegal_time) {
 		this.illegal_time = illegal_time;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Timestamp getStart_time() {
+		return start_time;
+	}
+
+	public void setStart_time(Timestamp start_time) {
+		this.start_time = start_time;
+	}
+
+	public Timestamp getEnd_time() {
+		return end_time;
+	}
+
+	public void setEnd_time(Timestamp end_time) {
+		this.end_time = end_time;
 	}
 	  
 

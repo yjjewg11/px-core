@@ -30,8 +30,14 @@ public class Announcements4Q extends IdEntity{
 	  private String groupuuid;//坐标	  
 	  @Column
 	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
+	  @Column
+	  private String url;//支持粘贴url
+	  @Column
+	  private Timestamp start_time;//开始时间
+	  @Column
+	  private Timestamp end_time;//结束时间
 	  @Transient
-		private Long count;//计数
+	  private Long count;//计数
 	  @Transient
 			private PageQueryResult replyPage;// 回复第一页数据
 			@Transient
@@ -110,6 +116,30 @@ public class Announcements4Q extends IdEntity{
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Timestamp getStart_time() {
+		return start_time;
+	}
+
+	public void setStart_time(Timestamp start_time) {
+		this.start_time = start_time;
+	}
+
+	public Timestamp getEnd_time() {
+		return end_time;
+	}
+
+	public void setEnd_time(Timestamp end_time) {
+		this.end_time = end_time;
 	}
 	  
 
