@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -175,9 +176,48 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
     
     return new PageQueryResult(pData.getPageSize(), pData.getPageNo(), list, total);
   }
+  /**
+  * 分页查询(总数)
+  * selectsql="select b2.studentuuid,b2.cardid,b2.userid,s1.name "
+  *  fromsql=" from px_student "
+  * @param hql
+  * @param pData
+  * @return
+  */
+ public PageQueryResult findMapByPageForSqlTotal(String selectsql,String countsql, PaginationData pData) {
+	  Session s = this.getHibernateTemplate().getSessionFactory().openSession();
+	  Query query= s.createSQLQuery(selectsql);
+	  query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		
+   long startTime = 0;
+   long endTime = 0;
+   startTime = System.currentTimeMillis();
+   List list =
+   		query.setFirstResult(pData.getStartIndex()).setMaxResults(
+           pData.getPageSize()).list();
+   endTime = System.currentTimeMillis() - startTime;
+   this.logger.info("findByPageForSqlTotal list  count time(ms)="+endTime);
+   long total = 0;
+   if(pData.getPageNo()==1){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
+     if (list.size() < pData.getPageSize()) {// 小于当前页,就不用单独计算总数.
+       total = list.size();
+     } else {
+       startTime = System.currentTimeMillis();
+       total =
+         Long.valueOf(s.createSQLQuery(countsql).uniqueResult()
+           .toString());
+       this.logger.info("findByPaginationToHql total  count time(ms)="+endTime);
+     }
+   }else{
+     total=999999;
+   }
+   endTime = System.currentTimeMillis() - startTime;
+  
+   return new PageQueryResult(pData.getPageSize(), pData.getPageNo(), list, total);
+ }
 
   /**
-   * 分页查询(总数)
+   * 分页查询(总数)数组方式.
    * selectsql="select b2.studentuuid,b2.cardid,b2.userid,s1.name "
    *  fromsql=" from px_student "
    * @param hql
