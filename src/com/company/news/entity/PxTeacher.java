@@ -28,16 +28,16 @@ public class PxTeacher extends IdEntity {
 	@Column
 	private String content;// html内容介绍
 	@Column
-	private Integer ct_stars;// 有效值,0-50.5星评价后计算平均值.(默认值30).
+	private Integer ct_stars;// 有效值,0-50.5星评价后计算平均值.(默认值30).(非输入项,系统计算)
 	@Column
 	private String summary;// 摘要,100字内.
 	@Column
-	private String course_uuid;// 教授课程
+	private Integer type;// 类型.英语,舞蹈,美术
 	@Column
 	private Integer status;// 是否公开发布.1:未发布.0:发布.同课程发布.
 	@Column
 	private Timestamp update_time;//更新时间
-	@Transient
+	@Column
 	private String course_title;//教授课程,显示名
 	
 	public String getGroupuuid() {
@@ -94,11 +94,11 @@ public class PxTeacher extends IdEntity {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	public String getCourse_uuid() {
-		return course_uuid;
+	public Integer getType() {
+		return type;
 	}
-	public void setCourse_uuid(String course_uuid) {
-		this.course_uuid = course_uuid;
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	public String getCourse_title() {
 		return course_title;

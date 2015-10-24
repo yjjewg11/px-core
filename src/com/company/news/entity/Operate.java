@@ -9,6 +9,18 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "px_operate")
+/**
+ * 学生档案表
+ * 
+ * @author liumingquan
+ *举例:
+ *学生名|换班级|[小二班] 换到 [小三班]|学校名
+ *String msg=student.getName()+"|换班级到|["+ cl.getName()+"]|"+group.getBrand_name();
+ *
+ *
+ *String msg=student.getName()+"|加入班级|["+ pClass.getName()+"]|爸爸电话:"+student.getBa_tel()+"|妈妈电话:"+student.getMa_tel()+"|"+group.getBrand_name();
+		
+ */
 public class Operate extends IdEntity {
 
 	@Column
