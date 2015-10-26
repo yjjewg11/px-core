@@ -29,6 +29,9 @@ public class PxTeacher extends IdEntity {
 	private String content;// html内容介绍
 	@Column
 	private Integer ct_stars;// 有效值,0-50.5星评价后计算平均值.(默认值30).(非输入项,系统计算)
+	  @Column
+	private Long ct_stars_count;//记录5星评价的总数.ct_stars=(((ct_stars*ct_stars_count)+new_ct_start)/(ct_stars_count+1)+0.5)*10
+		
 	@Column
 	private String summary;// 摘要,100字内.
 	@Column
@@ -105,6 +108,12 @@ public class PxTeacher extends IdEntity {
 	}
 	public void setCourse_title(String course_title) {
 		this.course_title = course_title;
+	}
+	public Long getCt_stars_count() {
+		return ct_stars_count;
+	}
+	public void setCt_stars_count(Long ct_stars_count) {
+		this.ct_stars_count = ct_stars_count;
 	}
 
 	

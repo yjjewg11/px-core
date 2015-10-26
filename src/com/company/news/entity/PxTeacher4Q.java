@@ -26,6 +26,9 @@ public class PxTeacher4Q extends IdEntity {
 		private String img;// 显示图片id
 	@Column
 	private Integer ct_stars;// 有效值,0-50.5星评价后计算平均值.(默认值30).
+	  @Column
+		private Long ct_stars_count;//记录5星评价的总数.ct_stars=(((ct_stars*ct_stars_count)+new_ct_start)/(ct_stars_count+1)+0.5)*10
+		
 	@Column
 	private String summary;// 简介,100字内.
 	@Column

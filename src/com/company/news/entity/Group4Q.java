@@ -31,6 +31,11 @@ public class Group4Q extends IdEntity{
 		private Integer ct_stars;//有效值,0-50.5星评价后计算平均值.(默认值30).
 		@Column
 		private Long ct_study_students;//统计已经学习过的学生数量
+		
+		  @Column
+		  private String prov;//省,比如:四川
+		  @Column
+		  private String city;//市:比如:成都
 
 	public String getLink_tel() {
 		return link_tel;
@@ -101,6 +106,18 @@ public class Group4Q extends IdEntity{
 	}
 	public void setCt_study_students(Long ct_study_students) {
 		this.ct_study_students = ct_study_students;
+	}
+	public String getProv() {
+		return prov;
+	}
+	public void setProv(String prov) {
+		this.prov = prov;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 
