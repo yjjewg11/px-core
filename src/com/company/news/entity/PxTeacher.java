@@ -40,8 +40,13 @@ public class PxTeacher extends IdEntity {
 	private Integer status;// 是否公开发布.1:未发布.0:发布.同课程发布.
 	@Column
 	private Timestamp update_time;//更新时间
+	
+	
+	
+	@Transient
+	private String course_uuids;//教授课程,uuid.多个逗号分割
 	@Column
-	private String course_title;//教授课程,显示名
+	private String course_title;//教授课程,显示名.多个逗号分割
 	
 	public String getGroupuuid() {
 		return groupuuid;
@@ -103,17 +108,25 @@ public class PxTeacher extends IdEntity {
 	public void setType(Integer type) {
 		this.type = type;
 	}
+	
+	public Long getCt_stars_count() {
+		return ct_stars_count;
+	}
+	public void setCt_stars_count(Long ct_stars_count) {
+		this.ct_stars_count = ct_stars_count;
+	}
 	public String getCourse_title() {
 		return course_title;
 	}
 	public void setCourse_title(String course_title) {
 		this.course_title = course_title;
 	}
-	public Long getCt_stars_count() {
-		return ct_stars_count;
+	@Transient
+	public String getCourse_uuids() {
+		return course_uuids;
 	}
-	public void setCt_stars_count(Long ct_stars_count) {
-		this.ct_stars_count = ct_stars_count;
+	public void setCourse_uuids(String course_uuids) {
+		this.course_uuids = course_uuids;
 	}
 
 	

@@ -28,7 +28,8 @@ public class Group extends IdEntity{
 	  private String description;//  
 	  @Column
 	  private String private_key;// 密钥
-	  
+	  @Column
+		private String summary;// 摘要,100字内
 	  @Column
 	  private String img;//组织logo
 	  
@@ -142,6 +143,12 @@ public class Group extends IdEntity{
 	}
 	public void setCt_stars_count(Long ct_stars_count) {
 		this.ct_stars_count = ct_stars_count;
+	}
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 
