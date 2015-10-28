@@ -124,7 +124,7 @@ public class PxStringUtil {
 			return s;
 		}
 		
-		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("img_down_url_pre", "http://kd.wenjienet.com/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
 	 * 将图片uuid替换成可以下载的http地址.中等图片
@@ -148,7 +148,7 @@ public class PxStringUtil {
 			return s;
 		}
 		
-		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("img_down_url_pre", "http://kd.wenjienet.com/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	
 	/**
@@ -175,7 +175,7 @@ public class PxStringUtil {
 			return s;
 		}
 		
-		return ProjectProperties.getProperty("img_down_url_pre", "http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("img_down_url_pre", "http://kd.wenjienet.com/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
 	 * 将图片uuid替换成可以下载的http地址.
@@ -199,7 +199,7 @@ public class PxStringUtil {
 	/**
 	 * 将图片http地址替换成uuid,用于保存.
 	 * @param uuid
-	 * http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid},http://localhost:8080/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid},
+	 * http://kd.wenjienet.com/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid},http://kd.wenjienet.com/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid},
 	 * =>{uuid}
 	 * 
 	 * or
@@ -272,7 +272,7 @@ public class PxStringUtil {
 	 */
 	public static String getAnnByUuid(String uuid){
 		if(uuid==null)return null;
-		return ProjectProperties.getProperty("share_url_getAnn", "http://localhost:8080/px-rest/rest/share/getAnn.html?uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("share_url_getAnn", "http://kd.wenjienet.com/px-rest/rest/share/getAnn.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	
 	
@@ -284,7 +284,7 @@ public class PxStringUtil {
 	 */
 	public static String getArticleByUuid(String uuid){
 		if(uuid==null)return null;
-		return ProjectProperties.getProperty("share_url_getArticle", "http://localhost:8080/px-rest/rest/share/getArticle.html?uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("share_url_getArticle", "http://kd.wenjienet.com/px-rest/rest/share/getArticle.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
 	 * 分享班级互动
@@ -294,7 +294,18 @@ public class PxStringUtil {
 	 */
 	public static String getClassNewsByUuid(String uuid){
 		if(uuid==null)return null;
-		return ProjectProperties.getProperty("share_url_getClassNews", "http://localhost:8080/px-rest/rest/share/getClassNews.html?uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("share_url_getClassNews", "http://kd.wenjienet.com/px-rest/rest/share/getClassNews.html?uuid={uuid}").replace("{uuid}", uuid);
+	}
+	
+	/**
+	 * 分享精品地址
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String getPxCourseByUuid(String uuid){
+		if(uuid==null)return null;
+		return ProjectProperties.getProperty("share_url_getPxCourse", "http://kd.wenjienet.com/px-rest/rest/share/getArticle.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	
 
@@ -306,7 +317,7 @@ public class PxStringUtil {
 	 */
 	public static String getCookbookPlanByUuid(String uuid){
 		if(uuid==null)return null;
-		return ProjectProperties.getProperty("share_url_getCookbookPlan", "http://localhost:8080/px-rest/rest/share/getClassNews.html?uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("share_url_getCookbookPlan", "http://kd.wenjienet.com/px-rest/rest/share/getClassNews.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	
 	/**

@@ -49,6 +49,9 @@ public class Parent extends IdEntity implements SessionUserInfoInterface{
 	@Column
 	private Long count;//记录登入次数
 	
+	@Column
+	private String sessionid;// 保存登录成功后的sessionid
+	
 	public Timestamp getLast_login_time() {
 		return last_login_time;
 	}
@@ -157,6 +160,14 @@ public class Parent extends IdEntity implements SessionUserInfoInterface{
 
 	public void setCount(Long count) {
 		this.count = count;
+	}
+
+	public String getSessionid() {
+		return sessionid;
+	}
+
+	public void setSessionid(String sessionid) {
+		this.sessionid = sessionid;
 	}
 
 }

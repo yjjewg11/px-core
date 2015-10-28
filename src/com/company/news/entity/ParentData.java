@@ -26,8 +26,7 @@ public class ParentData extends IdEntity {
 	private String phone_type;//iPhone 或  andorid
 	@Column
 	private String app_verion;// 客户端版本号
-	@Column
-	private String sessionid;// 保存登录成功后的sessionid
+	
 	@Column
 	private String city;// 城市
 	@Column
@@ -52,12 +51,6 @@ public class ParentData extends IdEntity {
 	}
 	public void setApp_verion(String app_verion) {
 		this.app_verion = app_verion;
-	}
-	public String getSessionid() {
-		return sessionid;
-	}
-	public void setSessionid(String sessionid) {
-		this.sessionid = sessionid;
 	}
 	public String getCity() {
 		return city;

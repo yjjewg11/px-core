@@ -43,24 +43,12 @@ public class User extends IdEntity implements SessionUserInfoInterface{
 	private String img;// 头像。
 	@Column
 	private Long count;//记录登入次数
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-
+	@Column
+	private String sessionid;// 保存登录成功后的sessionid.实现服务器,session共享.
+	@Column
+	private Integer login_type;// 登录类型.取值范围:SystemConstants.Group_type_
 	@Column
 	private Timestamp last_login_time;// 上一次登录时间
-	public Timestamp getLast_login_time() {
-		return last_login_time;
-	}
-
-	public void setLast_login_time(Timestamp last_login_time) {
-		this.last_login_time = last_login_time;
-	}
-
 	@Column
 	private Integer type;// 用户类型。0:普通用户(默认)；1:组织管理员
 
@@ -173,6 +161,38 @@ public class User extends IdEntity implements SessionUserInfoInterface{
 
 	public void setCount(Long count) {
 		this.count = count;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public String getSessionid() {
+		return sessionid;
+	}
+
+	public void setSessionid(String sessionid) {
+		this.sessionid = sessionid;
+	}
+
+	public Timestamp getLast_login_time() {
+		return last_login_time;
+	}
+
+	public void setLast_login_time(Timestamp last_login_time) {
+		this.last_login_time = last_login_time;
+	}
+
+	public Integer getLogin_type() {
+		return login_type;
+	}
+
+	public void setLogin_type(Integer login_type) {
+		this.login_type = login_type;
 	}
 
 }
