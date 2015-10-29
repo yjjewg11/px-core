@@ -12,15 +12,17 @@ public class BaseDataList extends IdEntity{
 	
 
 	  @Column
-	  private String typeuuid;//
+	  private String typeuuid;//分类名
 	  @Column
-	  private String datavalue;//
+	  private String datavalue;//值
 	  @Column
-	  private Integer datakey;//
+	  private Integer datakey;//key
 	  @Column
-	  private String description;//
+	  private String description;//描述或其他
 	  @Column
-	  private Integer enable;//
+	  private Integer enable;//0:禁用.1:显示
+	  @Column
+	  private Integer index;//排序默认0.
 	  
 	public String getTypeuuid() {
 		return typeuuid;
@@ -52,6 +54,12 @@ public class BaseDataList extends IdEntity{
 	}
 	public void setEnable(Integer enable) {
 		this.enable = enable;
+	}
+	public Integer getIndex() {
+		return index;
+	}
+	public void setIndex(Integer index) {
+		this.index = index;
 	}
 	  
 

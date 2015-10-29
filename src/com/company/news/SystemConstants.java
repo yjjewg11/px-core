@@ -145,6 +145,17 @@ public class SystemConstants {
 	//结业
 	static public final Integer Class_isdisable_0 = Integer.valueOf(0);//未结业
 	static public final Integer Class_isdisable_1 = Integer.valueOf(1);//已结业
+	
+	
+	
+	//设备注册的类型
+		static public final Integer StatMonthAttendance_type_0 = Integer.valueOf(0);//家长
+		static public final Integer StatMonthAttendance_type_1 = Integer.valueOf(1);//老师
+		
+	//学生状态
+		static public final Integer Student_status_0 = Integer.valueOf(0);//在校
+		static public final Integer Student_status_1 = Integer.valueOf(1);//结业
+		static public final Integer Student_status_2 = Integer.valueOf(2);//离校   中途离校
 }
 
 
