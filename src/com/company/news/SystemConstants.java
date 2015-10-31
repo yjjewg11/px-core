@@ -156,6 +156,10 @@ public class SystemConstants {
 		static public final Integer Student_status_0 = Integer.valueOf(0);//在校
 		static public final Integer Student_status_1 = Integer.valueOf(1);//结业
 		static public final Integer Student_status_2 = Integer.valueOf(2);//离校   中途离校
+		
+		
+		
+		static public final String GroupHabits_key_WorkTime = "WorkTime";//上班时间.格式: 08:00-17:00
 }
 
 
