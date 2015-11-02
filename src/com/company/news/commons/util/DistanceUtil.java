@@ -1,5 +1,8 @@
 package com.company.news.commons.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 public class DistanceUtil {
 	/**
 	 * 计算两经纬度点之间的距离（单位：米）
@@ -36,6 +39,14 @@ public class DistanceUtil {
 	 */
 	public static String getDistance(String point1, String point2) {
 		if(point1==null||point2==null)return null;
+		//修复url编码问题."map_point",  "-1.0%2C-1.0"
+		try {
+			point1=URLDecoder.decode(point1,   "utf-8");
+			point2=URLDecoder.decode(point1,   "utf-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
 		double lng1, lat1, lng2, lat2 = 0;
 		try {
 			String[] point1s = point1.split(",");

@@ -22,7 +22,7 @@ public class BaseDataList extends IdEntity{
 	  @Column
 	  private Integer enable;//0:禁用.1:显示
 	  @Column
-	  private Integer index;//排序默认0.
+	  private Integer ind;//排序默认0.
 	  
 	public String getTypeuuid() {
 		return typeuuid;
@@ -55,11 +55,11 @@ public class BaseDataList extends IdEntity{
 	public void setEnable(Integer enable) {
 		this.enable = enable;
 	}
-	public Integer getIndex() {
-		return index;
+	public Integer getInd() {
+		return ind;
 	}
-	public void setIndex(Integer index) {
-		this.index = index;
+	public void setInd(Integer ind) {
+		this.ind = ind;
 	}
 	  
 
