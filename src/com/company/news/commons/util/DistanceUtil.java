@@ -42,7 +42,7 @@ public class DistanceUtil {
 		//修复url编码问题."map_point",  "-1.0%2C-1.0"
 		try {
 			point1=URLDecoder.decode(point1,   "utf-8");
-			point2=URLDecoder.decode(point1,   "utf-8");
+			point2=URLDecoder.decode(point2,   "utf-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -69,7 +69,7 @@ public class DistanceUtil {
 		}
 
 		//格式化为带1位小数的字符
-		java.text.DecimalFormat df = new java.text.DecimalFormat("#.0");
+		java.text.DecimalFormat df = new java.text.DecimalFormat("0.0");
 		return df.format(getDistance(lng1, lat1, lng2, lat2) / 1000)+"km";
 	}
 }
