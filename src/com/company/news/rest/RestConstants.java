@@ -25,6 +25,9 @@ public class RestConstants {
   static public String Return_ResponseMessage_count="count";
   //总数
   static public String Return_ResponseMessage_isFavorites="isFavor";
+  //联系电话
+  static public String Return_ResponseMessage_link_tel="link_tel";
+  
   //请求list
   static public String Return_ResponseMessage_list="list";
   //请求md5
