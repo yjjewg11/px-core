@@ -305,7 +305,7 @@ public class PxStringUtil {
 	 */
 	public static String getPxCourseByUuid(String uuid){
 		if(uuid==null)return null;
-		return ProjectProperties.getProperty("share_url_getPxCourse", "http://kd.wenjienet.com/px-rest/rest/share/getArticle.html?uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("share_url_getPxCourse", "http://kd.wenjienet.com/px-rest/rest/share/getPxCourse.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	
 
@@ -350,6 +350,34 @@ public class PxStringUtil {
 		 return tmp;
 	  }
 	
+	  /**
+	   * 获取电话保密格式.
+	   * 136111178901-> 136****78901
+	   * @param cellphone
+	   * @return
+	   */
+	  public static String getSecretCellphone(String cellphone){
+			if (StringUtils.isBlank(cellphone)||cellphone.length()<8) {
+				return cellphone;
+			}
+		// 电话保密
+				String  s=StringUtils.substring(cellphone, 0, 3)+ "****" + StringUtils.substring(cellphone, 7);
+			return s;
+	  }
+	  
+	  /**
+	   * 最大字符截取
+	   * 136111178901-> 136...
+	   * @param cellphone
+	   * @return
+	   */
+	  public static String getSubString(String str,Integer index){
+			if (StringUtils.isBlank(str)||str.length()<=index||index<4) {
+				return str;
+			}
+			str=str.substring(0, index-3)+"...";
+			return str;
+	  }
 	  
 	  public static void main(String[] s){
 		  String s1="180 123 123123";

@@ -72,4 +72,42 @@ public class DistanceUtil {
 		java.text.DecimalFormat df = new java.text.DecimalFormat("0.0");
 		return df.format(getDistance(lng1, lat1, lng2, lat2) / 1000)+"km";
 	}
+	
+	/**
+	 * 
+	 * @param point1
+	 *            坐标点1 经纬度用逗号分隔
+	 * @param point2
+	 *            坐标点2 经纬度用逗号分隔
+	 * @return 换算为KM
+	 * longitude:经度
+	 * 
+	 * Latitude:纬度
+	 * 
+	 */
+	public static double[] getLongitudeAndLatitude  (String point1) {
+		if(point1==null)return null;
+		//修复url编码问题."map_point",  "-1.0%2C-1.0"
+		try {
+			point1=URLDecoder.decode(point1,   "utf-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		double lng1, lat1, lng2, lat2 = 0;
+		try {
+			String[] point1s = point1.split(",");
+			if (point1s.length == 2)// 验证长度
+			{
+				lng1 = Double.parseDouble(point1s[0]);
+				lat1 = Double.parseDouble(point1s[1]);
+			} else
+				return null;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return new double[]{lng1,lat1};
+	}
 }
