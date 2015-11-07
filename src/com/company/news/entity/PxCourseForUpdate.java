@@ -13,7 +13,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "px_pxcourse")
-public class PxCourse extends IdEntity {
+public class PxCourseForUpdate extends IdEntity {
 	@Transient
 	private Long count;// 统计浏览次数.//非数据库字段.
 	@Column
@@ -48,14 +48,14 @@ public class PxCourse extends IdEntity {
 	private String update_useruuid;//创建人uuid.(后台设置)
 	
 	//ct_开头字段更新时,不允许修改.
-	@Column
-	private Integer ct_stars;//有效值,0-50.5星评价后计算平均值.(默认值30).
-	
-	@Column
-	private Long ct_stars_count;//记录5星评价的总数.ct_stars=(((ct_stars*ct_stars_count)+new_ct_start)/(ct_stars_count+1)+0.5)*10
-		
-	@Column
-	private Long ct_study_students;//统计已经学习过的学生数量
+//	@Column
+//	private Integer ct_stars;//有效值,0-50.5星评价后计算平均值.(默认值30).
+//	
+//	@Column
+//	private Long ct_stars_count;//记录5星评价的总数.ct_stars=(((ct_stars*ct_stars_count)+new_ct_start)/(ct_stars_count+1)+0.5)*10
+//		
+//	@Column
+//	private Long ct_study_students;//统计已经学习过的学生数量
 	@Column
 	private Timestamp updatetime;//更新时间
 	@Transient
@@ -138,24 +138,6 @@ public class PxCourse extends IdEntity {
 	}
 	public void setGroupuuid(String groupuuid) {
 		this.groupuuid = groupuuid;
-	}
-	public Integer getCt_stars() {
-		return ct_stars;
-	}
-	public void setCt_stars(Integer ct_stars) {
-		this.ct_stars = ct_stars;
-	}
-	public Long getCt_study_students() {
-		return ct_study_students;
-	}
-	public void setCt_study_students(Long ct_study_students) {
-		this.ct_study_students = ct_study_students;
-	}
-	public Long getCt_stars_count() {
-		return ct_stars_count;
-	}
-	public void setCt_stars_count(Long ct_stars_count) {
-		this.ct_stars_count = ct_stars_count;
 	}
 
 }

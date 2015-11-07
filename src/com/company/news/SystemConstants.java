@@ -160,6 +160,9 @@ public class SystemConstants {
 		
 		
 		static public final String GroupHabits_key_WorkTime = "WorkTime";//上班时间.格式: 08:00-17:00
+		
+		
+		static public final Integer Ct_stars_init=45;//5星,取值范围.0-50.
 }
 
 
