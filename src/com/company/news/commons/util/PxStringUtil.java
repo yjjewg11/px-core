@@ -389,6 +389,20 @@ public class PxStringUtil {
 			return str;
 	  }
 	  
+	  /**
+	   * 判断是否是url
+	   * @param str
+	   * @return
+	   */
+	  public static boolean isUrl(String str){
+		  if (StringUtils.isBlank(str))return false;
+		  if(str.startsWith("http://")||str.startsWith("https://")){
+				return true;
+			}
+		  return false;
+	  }
+	  
+	
 	  public static void main(String[] s){
 		  String s1="180 123 123123";
 		  repairCellphone(s1);
