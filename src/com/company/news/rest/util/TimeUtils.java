@@ -119,6 +119,7 @@ public class TimeUtils
 
     public static final Timestamp string2Timestamp(String format, String time)
     {
+    	if(time==null)return  null;
         if(format == null)
             format = YYYY_MM_DD_FORMAT;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
@@ -332,6 +333,7 @@ public class TimeUtils
     public static final String YYYY_MM_DD_FORMAT = "yyyy-MM-dd";
     public static final long DEFAULT_DATE = -5364691200000L;
     public static final String DEFAULTFORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String YYYY_MM_DD_HH_mm_FORMAT = "yyyy-MM-dd HH:mm";
     
     /**
      * 当前时间本月最后一天
