@@ -1,12 +1,11 @@
 package com.company.news.commons.util.upload;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 
-import javax.imageio.ImageIO;
-
 import jcifs.smb.SmbFile;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.Thumbnails.Builder;
 
 import org.apache.log4j.Logger;
 import org.imgscalr.Scalr;
@@ -53,15 +52,19 @@ public class DiskIUploadFile implements IUploadFile {
 	public boolean uploadFile(InputStream input, String key, Integer type) {
 		try {
 			logger.info("uploadFile:"+key);
-			FileUtils.createDirIfNoExists(uploadPath);
+			FileUtils.createDirIfNoExists(uploadPath + key);
 
-			// 生成缩略图
-			BufferedImage thumbnail = Scalr.resize(ImageIO.read(input),
-					Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
-					this.getThumbSize(type)[0], this.getThumbSize(type)[1],
-					Scalr.OP_ANTIALIAS);
-
-			ImageIO.write(thumbnail, "png", new File(uploadPath + key));
+			
+			Builder  tmp=Thumbnails.of(input);
+			tmp.scale(1f) ;
+		
+//			// 生成缩略图
+//			BufferedImage thumbnail = Scalr.resize(ImageIO.read(input),
+//					Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
+//					this.getThumbSize(type)[0], this.getThumbSize(type)[1],
+//					Scalr.OP_ANTIALIAS);
+//
+//			ImageIO.write(thumbnail, "png", new File(uploadPath + key));
 
 			//保存原始图片
 			String lastPath = "";
@@ -74,11 +77,17 @@ public class DiskIUploadFile implements IUploadFile {
 					lastPath += (keys[i] + "/");
 				}
 			}
-			filename = (keys[keys.length - 1] + "@old");
-
-			if (!FileUtils.saveFile(input, uploadPath + lastPath, filename)) {
-				return false;
-			}
+//			filename = (keys[keys.length - 1] + "@old");
+			filename = ("_"+keys[keys.length - 1]);
+			
+		
+//			tmp.toFile(new File(uploadPath + lastPath+filename));
+//			
+//			tmp.size(80, 80);
+			tmp.toFile(new File(uploadPath + key));
+//			if (!FileUtils.saveFile(input, uploadPath + lastPath, filename)) {
+//				return false;
+//			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -33,7 +33,9 @@ public class FileUtils {
   }
 
   public static String createDir(String path, String name) {
+	 
     path = path == null ? FilenameUtils.separatorsToSystem("") : path;
+    path=FilenameUtils.getFullPath(path);
     File file = new File(FilenameUtils.separatorsToSystem(path));
     if (!file.exists()) {
       logger.info("create dir:"+path);

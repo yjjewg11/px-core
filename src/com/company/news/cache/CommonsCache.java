@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import com.company.common.SpringContextHolder;
 import com.company.news.dao.NSimpleHibernateDao;
 import com.company.news.entity.BaseDataList;
-import com.company.news.entity.User;
 
 
 public class CommonsCache{
@@ -78,6 +77,16 @@ public class CommonsCache{
 		dbDataCache.put(e);
 	}
 	
-	
+	// 获取自动保存内容.不是数据库db获取
+		public static Object getNoDb(String uuid,Class clazz) {
+			logger.info(clazz.getSimpleName()+":get:uuid-->" + uuid);
+			Element e = dbDataCache.get(uuid+"_"+clazz.getSimpleName());
+	 
+			if (e != null)
+				return  e.getObjectValue();
+			
+			return null;
+		}
+
 
 }
