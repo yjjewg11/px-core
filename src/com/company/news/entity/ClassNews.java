@@ -21,16 +21,20 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 	private Long count;// 统计浏览次数.//非数据库字段.
 	@Column
 	private Timestamp create_time;// 创建时间
-	@Column
-	private Timestamp reply_time;// 回复时间
-	@Column
-	private Timestamp update_time;// 更新时间
+//	@Column
+//	private Timestamp reply_time;// 回复时间
+//	@Column
+//	private Timestamp update_time;// 更新时间
 	@Column
 	private String classuuid;// 关联班级uuid(显示班级名称)
 	@Column
 	private String groupuuid;// 关联学校uuid(显示班级名称)
 	@Column
-	private String title;// 标题
+	private String class_name;// 关联班级显示班级名称)
+	@Column
+	private String group_name;// 关联学校(显示班级名称)
+//	@Column
+//	private String title;// 标题
 	@Column
 	private String content;// 内容(ubb格式)
 
@@ -82,46 +86,6 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 
 	public void setUsertype(Integer usertype) {
 		this.usertype = usertype;
-	}
-
-	public Timestamp getReply_time() {
-		return reply_time;
-	}
-
-	public void setReply_time(Timestamp reply_time) {
-		this.reply_time = reply_time;
-	}
-
-	public Timestamp getCreate_time() {
-		return create_time;
-	}
-
-	public void setCreate_time(Timestamp create_time) {
-		this.create_time = create_time;
-	}
-
-	public Timestamp getUpdate_time() {
-		return update_time;
-	}
-
-	public void setUpdate_time(Timestamp update_time) {
-		this.update_time = update_time;
-	}
-
-	public String getClassuuid() {
-		return classuuid;
-	}
-
-	public void setClassuuid(String classuuid) {
-		this.classuuid = classuuid;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getContent() {
@@ -218,6 +182,38 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 
 	public void setIllegal_time(Timestamp illegal_time) {
 		this.illegal_time = illegal_time;
+	}
+
+	public Timestamp getCreate_time() {
+		return create_time;
+	}
+
+	public void setCreate_time(Timestamp create_time) {
+		this.create_time = create_time;
+	}
+
+	public String getClassuuid() {
+		return classuuid;
+	}
+
+	public void setClassuuid(String classuuid) {
+		this.classuuid = classuuid;
+	}
+
+	public String getClass_name() {
+		return class_name;
+	}
+
+	public void setClass_name(String class_name) {
+		this.class_name = class_name;
+	}
+
+	public String getGroup_name() {
+		return group_name;
+	}
+
+	public void setGroup_name(String group_name) {
+		this.group_name = group_name;
 	}
 	
 

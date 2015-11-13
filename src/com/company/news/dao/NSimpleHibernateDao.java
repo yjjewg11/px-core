@@ -430,4 +430,24 @@ public PageQueryResult findByPageForQueryTotal(Query query ,String countsql, Pag
   }
  
   
+
+
+  /**
+   * @param className
+   * @param id
+   * @return 2013-6-3 TODO 根据对象ID获取对象，没有代理的方式，方便结果处理
+   * @author yl
+   */
+  public String getGroupName(String groupuuid) {
+    String hql = "select brand_name from Group where uuid=:uuid";
+    List l = this.getSession().createQuery(hql).setString("uuid", groupuuid).list();
+    if (l != null && l.size() != 0) {
+      return (String) l.get(0);
+    }
+
+    return null;
+  }
+  
+  
+  
 }

@@ -28,8 +28,8 @@ public class ClassNewsReply extends IdEntity implements CreateUserInterface {
 	@Column
 	private String create_img;// 创建人头像
 	
-	@Column
-	private Timestamp update_time;// 创建时间
+//	@Column
+//	private Timestamp update_time;// 创建时间
 	@Column
 	private Integer type;//点赞类型 0：互动 1：公告 2：课程表 3：食谱
 	@Column
@@ -62,13 +62,13 @@ public class ClassNewsReply extends IdEntity implements CreateUserInterface {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public Timestamp getUpdate_time() {
-		return update_time;
-	}
-
-	public void setUpdate_time(Timestamp update_time) {
-		this.update_time = update_time;
-	}
+//	public Timestamp getUpdate_time() {
+//		return update_time;
+//	}
+//
+//	public void setUpdate_time(Timestamp update_time) {
+//		this.update_time = update_time;
+//	}
 
 	public Timestamp getCreate_time() {
 		return create_time;
