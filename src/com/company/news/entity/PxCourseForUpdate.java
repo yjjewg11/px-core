@@ -46,7 +46,23 @@ public class PxCourseForUpdate extends IdEntity {
 	private String status;// 发布状态:0:发布.1:不发布.
 	@Column
 	private String update_useruuid;//创建人uuid.(后台设置)
+	@Column
+	private Integer age_min;//有效年龄范围最小值（不能小于0）
+	@Column
+	private Integer age_max;//有效年龄范围最大值
 	
+	public Integer getAge_min() {
+		return age_min;
+	}
+	public void setAge_min(Integer age_min) {
+		this.age_min = age_min;
+	}
+	public Integer getAge_max() {
+		return age_max;
+	}
+	public void setAge_max(Integer age_max) {
+		this.age_max = age_max;
+	}
 	//ct_开头字段更新时,不允许修改.
 //	@Column
 //	private Integer ct_stars;//有效值,0-50.5星评价后计算平均值.(默认值30).

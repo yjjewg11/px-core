@@ -58,6 +58,10 @@ public class PxCourse extends IdEntity {
 	private Long ct_study_students;//统计已经学习过的学生数量
 	@Column
 	private Timestamp updatetime;//更新时间
+	@Column
+	private Integer age_min;//有效年龄范围最小值（不能小于0）
+	@Column
+	private Integer age_max;//有效年龄范围最大值
 	@Transient
 	public Long getCount() {
 		return count;
@@ -156,6 +160,18 @@ public class PxCourse extends IdEntity {
 	}
 	public void setCt_stars_count(Long ct_stars_count) {
 		this.ct_stars_count = ct_stars_count;
+	}
+	public Integer getAge_min() {
+		return age_min;
+	}
+	public void setAge_min(Integer age_min) {
+		this.age_min = age_min;
+	}
+	public Integer getAge_max() {
+		return age_max;
+	}
+	public void setAge_max(Integer age_max) {
+		this.age_max = age_max;
 	}
 
 }
