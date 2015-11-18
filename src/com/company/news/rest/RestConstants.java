@@ -34,6 +34,8 @@ public class RestConstants {
   static public String Return_ResponseMessage_md5="md5";
   //分享地址.
   static public String Return_ResponseMessage_share_url="share_url";
+  //对象内容详细连接地址
+  static public String Return_ResponseMessage_obj_url="obj_url";
   //请求返回状态-失败
   static public String Return_ResponseMessage_failed="failed";
   //请求返回状态-无权限

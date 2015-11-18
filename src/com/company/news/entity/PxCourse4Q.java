@@ -40,8 +40,8 @@ public class PxCourse4Q extends IdEntity {
 	private String address;//上课地点.
 	@Column
 	private String schedule;//课时设置:每次45分钟共20课次.
-	@Column
-	private String context;//课程详细内容介绍.(html).
+//	@Column
+//	private String context;//课程详细内容介绍.(html).
 	@Column
 	private Double fees;//收费价格(可以不填写)
 	@Column
@@ -110,12 +110,12 @@ public class PxCourse4Q extends IdEntity {
 	public void setSchedule(String schedule) {
 		this.schedule = schedule;
 	}
-	public String getContext() {
-		return context;
-	}
-	public void setContext(String context) {
-		this.context = context;
-	}
+//	public String getContext() {
+//		return context;
+//	}
+//	public void setContext(String context) {
+//		this.context = context;
+//	}
 
 	public Double getFees() {
 		return fees;

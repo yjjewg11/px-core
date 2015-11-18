@@ -307,6 +307,16 @@ public class PxStringUtil {
 		if(uuid==null)return null;
 		return ProjectProperties.getProperty("share_url_getPxCourse", "http://kd.wenjienet.com/px-rest/rest/share/getPxCourse.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
+	/**
+	 * 分享精品地址
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String getPxCourseContentByUuid(String uuid){
+		if(uuid==null)return null;
+		return ProjectProperties.getProperty("content_url_getPxCourse", "http://kd.wenjienet.com/px-rest/rest/share/getPxCourse.html?uuid={uuid}&v=1").replace("{uuid}", uuid);
+	}
 	
 
 	/**
@@ -329,6 +339,16 @@ public class PxStringUtil {
 	public static String getGroupShareURLByUuid(String uuid){
 		if(uuid==null)return null;
 		return ProjectProperties.getProperty("share_url_group", "http://kd.wenjienet.com/px-rest/rest/share/getKDInfo.html?uuid={uuid}").replace("{uuid}", uuid);
+	}
+	/**
+	 * 分享精品地址
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String getGroupContentURLByUuid(String uuid){
+		if(uuid==null)return null;
+		return ProjectProperties.getProperty("content_url_group", "http://kd.wenjienet.com/px-rest/rest/share/getKDInfo.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
 	 * 根据孩子关联信息,获取父母称呼
