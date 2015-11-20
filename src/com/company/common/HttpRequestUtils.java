@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.company.news.commons.util.PxStringUtil;
+import com.company.news.rest.util.DBUtil;
  
 public class HttpRequestUtils {
     private static Logger logger = LoggerFactory.getLogger(HttpRequestUtils.class);    //日志记录
@@ -164,7 +165,10 @@ public class HttpRequestUtils {
         {  
             title = title + list.get(i);  
         }  
-        return outTag(title);  
+        title=outTag(title);
+        title=PxStringUtil.getSubString(title, 128);
+        
+        return title;  
     }  
     
     /** 
