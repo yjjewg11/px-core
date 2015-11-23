@@ -119,6 +119,7 @@ public class HttpRequestUtils {
      * @return
      */
     public static String httpGetHtmlTitle(String url){
+    	url=StringUtils.trim(url);
     	if(!PxStringUtil.isUrl(url)){
     		return null;
     	}
