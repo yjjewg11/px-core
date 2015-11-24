@@ -58,7 +58,19 @@ public abstract class AbstractStudent extends IdEntity {
 	@Column
 	private String ba_work;// 爸爸工作单位
 	@Column
+	private String stutas;// 学生在校状态-0在线-1离线-2毕业
+	public String getStutas() {
+		return stutas;
+	}
+
+	public void setStutas(String stutas) {
+		this.stutas = stutas;
+	}
+
+	@Column
 	private Date last_login_time;// 上一次登录时间
+
+
 	public Date getLast_login_time() {
 		return last_login_time;
 	}
