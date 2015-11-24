@@ -29,8 +29,8 @@ public class PushMessage extends IdEntity{
 	  private Integer isread;//是否阅读
 	  @Column
 	  private String url;//访问地址.
-//	  @Column
-//	  private String send_user;//发送人(不用全部是系统发送).
+	  @Column
+	  private Integer count;//记录rel_uuid相同情况下,为阅读的次数.举例.互动回复了10条记录.点击看了后,清空为0.
 //	  @Column
 //	  private String send_useruuid;//发送人
 //	  @Column
@@ -92,5 +92,11 @@ public class PushMessage extends IdEntity{
 	}
 	public void setRel_uuid(String rel_uuid) {
 		this.rel_uuid = rel_uuid;
+	}
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 }

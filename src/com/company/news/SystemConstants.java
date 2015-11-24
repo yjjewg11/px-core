@@ -90,6 +90,7 @@ public class SystemConstants {
 
     
     static public String Charset="UTF-8";
+    static public String Charset_GBK="GBK";
     
     //及时消息模块
     static public final Integer Message_type_0 = Integer.valueOf(0);//推送消息.
@@ -165,6 +166,9 @@ public class SystemConstants {
 		
 		
 		static public final Integer Ct_stars_init=45;//5星,取值范围.0-50.
+		
+		static public final Integer Read_flag_0=Integer.valueOf(0);//0:未读
+		static public final Integer Read_flag_1=Integer.valueOf(1);//0:已读
 }
 
 

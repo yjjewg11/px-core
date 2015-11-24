@@ -10,8 +10,10 @@ import java.util.regex.Pattern;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -21,8 +23,8 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.company.news.SystemConstants;
 import com.company.news.commons.util.PxStringUtil;
-import com.company.news.rest.util.DBUtil;
  
 public class HttpRequestUtils {
     private static Logger logger = LoggerFactory.getLogger(HttpRequestUtils.class);    //日志记录
@@ -94,9 +96,11 @@ public class HttpRequestUtils {
             //发送get请求
             HttpGet request = new HttpGet(url);
             HttpResponse response = client.execute(request);
- 
+           
             /**请求发送成功，并得到响应**/
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            	
+            	
                 /**读取服务器返回过来的json字符串数据**/
                 String strResult = EntityUtils.toString(response.getEntity());
                 /**把json字符串转换成json对象**/
@@ -111,6 +115,29 @@ public class HttpRequestUtils {
         return jsonResult;
     }
     
+    /** 
+     * 正则获取字符编码 
+     * @param content 
+     * @return 
+     */  
+    private static String getCharSet(	 Header[] headers){  
+    	if(headers.length==0)return SystemConstants.Charset_GBK;
+    	//"text/html;charset=UTF-8"
+    	for(Header o:headers){
+    		
+    		if("Content-Type".equalsIgnoreCase(o.getName())){
+    			logger.info(o.getName()+"<=>"+o.getValue());
+    			if(o.getValue()!=null){
+    				if(o.getValue().contains("GBK")||o.getValue().contains("gbk")){
+        				return SystemConstants.Charset_GBK;
+    				}else if(o.getValue().contains("GB2312")||o.getValue().contains("gb2312")){
+        				return SystemConstants.Charset_GBK;
+    				}
+    			}
+    		}
+    	}
+    	return SystemConstants.Charset;
+    }  
     
 
     /**
@@ -129,12 +156,28 @@ public class HttpRequestUtils {
         	CloseableHttpClient  client = HttpClients.createDefault();
             //发送get请求
             HttpGet request = new HttpGet(url);
-            HttpResponse response = client.execute(request);
+            CloseableHttpResponse  response = client.execute(request);
  
             /**请求发送成功，并得到响应**/
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                /**读取服务器返回过来的json字符串数据**/
-                 strResult = EntityUtils.toString(response.getEntity());
+//            	response.get
+            	
+            	 Header[] headers=response.getAllHeaders();
+             	
+                 /**读取服务器返回过来的json字符串数据**/
+            	 String charset=getCharSet(headers);
+            	// System.out.println("charset="+charset);
+                  strResult = EntityUtils.toString(response.getEntity(),charset);
+//                 
+//                /**读取服务器返回过来的json字符串数据**/
+//                 strResult = EntityUtils.toString(response.getEntity(),SystemConstants.Charset);
+//                 String charset = getCharSet(strResult);  
+//                 System.out.println(charset);
+//                 if(!SystemConstants.Charset.equalsIgnoreCase(charset)&&StringUtils.isNotBlank(charset)){
+//                	
+//                	 strResult= new String(strResult.getBytes(SystemConstants.Charset),charset);
+//                	 
+//                 }
                 if(StringUtils.isNotBlank(strResult)) return  getTitle(strResult);
                 /**把json字符串转换成json对象**/
             } else {
@@ -145,6 +188,7 @@ public class HttpRequestUtils {
         }
       return null;
     }
+    
     
     /** 
      * 从html源码(字符串)中去掉标题 
@@ -172,6 +216,8 @@ public class HttpRequestUtils {
         return title;  
     }  
     
+    
+    
     /** 
      * 去掉html源码中的标签 
      * @param s 
@@ -184,6 +230,8 @@ public class HttpRequestUtils {
       
     public static void main(String[] args) {  
         String htmlUrl = "http://mp.weixin.qq.com/s?__biz=MzA3NTg4MDQzMw==&mid=400325494&idx=7&sn=a9412f129d8f11b3e52522131c50d5ec&scene=2&srcid=1115nofTRhdDvk5O3XSxmhwX&from=timeline&isappinstalled=0#wechat_redirect";  
+       
+        htmlUrl="http://www.duanwenxue.com/article/665726.html#0-tqq-1-57024-89b7933b38b0586d98eb9d131fa70b46";
         String dd= HttpRequestUtils.httpGetHtmlTitle(htmlUrl);  
          System.out.println(dd);
     }  

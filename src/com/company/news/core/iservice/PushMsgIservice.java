@@ -1,11 +1,13 @@
 package com.company.news.core.iservice;
 
 import java.util.List;
+import java.util.Map;
 
 import net.sf.json.JSONObject;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,11 @@ import com.baidu.yun.push.model.PushMsgToAllResponse;
 import com.company.news.ProjectProperties;
 import com.company.news.SystemConstants;
 import com.company.news.commons.util.IOSPushUtils;
+import com.company.news.commons.util.PxStringUtil;
 import com.company.news.dao.NSimpleHibernateDao;
 import com.company.news.entity.PushMessage;
 import com.company.news.rest.util.TimeUtils;
+import com.company.news.service.ClassNewsService;
 import com.company.pushmsg.PushMsgAndoridInterface;
 import com.company.pushmsg.PushMsgBaiduAndoridImpl;
 import com.company.pushmsg.PushMsgIosInterface;
@@ -148,6 +152,8 @@ public class PushMsgIservice {
 		  this.androidPushMsgToAll_to_teacher_app(group_uuid,title,msg);
 	  }
 	  
+
+	  
 	  private static String getPushMsgTitleByType(int type){
 		  String title="消息";
 		  if(type==SystemConstants.common_type_gonggao){
@@ -158,6 +164,8 @@ public class PushMsgIservice {
 			  title="信件";
 		  }else if(type==SystemConstants.common_type_messageKD){
 			  title="园长信件";
+		  }else if(type==SystemConstants.common_type_hudong){
+			  title="互动";
 		  }
 		  
 		  return title;
@@ -251,14 +259,14 @@ public class PushMsgIservice {
 	   * @param msg
 	   * @return
 	   */
-	  private void pushMsg_to_teacher_app(final String uuid,final String title,final String msg) throws Exception{
+	  private void pushMsg_to_teacher_app(final String useruuid,final String title,final String msg) throws Exception{
 		  
 //		  String apiKey = ProjectProperties.getProperty("baidu_apiKey_teacher", "El4au0Glwr7Xt8sPgZFg2UP7");
 //		  String secretKey = ProjectProperties.getProperty("baidu_secretKey_teacher", "4rtqyA96S6GDNVcgB8D1Cqh0Wm4Vohq8");
 //		  this.androidPushMsgToAll(msg, apiKey, secretKey);
-		   final List<String> anroidlist=getChannelIdByUser_uuid(SystemConstants.PushMsgDevice_device_type_android,SystemConstants.PushMsgDevice_type_1,uuid);
+		   final List<String> anroidlist=getChannelIdByUser_uuid(SystemConstants.PushMsgDevice_device_type_android,SystemConstants.PushMsgDevice_type_1,useruuid);
 		  //1.发布
-		   final List<String> iosList=getChannelIdByUser_uuid(SystemConstants.PushMsgDevice_device_type_ios,SystemConstants.PushMsgDevice_type_1,uuid);
+		   final List<String> iosList=getChannelIdByUser_uuid(SystemConstants.PushMsgDevice_device_type_ios,SystemConstants.PushMsgDevice_type_1,useruuid);
 		   final PushMsgIservice that=this;
 	        new Thread(new Runnable(){
 	            public void run() {
@@ -325,15 +333,15 @@ public class PushMsgIservice {
 	   * @param msg
 	   * @return
 	   */
-	  private void pushMsg_to_parent_app(final String uuid,final String title,final String msg)throws Exception{
+	  private void pushMsg_to_parent_app(final String useruuid,final String title,final String msg)throws Exception{
 		  
 //		  String apiKey = ProjectProperties.getProperty("baidu_apiKey_parent", "p9DUFwCzoUaKenaB5ovHch0G");
 //		  String secretKey = ProjectProperties.getProperty("baidu_secretKey_parent", "GUHR0mniN15LvML8OWnm3GzMdXsVEGbD");
 //		  this.androidPushMsgToAll(msg, apiKey, secretKey);
 		  
-		   final List<String> anroidlist=getChannelIdByUser_uuid(SystemConstants.PushMsgDevice_device_type_android,SystemConstants.PushMsgDevice_type_0,uuid);
+		   final List<String> anroidlist=getChannelIdByUser_uuid(SystemConstants.PushMsgDevice_device_type_android,SystemConstants.PushMsgDevice_type_0,useruuid);
 			  //1.发布
-			   final List<String> iosList=getChannelIdByUser_uuid(SystemConstants.PushMsgDevice_device_type_ios,SystemConstants.PushMsgDevice_type_0,uuid);
+			   final List<String> iosList=getChannelIdByUser_uuid(SystemConstants.PushMsgDevice_device_type_ios,SystemConstants.PushMsgDevice_type_0,useruuid);
 			   final PushMsgIservice that=this;
 		        new Thread(new Runnable(){
 		            public void run() {
@@ -474,6 +482,69 @@ public class PushMsgIservice {
 			
 			
 	  }
-	 
+
+	  /**
+	   * 根据回复内容,推送给对应老师或家长
+	   * @param msg
+	   * @return
+	   */
+	  public void pushMsg_replay_to_classNews_to_teacherOrParent(String type_uuid,String msg) throws Exception{
+		  
+		  Session session=this.nSimpleHibernateDao.getHibernateTemplate().getSessionFactory().openSession();
+			String sql=" SELECT t1.uuid,t1.create_useruuid,t1.usertype,t1.groupuuid";
+			sql+=" FROM px_classnews t1 ";
+			sql+=" where t1.uuid='"+type_uuid+"'  ";	
+			Query  query =session.createSQLQuery(sql);
+			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			List<Map> list=query.list();
+			
+		  if(list.size()==0)return;
+		  
+		  
+		  Map obj=list.get(0);
+		  if(obj.get("usertype")==null){
+			  logger.error("px_classnews usertype is null,uuid"+type_uuid);
+			  return;
+		  }
+		  
+		  boolean isSendPushMsg=true;
+		 
+		  PushMessage pushMessage=(PushMessage)this.nSimpleHibernateDao.getObjectByAttribute(PushMessage.class, "rel_uuid", type_uuid);
+		  if(pushMessage==null){
+			  pushMessage= new PushMessage();
+			  pushMessage.setCount(1);
+		  }else{//已经发过消息的情况下,只修改对应的内容.不新加数据.
+			  if(SystemConstants.Read_flag_0.equals(pushMessage.getIsread())){//未读情况下,推送消息不在发送.
+				  isSendPushMsg=false;
+				  if(pushMessage.getCount()==null){//计数.
+					  pushMessage.setCount(1);
+				  }else{
+					  pushMessage.setCount(pushMessage.getCount()+1);
+				  }
+			  }else{//
+				  pushMessage.setCount(1);
+			  }
+		  }
+		  pushMessage.setGroup_uuid((String)obj.get("groupuuid"));
+		  pushMessage.setRevice_useruuid((String)obj.get("create_useruuid"));
+		  pushMessage.setType(SystemConstants.common_type_hudong);
+		  pushMessage.setRel_uuid(type_uuid);
+		  pushMessage.setTitle("互动("+pushMessage.getCount()+")");
+		  pushMessage.setMessage(PxStringUtil.getSubString(msg, 128));
+		  pushMessage.setCreate_time(TimeUtils.getCurrentTimestamp());
+		  pushMessage.setIsread(SystemConstants.Read_flag_0);
+		  
+		  this.nSimpleHibernateDao.save(pushMessage);
+		  if(isSendPushMsg){//不重复发送消息
+			  if("1".equals((obj.get("usertype").toString()))){
+				 //家长
+				  this.pushMsg_to_parent_app(pushMessage.getRevice_useruuid(), pushMessage.getTitle(), msg);
+			  }else{
+				  //老师
+				  this.pushMsg_to_teacher_app(pushMessage.getRevice_useruuid(), pushMessage.getTitle(), msg);
+			  }
+			 
+		  }
+	  }
 	  
 }
