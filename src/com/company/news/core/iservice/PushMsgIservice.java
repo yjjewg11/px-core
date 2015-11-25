@@ -507,6 +507,11 @@ public class PushMsgIservice {
 			  return;
 		  }
 		  
+		  if("1".equals((obj.get("usertype").toString()))){
+				 //家长,暂时不开发通知
+			return;
+		  }
+		  
 		  boolean isSendPushMsg=true;
 		 
 		  PushMessage pushMessage=(PushMessage)this.nSimpleHibernateDao.getObjectByAttribute(PushMessage.class, "rel_uuid", type_uuid);

@@ -58,16 +58,7 @@ public abstract class AbstractStudent extends IdEntity {
 	@Column
 	private String ba_work;// 爸爸工作单位
 	@Column
-	private String status;// 学生在校状态-0在线-1离线-2毕业
-
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	private Integer status;// 学生在校状态-0在线-1离线-2毕业
 
 	@Column
 	private Date last_login_time;// 上一次登录时间
@@ -281,6 +272,14 @@ public abstract class AbstractStudent extends IdEntity {
 
 	public void setClassuuid(String classuuid) {
 		this.classuuid = classuuid;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 
