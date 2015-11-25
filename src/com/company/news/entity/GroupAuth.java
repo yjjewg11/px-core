@@ -26,6 +26,8 @@ public class GroupAuth extends IdEntity{
 	  @Column
 	  private String license_num;//营业执照号.长度20
 	  @Column
+	  private String license_img;//营业执照照片
+	  @Column
 	  private String legal_name;//法人姓名.长度45
 	  @Column
 	  private String link_tel;//公司电话.
