@@ -19,7 +19,7 @@ public class Group4Q extends IdEntity{
 	  @Column
 	  private Integer type;//类型：2，培训机构，1:幼儿园
 	  @Column
-	  private Integer status;//类型：0:为审核.1:提交审核,2:审核驳回.9:审核通过,允许公告.
+	  private Integer status;//类型：0:未审核.1:提交审核,2:审核驳回.9:审核通过,允许公告.
 	  @Column
 	  private String map_point;//坐标
 	  @Column
