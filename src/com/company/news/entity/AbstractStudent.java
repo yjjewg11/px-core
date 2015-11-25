@@ -58,13 +58,15 @@ public abstract class AbstractStudent extends IdEntity {
 	@Column
 	private String ba_work;// 爸爸工作单位
 	@Column
-	private String staus;// 学生在校状态-0在线-1离线-2毕业
-	public String getStaus() {
-		return staus;
+	private String status;// 学生在校状态-0在线-1离线-2毕业
+
+
+	public String getStatus() {
+		return status;
 	}
 
-	public void setStaus(String staus) {
-		this.staus = staus;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Column
