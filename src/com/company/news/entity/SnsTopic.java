@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sns_section")
+@Table(name = "sns_topic")
 /**
  * 话题
  * @author liumingquan
@@ -30,6 +30,10 @@ public class SnsTopic extends IdEntity {
 	private Long yes_count;//赞成票数.
 	@Column
 	private Long no_count;//反对票数
+	 @Column
+	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
+	@Column
+	private Integer level;//等级.0:普通.1:热帖,9:精华
 	
 	//@Column
 //	private Long click_count;// 点击次数.
@@ -81,6 +85,18 @@ public class SnsTopic extends IdEntity {
 	}
 	public void setNo_count(Long no_count) {
 		this.no_count = no_count;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 
 }

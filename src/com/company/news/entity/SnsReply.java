@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sns_section")
+@Table(name = "sns_reply")
 /**
  * 话题(回复)回复
  * @author liumingquan
@@ -25,11 +25,16 @@ public class SnsReply extends IdEntity {
 	@Column
 	private String content;// HTML
 	@Column
-	private Long reply_count;//话题数量
+	private Long reply_count;//回复数量
 	@Column
 	private Long yes_count;//赞成票数.
 	@Column
 	private Long no_count;//反对票数
+	
+	@Column
+	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
+	
+	
 	public String getTopic_uuid() {
 		return topic_uuid;
 	}
@@ -77,6 +82,12 @@ public class SnsReply extends IdEntity {
 	}
 	public void setNo_count(Long no_count) {
 		this.no_count = no_count;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 

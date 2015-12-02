@@ -18,6 +18,9 @@ public class SnsSection extends IdEntity {
 	private Integer id;//分类id
 	@Column
 	private Timestamp create_time;// 评价时间
+	
+	@Column
+	private String img;// logo图片
 	@Column
 	private String title;// 话题板块.20字符
 //	@Column
@@ -57,6 +60,12 @@ public class SnsSection extends IdEntity {
 	}
 	public void setInd(Integer ind) {
 		this.ind = ind;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 }

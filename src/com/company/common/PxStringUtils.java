@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
  * @author CL
  * String操作的实用类
  * */
+@Deprecated
 public class PxStringUtils {
     public PxStringUtils() {
     }
