@@ -21,6 +21,8 @@ public class RestConstants {
   static public String Return_ResponseMessage="ResMsg";
   //请求返回状态-成功
   static public String Return_ResponseMessage_success="success";
+  //请求返回状态-没变化,继续缓存
+  static public String Return_ResponseMessage_unchange="unchange";
   //总数
   static public String Return_ResponseMessage_count="count";
   //总数
