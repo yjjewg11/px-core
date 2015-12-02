@@ -12,13 +12,14 @@ public class DBUtil {
 	
 	
 	/**
+	 * 修复为空是,拼接的sql报错bug.
 	 * 将逗号分割的多个数据组织成 where条件 in 需要的值
 	 * uuid1,uuid2=>'uuid1','uuid2'
 	 * @return
 	 */
 	public static String stringsToWhereInValue(String strs){
 		String rstr="";
-		if(strs==null)return "''";
+		if(StringUtils.isBlank(strs))return "''";
 		String[] strArr=strs.split(",");
 		for(int i=0;i<strArr.length;i++){
 			if(StringUtils.isNotBlank(strArr[i]))rstr+="'"+strArr[i]+"',";

@@ -342,6 +342,18 @@ public class PxStringUtil {
 		if(uuid==null)return null;
 		return ProjectProperties.getProperty("share_url_group", "http://kd.wenjienet.com/px-rest/rest/share/getKDInfo.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
+	
+	
+	/**
+	 * 幼儿园招生地址
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String getGroupRecruitURLByUuid(String uuid){
+		if(uuid==null)return null;
+		return ProjectProperties.getProperty("recruit_url_group", "http://kd.wenjienet.com/px-rest/rest/share/getRecruitBygroupuuid.html?uuid={uuid}").replace("{uuid}", uuid);
+	}
 	/**
 	 * 分享精品地址
 	 * @param str
