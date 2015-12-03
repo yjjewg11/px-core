@@ -4,6 +4,7 @@ public class RestConstants {
   //sessionid 标示
   static public String Return_JSESSIONID="JSESSIONID";
   static public String LOGIN_TYPE="S_type";
+  static public String User_TYPE="U_type";//用户类型.1:老师.2:家长.0:管理员
   static public String CENSOR_DEVICE="censordevice";
   static public String Return_access_token="access_token";
   static public String Session_UserInfo="S_UserInfo";

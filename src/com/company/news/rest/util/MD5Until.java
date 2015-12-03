@@ -21,6 +21,7 @@ public class MD5Until {
 	 * @return
 	 */
 	public static String getMD5String(String s) {
+		if(s==null)return "";
 		return getMD5String(s.getBytes());
 	}
 

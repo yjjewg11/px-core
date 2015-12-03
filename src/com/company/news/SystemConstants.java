@@ -8,6 +8,8 @@ public class SystemConstants {
 	static public final Integer Group_type_1 = Integer.valueOf(1);//幼儿园
 	static public final Integer Group_type_2 = Integer.valueOf(2);//培训机构
 	
+	static public final Integer Group_type_3 = Integer.valueOf(2);//话题模块登录,允许老师和家长登录.
+	
 	static public final String Sex_male = "0";//男
 	static public final String Sex_female = "1";//女
 	
@@ -172,6 +174,10 @@ public class SystemConstants {
 		
 		static public final Integer SnsDianzan_status_yes=Integer.valueOf(1);//赞同
 		static public final Integer SnsDianzan_status_no=Integer.valueOf(2);//不赞成
+		
+		static public final String Session_User_Login_Type_Teacher="1";//老师
+		static public final String Session_User_Login_Type_Parent="2";//家长
+		static public final String Session_User_Login_Type_Admin="0";//管理员
 		
 }
 

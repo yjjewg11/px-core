@@ -20,6 +20,7 @@ public final class JSONUtils {
   public JSONUtils() {}
 
   public static String getJsonString(Object obj) {
+	
     if ((obj instanceof Array) || (obj instanceof Map) || (obj instanceof Collection))
       return arrayToJSONString(obj);
     else
@@ -32,6 +33,7 @@ public final class JSONUtils {
   }
 
   private static String objectToJsonString(Object obj) {
+	  if(obj==null)return null;
     String json = JSONObject.fromObject(obj).toString();
     return json;
   }
