@@ -1,11 +1,9 @@
 package com.company.news.entity;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +14,7 @@ import javax.persistence.Table;
  *rel_uuid,user_uuid 联合主键
  */
 @Deprecated
-public class SnsDianzan  implements Serializable {
+public class SnsDianzan  extends IdEntity  {
 	@Column
 	private String rel_uuid;//分类id
 	@Column

@@ -169,6 +169,10 @@ public class SystemConstants {
 		
 		static public final Integer Read_flag_0=Integer.valueOf(0);//0:未读
 		static public final Integer Read_flag_1=Integer.valueOf(1);//0:已读
+		
+		static public final Integer SnsDianzan_status_yes=Integer.valueOf(1);//赞同
+		static public final Integer SnsDianzan_status_no=Integer.valueOf(2);//不赞成
+		
 }
 
 
