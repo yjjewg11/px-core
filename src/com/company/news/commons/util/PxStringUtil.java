@@ -119,9 +119,9 @@ public class PxStringUtil {
 			return uuid;
 		}
 		if (uploadfiletype.equals("oss")) {
-			UploadFile4Q q=(UploadFile4Q)CommonsCache.get(uuid, UploadFile4Q.class);
-			if(q==null)return "";
-			String s= ProjectProperties.getProperty("oss_Small_img_down_url", "http://img.wenjienet.com/{object}@60h").replace("{object}",q.getFile_path() );
+			String path=CommonsCache.getUploadFileOfFile_path(uuid);
+			if(StringUtils.isBlank(path))return "";
+			String s= ProjectProperties.getProperty("oss_Small_img_down_url", "http://img.wenjienet.com/{object}@60h").replace("{object}",path );
 			s+="?uuid="+uuid;//必须添加用于保存时,转为uuid保存.
 			return s;
 		}
@@ -143,9 +143,9 @@ public class PxStringUtil {
 			return uuid;
 		}
 		if (uploadfiletype.equals("oss")) {
-			UploadFile4Q q=(UploadFile4Q)CommonsCache.get(uuid, UploadFile4Q.class);
-			if(q==null)return "";
-			String s= ProjectProperties.getProperty("oss_middle_img_down_url", "http://img.wenjienet.com/{object}@108h").replace("{object}",q.getFile_path() );
+			String path=CommonsCache.getUploadFileOfFile_path(uuid);
+			if(StringUtils.isBlank(path))return "";
+			String s= ProjectProperties.getProperty("oss_middle_img_down_url", "http://img.wenjienet.com/{object}@108h").replace("{object}",path);
 			s+="?uuid="+uuid;//必须添加用于保存时,转为uuid保存.
 			return s;
 		}
@@ -170,9 +170,9 @@ public class PxStringUtil {
 		}
 		if (ProjectProperties.getProperty(
 				"uploadfiletype", "oss").equals("oss")) {
-			UploadFile4Q q=(UploadFile4Q)CommonsCache.get(uuid, UploadFile4Q.class);
-			if(q==null)return "";
-			String s= ProjectProperties.getProperty("oss_img_down_url", "http://img.wenjienet.com/{object}@60h").replace("{object}",q.getFile_path() );
+			String path=CommonsCache.getUploadFileOfFile_path(uuid);
+			if(StringUtils.isBlank(path))return "";
+			String s= ProjectProperties.getProperty("oss_img_down_url", "http://img.wenjienet.com/{object}@60h").replace("{object}",path );
 			s+="?uuid="+uuid;//必须添加用于保存时,转为uuid保存.
 			return s;
 		}

@@ -69,6 +69,35 @@ public class CommonsCache{
 			return object;
 		}
 	}
+	
+
+	// 获取自动保存内容
+	public static String getUploadFileOfFile_path(String uuid) {
+		
+		String path=PxRedisCache.getUploadFilePath(uuid);
+		if(StringUtils.isNotBlank(path)){
+			return path;
+		}
+		
+		String key=uuid+"_UpPath";
+		Element e = dbDataCache.get(key);
+		if (e != null)
+			return  (String)e.getObjectValue();
+		else {
+			List list =nSimpleHibernateDao.getHibernateTemplate().find("select file_path from UploadFile4Q where uuid='"+uuid+"'");
+			if (list != null&&list.size()>0){
+				path=(String) list.get(0);
+				PxRedisCache.setUploadFilePath(uuid, path);
+				
+				 e = new Element(key, path);
+					logger.info(key);
+				dbDataCache.put(e);
+				return  (String)e.getObjectValue();
+			}
+				
+			return null;
+		}
+	}
 
 	// 存入自动保存内容
 	public static void put(String uuid, Object user) {
