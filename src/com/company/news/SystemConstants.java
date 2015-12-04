@@ -8,7 +8,7 @@ public class SystemConstants {
 	static public final Integer Group_type_1 = Integer.valueOf(1);//幼儿园
 	static public final Integer Group_type_2 = Integer.valueOf(2);//培训机构
 	
-	static public final Integer Group_type_3 = Integer.valueOf(2);//话题模块登录,允许老师和家长登录.
+	static public final Integer Group_type_3 = Integer.valueOf(3);//话题模块登录,允许老师和家长登录.
 	
 	static public final String Sex_male = "0";//男
 	static public final String Sex_female = "1";//女
