@@ -49,7 +49,7 @@ public class PxRedisCache{
 	 * @param ext_uuid
 	 * @return
 	 */
-	public   List<String> getCountByExt_uuids(String[] ext_uuids){
+	public  static List<String> getCountByExt_uuids(String[] ext_uuids){
 		// TODO Auto-generated method stub
 		try {
 			if(pxRedisCache==null)return null;
@@ -66,11 +66,11 @@ public class PxRedisCache{
 	 * @param ext_uuid
 	 * @return
 	 */
-	public static  List<Object> getAddCountByExt_uuids(String[] ext_uuids){
+	public static  List<Object> getIncrCountByExt_uuids(String[] ext_uuids){
 		// TODO Auto-generated method stub
 		try {
 			if(pxRedisCache==null)return null;
-			return pxRedisCache.getAddCountByExt_uuids(ext_uuids);
+			return pxRedisCache.getIncrCountByExt_uuids(ext_uuids);
 		}catch (NullPointerException e) {
 			logger.error("redis Connection failure!");
 		} catch (Exception e) {

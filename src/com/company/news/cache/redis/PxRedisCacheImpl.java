@@ -28,7 +28,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 //	private CountService countService;
 
 	private  static long  faildTime=0;
-	private final static long  faildTimeInterval=1000*60*10;//间隔10分钟
+	private final static long  faildTimeInterval=1000*60*1;//间隔10分钟
 	private final static String hostname=ProjectProperties.getProperty("redis.hostname", "127.0.0.1");
 	private final static int port = ProjectProperties.getPropertyAsInt("redis.port", 6379);
 	private final static String auth = ProjectProperties.getProperty("redis.auth", "auth");
@@ -124,7 +124,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	 * @param ext_uuids
 	 * @return
 	 */
-	public   List<Object> getAddCountByExt_uuids(String[] ext_uuids){
+	public   List<Object> getIncrCountByExt_uuids(String[] ext_uuids){
 		Jedis jedis=getJedis();
 //		
 		Double score=Double.valueOf(TimeUtils.getCurrentTime(Date_YYYYMMDD));

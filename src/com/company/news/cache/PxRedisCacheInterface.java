@@ -28,7 +28,7 @@ public interface PxRedisCacheInterface {
 	 * @param ext_uuids
 	 * @return
 	 */
-	public   List<Object> getAddCountByExt_uuids(String[] ext_uuids);
+	public   List<Object> getIncrCountByExt_uuids(String[] ext_uuids);
 	/**
 	 * 批量设置阅读计数到缓存中.
 	 * @param ext_uuid
