@@ -279,6 +279,18 @@ public class PxStringUtil {
 	
 	
 	/**
+	 * 分享话题地址
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String getSnsTopicByUuid(String uuid){
+		if(uuid==null)return null;
+		return ProjectProperties.getProperty("share_url_getSnsTopic", "http://kd.wenjienet.com/px-rest/rest/share/getSnsTopic.html?uuid={uuid}").replace("{uuid}", uuid);
+	}
+	
+	
+	/**
 	 * 分享精品地址
 	 * @param str
 	 * @return

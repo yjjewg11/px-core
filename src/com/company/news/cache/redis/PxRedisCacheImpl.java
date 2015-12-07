@@ -31,7 +31,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	private final static long  faildTimeInterval=1000*60*10;//间隔10分钟
 	private final static String hostname=ProjectProperties.getProperty("redis.hostname", "127.0.0.1");
 	private final static int port = ProjectProperties.getPropertyAsInt("redis.port", 6379);
-	private final static String auth = ProjectProperties.getProperty("redis.auth", "");
+	private final static String auth = ProjectProperties.getProperty("redis.auth", "auth");
 	//缺陷
     public static final String Date_YYYYMMDD = "yyMMdd"
     		;
@@ -49,7 +49,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 
 	public PxRedisCacheImpl() {
 		super();
-		 jedisPool =  new JedisPool(new JedisPoolConfig(),hostname, port, 2000);
+		 jedisPool =  new JedisPool(new JedisPoolConfig(),hostname, port, 10000);
 	}
 
 	 public  Jedis getJedis() {
@@ -57,13 +57,13 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		 
 		 //加入超时机制
 		 if(tmpTime-faildTime<faildTimeInterval){
-//			 return null;
+			 return null;
 		 }
 	
 	        try {
 	        	
 	       	 Jedis jedis = jedisPool.getResource();
-			   if(StringUtils.isBlank(auth))jedis.auth(auth);
+			   if(StringUtils.isNotBlank(auth))jedis.auth(auth);
 			    
 				return jedis;
 			} catch (Exception e) {
@@ -88,6 +88,34 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		jedis.close();
 		//count==1 表示缓存中没值
 		return countResponse.get();
+	}
+	
+	
+
+	/**
+	 * 返回list,不加一:
+	 * 1://count==null 表示缓存中没值
+	 * @param ext_uuids
+	 * @return
+	 */
+	public   List<String> getCountByExt_uuids(String[] ext_uuids){
+		Jedis jedis=getJedis();
+//		
+		Double score=Double.valueOf(TimeUtils.getCurrentTime(Date_YYYYMMDD));
+		
+		 Pipeline p = jedis.pipelined();
+		 Map<String,Double> zMap=new HashMap();
+		 for(int i=0;i<ext_uuids.length;i++){
+			 
+			 zMap.put(ext_uuids[i], score);
+		 }
+		 Response<List<String>> results= p.hmget(Redis_Hash_Count_table_key, ext_uuids);
+		 p.zadd(Redis_SortedSet_Count_table_key, zMap);
+		 p.sync();
+		 
+		jedis.close();
+		//count==1 表示缓存中没值
+		return results.get();
 	}
 	
 	/**

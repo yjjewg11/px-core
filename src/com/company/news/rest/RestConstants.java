@@ -35,6 +35,9 @@ public class RestConstants {
   static public String Return_ResponseMessage_list="list";
   //请求md5
   static public String Return_ResponseMessage_md5="md5";
+  
+//点赞.null,可以点赞,1:已赞同,2已不赞同
+  static public String Return_ResponseMessage_dianZan="dianZan";
   //分享地址.
   static public String Return_ResponseMessage_share_url="share_url";
   //对象内容详细连接地址

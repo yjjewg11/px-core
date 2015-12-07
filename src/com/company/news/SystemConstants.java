@@ -61,6 +61,10 @@ public class SystemConstants {
 	public static final int common_type_messageTeaher = 11;//老师和家长交流信件
 	public static final int common_type_messageKD = 12;//老师和园长交流信件
 	public static final int common_type_signrecord = 13;//孩子签到记录
+	
+	public static final int common_type_SnsTopic = 71;//话题
+	public static final int common_type_SnsReply = 72;//话题回复.
+	
 	public static final int common_type_pxgroup = 81;//培训机构
 	public static final int common_type_pxcourse = 82;//培训课程	
 	public static final int common_type_teacher = 83;//教师	

@@ -49,6 +49,23 @@ public class PxRedisCache{
 	 * @param ext_uuid
 	 * @return
 	 */
+	public   List<String> getCountByExt_uuids(String[] ext_uuids){
+		// TODO Auto-generated method stub
+		try {
+			if(pxRedisCache==null)return null;
+			return pxRedisCache.getCountByExt_uuids(ext_uuids);
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	/**
+	 * null,表示不启用或者失败.1表示缓存没有数据.
+	 * @param ext_uuid
+	 * @return
+	 */
 	public static  List<Object> getAddCountByExt_uuids(String[] ext_uuids){
 		// TODO Auto-generated method stub
 		try {

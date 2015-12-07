@@ -16,8 +16,15 @@ public interface PxRedisCacheInterface {
 	 * @param count
 	 */
 	public  void setCountByExt_uuid(String ext_uuid,Long count);
+	
 	/**
-	 * 批量计数
+	 * 批量获取计数,不加1
+	 * @param ext_uuids
+	 * @return
+	 */
+	public   List<String> getCountByExt_uuids(String[] ext_uuids);
+	/**
+	 * 批量计数,自动加一
 	 * @param ext_uuids
 	 * @return
 	 */
