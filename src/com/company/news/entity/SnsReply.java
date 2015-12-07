@@ -34,7 +34,11 @@ public class SnsReply extends IdEntity {
 	@Column
 	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
 	
-	
+	 @Column
+	  private Long illegal;//举报次数.用于优先审查
+	  
+	  @Column
+		private Timestamp illegal_time;// 举报时间
 	public String getTopic_uuid() {
 		return topic_uuid;
 	}
@@ -88,6 +92,18 @@ public class SnsReply extends IdEntity {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public Long getIllegal() {
+		return illegal;
+	}
+	public void setIllegal(Long illegal) {
+		this.illegal = illegal;
+	}
+	public Timestamp getIllegal_time() {
+		return illegal_time;
+	}
+	public void setIllegal_time(Timestamp illegal_time) {
+		this.illegal_time = illegal_time;
 	}
 
 

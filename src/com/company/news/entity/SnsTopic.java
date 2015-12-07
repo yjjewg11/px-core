@@ -35,6 +35,13 @@ public class SnsTopic extends IdEntity {
 	@Column
 	private Integer level;//等级.0:普通.1:热帖,9:精华
 	
+	 @Column
+	  private Long illegal;//举报次数.用于优先审查
+	  
+	  @Column
+		private Timestamp illegal_time;// 举报时间
+	  
+	
 	//@Column
 //	private Long click_count;// 点击次数.
 	public Integer getSection_id() {
@@ -97,6 +104,18 @@ public class SnsTopic extends IdEntity {
 	}
 	public void setLevel(Integer level) {
 		this.level = level;
+	}
+	public Long getIllegal() {
+		return illegal;
+	}
+	public void setIllegal(Long illegal) {
+		this.illegal = illegal;
+	}
+	public Timestamp getIllegal_time() {
+		return illegal_time;
+	}
+	public void setIllegal_time(Timestamp illegal_time) {
+		this.illegal_time = illegal_time;
 	}
 
 }
