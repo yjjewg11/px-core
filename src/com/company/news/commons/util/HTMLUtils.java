@@ -23,14 +23,19 @@ public class HTMLUtils  {
     	
     }
     /**
-     * 根据html获取摘要文本和img图片uuid
+     * 根据html获取摘要文本(取100字以内),和img图片uuid(图片取3张)
      * @param htmlcontent
      * @return
      */
-	private static Object[] getSummaryAndImgByHTML(String htmlcontent) {
+    public static String[] getSummaryAndImgByHTML(String htmlcontent) {
 		if (StringUtils.isEmpty(htmlcontent)) {
 			return new String[]{null,null};
 		}
+		
+		
+		 int summaryCount=100;
+		 int maxCount=3;
+		 
 		//不能替换导致多个空格被改成一个空格.
 		Source source = new Source(htmlcontent);
 		Renderer renderer=source.getRenderer();
@@ -40,8 +45,7 @@ public class HTMLUtils  {
 		 List<Element> imglist=source.getAllElements(HTMLElementName.IMG);
 		 String url=ProjectProperties.getProperty("share_url_getEmot", "http://kd.wenjienet.com/px-rest/i/emoji/");
 		 List listimguuids=new ArrayList();
-		 int summaryCount=100;
-		 int maxCount=3;
+	
 		 for(Element img: imglist){
 			 String srcV=img.getAttributeValue("src");
 			 if(StringUtils.contains(srcV, url)){//过滤表情
@@ -51,11 +55,13 @@ public class HTMLUtils  {
 			if(StringUtils.isNotBlank(imguuid)){
 				listimguuids.add(imguuid);
 			}
-			 if(listimguuids.size()>=3)break;
+			 if(listimguuids.size()>=maxCount)break;
 		 }
 		 
 		String summary=PxStringUtil.getSubString(text, summaryCount);
-		String imguuids=StringUtils.join(listimguuids, ',');
+		String imguuids=null;
+		if(listimguuids.size()>0)imguuids=StringUtils.join(listimguuids, ',');
+		
 		return new String[]{summary,imguuids};
 	}
 

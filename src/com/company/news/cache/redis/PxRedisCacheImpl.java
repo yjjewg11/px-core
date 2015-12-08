@@ -36,15 +36,19 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	
 	private final static int port = ProjectProperties.getPropertyAsInt("redis.port", 6379);
 	private final static String auth = ProjectProperties.getProperty("redis.auth", "8a29000b512652bf0151337f27fd00e5");
-	//缺陷
-    public static final String Date_YYYYMMDD = "yyMMdd"
-    		;
+	//缺陷100年后,溢出
+    public static final String Date_YYYYMMDD = "yyMMdd";
 	public static String Redis_Hash_Count_table_key="Hash_Count";
 	public static String Redis_SortedSet_Count_table_key="SortedSet_Count";
 	
 	//上传图片的路径地址,和过期是24小时后
 	public static String Redis_String_Path="P_";
 	public static int Redis_String_Path_Expire=60*60*24;
+	//今日最新总数统计.(数量小),和过期是24小时后
+	public static String Redis_String_TodayNewMsgNumber="TodayNewMsg_";
+	public static int Redis_String_TodayNewMsgNumber_Expire=60*60*24;
+	
+	
 	
 	private static Logger logger = Logger.getLogger("RedisCache");
 	
@@ -320,6 +324,51 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		jedis.setex(key, Redis_String_Path_Expire, path);
 		jedis.close();
 	}
+	
+	
+	/**
+	 * 获取今日统计数量,缓存延长24小时
+	 * @param uuid
+	 * @return
+	 */
+	public  String getCountOfNewMsgNumber(String uuid){
+		Jedis jedis=getJedis();
+		String key=Redis_String_TodayNewMsgNumber+uuid;
+		 Pipeline p = jedis.pipelined();
+		 Response<String>  pathResponse= p.get(key);
+		 p.expire(key, Redis_String_TodayNewMsgNumber_Expire);
+		 p.sync();
+		jedis.close();
+		
+		return pathResponse.get();
+	}
+	
+	/**
+	 *  今日统计数量加一,缓存延长24小时
+	 * @param uuid
+	 */
+	public  void incrCountOfNewMsgNumber(String uuid){
+		Jedis jedis=getJedis();
+		String key=Redis_String_TodayNewMsgNumber+uuid;
+		 Pipeline p = jedis.pipelined();
+		 p.incr(key);
+		 p.expire(key, Redis_String_TodayNewMsgNumber_Expire);
+		 p.sync();
+		jedis.close();
+		
+	}
+	/**
+	 * 设置统计数量,缓存延长24小时
+	 * @param uuid
+	 * @param path
+	 */
+	public  void setCountOfNewMsgNumber(String uuid,String number){
+		Jedis jedis=getJedis();
+		String key=Redis_String_TodayNewMsgNumber+uuid;
+		jedis.setex(key, Redis_String_TodayNewMsgNumber_Expire, number);
+		jedis.close();
+	}
+	
 	
 	
 	public static void main(String[] s){

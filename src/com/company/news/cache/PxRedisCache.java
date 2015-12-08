@@ -18,13 +18,13 @@ import com.company.news.cache.redis.PxRedisCacheImpl;
 public class PxRedisCache{
 	
 	private static Logger logger = Logger.getLogger("PxRedisCache");
-	private final static String Redis_type=ProjectProperties.getProperty("Redis_type", "redis");
+//	private final static String Redis_type=ProjectProperties.getProperty("Redis_type", "redis");
 
-	private static PxRedisCacheInterface pxRedisCache=null;
+	private static PxRedisCacheImpl pxRedisCache=null;
 	static {
-		if("redis".equals(Redis_type)){
+//		if("redis".equals(Redis_type)){
 			pxRedisCache=new PxRedisCacheImpl();
-		}
+//		}
 	}
 	/**
 	 * null,表示不启用或者失败.1表示缓存没有数据.
@@ -141,6 +141,58 @@ public class PxRedisCache{
 		try {
 			if(pxRedisCache==null)return ;
 			pxRedisCache.setUploadFilePath(uuid, path);
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * 获取今日统计数量,缓存延长24小时
+	 * @param uuid
+	 * @return
+	 */
+	public static  String getCountOfNewMsgNumber(String uuid){
+		try {
+			if(pxRedisCache==null)return null;
+			return pxRedisCache.getCountOfNewMsgNumber(uuid);
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+			throw e;
+		} catch (Exception e) {
+//			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	/**
+	 * 今日统计数量加一,缓存延长24小时
+	 * @param uuid
+	 * @return
+	 */
+	public static  void incrCountOfNewMsgNumber(String uuid){
+		try {
+			if(pxRedisCache==null)return ;
+			 pxRedisCache.incrCountOfNewMsgNumber(uuid);
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+			throw e;
+		} catch (Exception e) {
+//			e.printStackTrace();
+			throw e;
+		}
+	}
+	/**
+	 * 设置统计数量,缓存延长24小时
+	 * @param uuid
+	 * @param number
+	 */
+	public  static void setCountOfNewMsgNumber(String uuid,String number){
+		try {
+			if(pxRedisCache==null)return ;
+			pxRedisCache.setCountOfNewMsgNumber(uuid, number);
 		}catch (NullPointerException e) {
 			logger.error("redis Connection failure!");
 		} catch (Exception e) {

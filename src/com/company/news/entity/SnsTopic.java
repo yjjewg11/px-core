@@ -25,6 +25,10 @@ public class SnsTopic extends IdEntity {
 	@Column
 	private String content;// HTML
 	@Column
+	private String summary;// 从内容中提取100字.
+	@Column
+	private String imguuids;// 从内容中提取图片uuid,最多3张.3*45+2=137字符
+	@Column
 	private Long reply_count;//话题数量
 	@Column
 	private Long yes_count;//赞成票数.
@@ -116,6 +120,18 @@ public class SnsTopic extends IdEntity {
 	}
 	public void setIllegal_time(Timestamp illegal_time) {
 		this.illegal_time = illegal_time;
+	}
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+	public String getImguuids() {
+		return imguuids;
+	}
+	public void setImguuids(String imguuids) {
+		this.imguuids = imguuids;
 	}
 
 }

@@ -7,8 +7,8 @@ import org.apache.commons.lang.StringUtils;
 
 import com.company.news.ProjectProperties;
 import com.company.news.cache.CommonsCache;
+import com.company.news.cache.PxConfigCache;
 import com.company.news.entity.AbstractStudentContactRealation;
-import com.company.news.entity.UploadFile4Q;
 import com.company.news.interfaces.CreateUserInterface;
 import com.company.news.interfaces.SessionUserInfoInterface;
 
@@ -98,11 +98,31 @@ public class PxStringUtil {
 		urls=PxStringUtil.StringDecComma(urls);
 		String uuids="";
 		for(String url:urls.split(",")){
-				String tmp=imgSMiddleUrlByUuid_sub(url);
+				String tmp=imgSmallUrlByUuid_sub(url);
 				if(StringUtils.isNotBlank(tmp))uuids+=","+tmp;
 		}
 		return PxStringUtil.StringDecComma(uuids);
 	}
+	
+	/**
+	 * 将图片uuid替换成可以下载的http地址.
+	 * 
+	 * @param uuids
+	 * @return List
+	 *   a,b,c=>http://img/a.jpg
+	 * date&author: 2009-3-25 
+	 */
+	public static List uuids_to_imgSmallUrlurlList(String uuids){
+		List list=new ArrayList();
+		if(StringUtils.isBlank(uuids))return list;
+		
+		for(String uuid:uuids.split(",")){
+			String url=imgSmallUrlByUuid_sub(uuid);
+				if(StringUtils.isNotBlank(url))list.add(url);
+		}
+		return list;
+	}
+	
 	
 	/**
 	 * 将图片uuid替换成可以下载的http地址.最小图片
@@ -137,7 +157,7 @@ public class PxStringUtil {
 	 * http://ddd/uuid1,http://ddd/uuid1,
 	 * date&author: 2009-3-25 
 	 */
-	private static String imgSMiddleUrlByUuid_sub(String uuid){
+	private static String imgMiddleUrlByUuid_sub(String uuid){
 		if(uuid==null)return "";
 		if(uuid.startsWith("http://")){
 			return uuid;
@@ -243,7 +263,7 @@ public class PxStringUtil {
 		if(StringUtils.isBlank(uuids))return list;
 		
 		for(String uuid:uuids.split(",")){
-				list.add(imgSMiddleUrlByUuid_sub(uuid));
+				list.add(imgMiddleUrlByUuid_sub(uuid));
 		}
 		return list;
 	}
@@ -262,7 +282,8 @@ public class PxStringUtil {
 		if(StringUtils.isBlank(uuids))return list;
 		
 		for(String uuid:uuids.split(",")){
-				list.add(imgUrlByUuid(uuid));
+				String url=imgUrlByUuid_sub(uuid);
+				if(StringUtils.isNotBlank(url))list.add(url);
 		}
 		return list;
 	}
@@ -448,6 +469,21 @@ public class PxStringUtil {
 		  return false;
 	  }
 	  
+	  
+	  
+
+		/**
+		 * 将图片uuid替换成可以下载的http地址.最小图片
+		 * @param uuid
+		 * @return
+		 * uuid1,uuid2
+		 * =>
+		 * 获取话题模块打开的url.
+		 * date&author: 2009-3-25 
+		 */
+		public static String getSnsTopicWebViewURL(String uuid){
+			return PxConfigCache.getConfig_sns_url()+"&topic_uuid="+uuid;
+		}
 	
 	  public static void main(String[] s){
 		  String s1="180 123 123123";
