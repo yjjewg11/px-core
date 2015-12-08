@@ -5,11 +5,19 @@ import java.util.Map;
 
 public interface PxRedisCacheInterface {
 	/**
-	 * 获取阅读计数,表px_count.
+	 * 获取阅读计数(加一后返回),表px_count.
 	 * @param ext_uuid
 	 * @return
 	 */
-	public  Long getAddCountByExt_uuid(String ext_uuid);
+	public  Long getIncrCountByExt_uuid(String ext_uuid);
+	
+	/**
+	 * 获取阅读计数,表px_count.
+	 * null 表示没有命中.
+	 * @param ext_uuid
+	 * @return
+	 */
+	public  Long getCountByExt_uuid(String ext_uuid);
 	/**
 	 * 设置阅读计数到缓存中.
 	 * @param ext_uuid

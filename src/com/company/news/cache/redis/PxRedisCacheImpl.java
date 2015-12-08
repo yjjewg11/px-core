@@ -17,7 +17,6 @@ import redis.clients.jedis.Response;
 import com.company.news.ProjectProperties;
 import com.company.news.cache.PxRedisCacheInterface;
 import com.company.news.rest.util.TimeUtils;
-import com.company.news.service.CountService;
 
 
 /**
@@ -28,10 +27,15 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 //	private CountService countService;
 
 	private  static long  faildTime=0;
-	private final static long  faildTimeInterval=1000*60*1;//间隔10分钟
-	private final static String hostname=ProjectProperties.getProperty("redis.hostname", "127.0.0.1");
+	private final static long  faildTimeInterval=1000*60*5;//间隔10分钟
+//	private final static String hostname=ProjectProperties.getProperty("redis.hostname", "127.0.0.1");
+	//private final static String hostname=ProjectProperties.getProperty("redis.hostname", "10.169.128.139");
+	private final static String hostname=ProjectProperties.getProperty("redis.hostname", "120.24.61.97");
+	
+	
+	
 	private final static int port = ProjectProperties.getPropertyAsInt("redis.port", 6379);
-	private final static String auth = ProjectProperties.getProperty("redis.auth", "auth");
+	private final static String auth = ProjectProperties.getProperty("redis.auth", "8a29000b512652bf0151337f27fd00e5");
 	//缺陷
     public static final String Date_YYYYMMDD = "yyMMdd"
     		;
@@ -49,7 +53,14 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 
 	public PxRedisCacheImpl() {
 		super();
-		 jedisPool =  new JedisPool(new JedisPoolConfig(),hostname, port, 10000);
+		 if(StringUtils.isNotBlank(auth)){
+				logger.info("Redis Server:"+hostname+":"+port+",auth="+auth);
+			 jedisPool =  new JedisPool(new JedisPoolConfig(),hostname, port, 10000,auth);
+		 }else{
+				logger.info("1Redis Server:"+hostname+":"+port+",auth="+auth);
+			 jedisPool =  new JedisPool(new JedisPoolConfig(),hostname, port, 10000);
+		 }
+		
 	}
 
 	 public  Jedis getJedis() {
@@ -63,18 +74,18 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	        try {
 	        	
 	       	 Jedis jedis = jedisPool.getResource();
-			   if(StringUtils.isNotBlank(auth))jedis.auth(auth);
+//			   if(StringUtils.isNotBlank(auth))jedis.auth(auth);
 			    
 				return jedis;
 			} catch (Exception e) {
 				faildTime=tmpTime;
-				// TODO Auto-generated catch block
+				logger.info("Redis Server:"+hostname+":"+port+",auth="+auth);
 				e.printStackTrace();
 				throw e;
 			}
 	    }
 	
-	public  Long getAddCountByExt_uuid(String ext_uuid){
+	public  Long getIncrCountByExt_uuid(String ext_uuid){
 		Jedis jedis=getJedis();
 //		Long dd=jedis.hincrBy(Redis_Hash_Count_table_key, ext_uuid,1l);
 //		jedis.zadd(Redis_SortedSet_Count_table_key, score, ext_uuid);
@@ -88,6 +99,32 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		jedis.close();
 		//count==1 表示缓存中没值
 		return countResponse.get();
+	}
+	
+	/**
+	 * null 表示没有命中.
+	 * @param ext_uuid
+	 * @return
+	 */
+	public  Long getCountByExt_uuid(String ext_uuid){
+		Jedis jedis=getJedis();
+//		Long dd=jedis.hincrBy(Redis_Hash_Count_table_key, ext_uuid,1l);
+//		jedis.zadd(Redis_SortedSet_Count_table_key, score, ext_uuid);
+//		
+		Double score=Double.valueOf(TimeUtils.getCurrentTime(Date_YYYYMMDD));
+		 Pipeline p = jedis.pipelined();
+		 Response<String>  countResponse= p.hget(Redis_Hash_Count_table_key, ext_uuid);
+		    p.zadd(Redis_SortedSet_Count_table_key, score, ext_uuid);
+		    p.sync();
+//		    List<Object> results = p.syncAndReturnAll();
+		jedis.close();
+		//count==1 表示缓存中没值
+		String countStr= countResponse.get();
+		Long count=null;
+		if(countStr!=null){
+			count=Long.valueOf(countStr);
+		}
+		return count;
 	}
 	
 	
@@ -150,7 +187,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	 * @return
 	 * @throws Exception
 	 */
-	public   boolean synAllCountRedisToDb(CountService countService ) throws Exception{
+	public   boolean synAllCountRedisToDb(SynPxRedisToDbInterface countService ) throws Exception{
 		Jedis jedis=getJedis();
 //		jedis.zadd(Redis_SortedSet_Count_table_key, score, ext_uuid);
 //		
@@ -196,15 +233,15 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		//count==1 表示缓存中没值
 		return true;
 	}
-	public   boolean synCountRedisToDb(CountService countService ) throws Exception{
+	public   boolean synCountRedisToDb(SynPxRedisToDbInterface countService) throws Exception{
 		
 	
 		Jedis jedis=getJedis();
 //		jedis.zadd(Redis_SortedSet_Count_table_key, score, ext_uuid);
 //		
-		//1.读取缓存.当天时间的前一天以前的数据.
+		//1.读取缓存.当天时间的前一天以前的数据.凌晨1点执行.执行前2天
 		Double score=Double.valueOf(TimeUtils.getCurrentTime(Date_YYYYMMDD));
-		score--;
+		score=score-2;
 		Long countSet=0l;
 		
 		do{
@@ -287,9 +324,12 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	
 	public static void main(String[] s){
 		PxRedisCacheImpl pxRedisCacheImpl=new PxRedisCacheImpl();
-		System.out.println(pxRedisCacheImpl.getAddCountByExt_uuid("aa"));
+		System.out.println(pxRedisCacheImpl.getIncrCountByExt_uuid("aa"));
 		//pxRedisCacheImpl.setCountByExt_uuid("aa", 20l);
-		System.out.println(pxRedisCacheImpl.getAddCountByExt_uuid("aa"));
+		System.out.println(pxRedisCacheImpl.getIncrCountByExt_uuid("aa"));
+		System.out.println(pxRedisCacheImpl.getUploadFilePath("uuid"));
+		pxRedisCacheImpl.setUploadFilePath("uuid","uuid1");
+		System.out.println(pxRedisCacheImpl.getUploadFilePath("uuid"));
 	}
 
 }

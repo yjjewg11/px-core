@@ -31,11 +31,30 @@ public class PxRedisCache{
 	 * @param ext_uuid
 	 * @return
 	 */
-	public static Long getAddCountByExt_uuid(String ext_uuid) {
+	public static Long getIncrCountByExt_uuid(String ext_uuid) {
 		// TODO Auto-generated method stub
 		try {
 			if(pxRedisCache==null)return null;
-			return pxRedisCache.getAddCountByExt_uuid(ext_uuid);
+			return pxRedisCache.getIncrCountByExt_uuid(ext_uuid);
+		} catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取阅读计数,表px_count.
+	 * null 表示没有命中.
+	 * @param ext_uuid
+	 * @return
+	 */
+	public static Long getCountByExt_uuid(String ext_uuid) {
+		// TODO Auto-generated method stub
+		try {
+			if(pxRedisCache==null)return null;
+			return pxRedisCache.getCountByExt_uuid(ext_uuid);
 		} catch (NullPointerException e) {
 			logger.error("redis Connection failure!");
 		} catch (Exception e) {
@@ -105,16 +124,17 @@ public class PxRedisCache{
 		}
 	}
 	
-	public static String getUploadFilePath(String uuid) {
+	public static String getUploadFilePath(String uuid) throws Exception{
 		try {
 			if(pxRedisCache==null)return null;
 			return pxRedisCache.getUploadFilePath(uuid);
 		}catch (NullPointerException e) {
 			logger.error("redis Connection failure!");
+			throw e;
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw e;
 		}
-		return null;
 	}
 	
 	public static void setUploadFilePath(String uuid, String path) {
