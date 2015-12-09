@@ -36,7 +36,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	
 	
 	private final static int port = ProjectProperties.getPropertyAsInt("redis.port", 6379);
-	private final static String auth = ProjectProperties.getProperty("redis.auth", "8a29000b512652bf0151337f27fd00e5");
+	private final static String auth = ProjectProperties.getProperty("redis.auth", "8a29000b512652bf0151337f27fd00e5");//
 	//缺陷100年后,溢出
     public static final String Date_YYYYMMDD = "yyMMdd";
 	public static String Redis_Hash_Count_table_key="Hash_Count";
@@ -49,6 +49,8 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	public static String Redis_String_TodayNewMsgNumber="TodayNewMsg_";
 	public static int Redis_String_TodayNewMsgNumber_Expire=60*60*24;
 	
+	
+	public static long PageSize=100;
 	
 	
 	private static Logger logger = Logger.getLogger("RedisCache");
@@ -104,10 +106,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	
 	        try {
 	        	
-	       	 Jedis jedis1 = jedisPool.getResource();
 	       	Jedis jedis = jedisPool.getResource();
-	       	jedis1.close();
-//			   if(StringUtils.isNotBlank(auth))jedis.auth(auth);\
 //	       	 System.out.println("jedis="+	jedis);
 //	       System.out.println("getNumActive="+	jedisPool.getNumActive());
 //	       System.out.println("getNumWaiters="+	jedisPool.getNumWaiters());
@@ -136,6 +135,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 			    p.close();
 			//count==1 表示缓存中没值
 			return countResponse.get();
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		} finally{
 			jedis.close();
 		}
@@ -167,6 +169,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 				count=Long.valueOf(countStr);
 			}
 			return count;
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		} finally{
 			jedis.close();
 		}
@@ -199,6 +204,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 			    p.close();
 			//count==1 表示缓存中没值
 			return results.get();
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		} finally{
 			jedis.close();
 		}
@@ -229,6 +237,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 			    p.close();
 			//count==1 表示缓存中没值
 			return results;
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}finally{
 			jedis.close();
 		}
@@ -247,47 +258,55 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 //		
 		try {
 			//1.读取缓存.当天时间的前一天以前的数据.
-			Double score=Double.valueOf(TimeUtils.getCurrentTime(Date_YYYYMMDD));
+//			Double score=Double.valueOf(TimeUtils.getCurrentTime(Date_YYYYMMDD));
 			//score--;
 			Long countSet=0l;
-			countSet=jedis.zcount(Redis_SortedSet_Count_table_key, score, score);
-			Long startIndex=0l;
-			do{
-				
-				Long endIndex=startIndex+100;
-				logger.info("min=0,max="+score+",count="+countSet);
-				Long startTime = System.currentTimeMillis();
-				
-				if(countSet<endIndex){
-					endIndex=countSet;
-				}
-				
-				 Set<String> set=jedis.zrange(Redis_SortedSet_Count_table_key,startIndex, endIndex);
-				 String[] keys=new String[set.size()];
-				 set.toArray(keys);
-				 List<String> values= jedis.hmget(Redis_Hash_Count_table_key,keys );
-				 
-				 //2.同步数据到数据库save db
-				 countService.update_synCountRedisToDb(keys,values);
-				 
-				 
-				 //3.同步数据成功后从缓存移除.
-				 Pipeline p = jedis.pipelined();
-				 p.hdel(Redis_Hash_Count_table_key, keys);
-				p.zremrangeByRank(Redis_SortedSet_Count_table_key,  0l, endIndex);
-				 p.sync();
-				    p.close();
-//			List<Object> results = p.syncAndReturnAll();
 			
+			countSet=jedis.zcard(Redis_SortedSet_Count_table_key);
+			Long startIndex=0l;
+			Long endIndex=0l;
+			logger.info("zcard "+Redis_SortedSet_Count_table_key+",count="+countSet);
+			
+			if(countSet>0l){
+				do{
+					
+					 endIndex=startIndex+PageSize;
 				
-				 startIndex=endIndex;
-				Long endTime = System.currentTimeMillis() - startTime;
-				logger.info(" countService.update_synCountRedisToDb,count time(ms)="+endTime);
-			}while(countSet>0);
+					Long startTime = System.currentTimeMillis();
+					
+					if(countSet<endIndex){
+						endIndex=countSet;
+					}
+					endIndex--;//0 99 共一100个
+					logger.info("zrange "+Redis_SortedSet_Count_table_key+" "+startIndex+" "+endIndex+",count="+countSet);
+					Set<String> set=jedis.zrange(Redis_SortedSet_Count_table_key,startIndex, endIndex);
+					 String[] keys=new String[set.size()];
+					 set.toArray(keys);
+					 List<String> values= jedis.hmget(Redis_Hash_Count_table_key,keys );
+					 
+					 //2.同步数据到数据库save db
+					 countService.update_synCountRedisToDb(keys,values);
+					 
+					 
+					 //3.同步数据成功后从缓存移除.
+//					 Pipeline p = jedis.pipelined();
+//					 p.hdel(Redis_Hash_Count_table_key, keys);
+//					p.zremrangeByRank(Redis_SortedSet_Count_table_key,  0l, endIndex);
+//					 p.sync();
+//					    p.close();
+					 startIndex=endIndex+1;
+					Long endTime = System.currentTimeMillis() - startTime;
+					logger.info(" countService.update_synCountRedisToDb,count time(ms)="+endTime);
+				}while(endIndex+1<countSet);
+			}
+			
 			
 			//count==1 表示缓存中没值
 			return true;
-		} finally{
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}finally{
 			jedis.close();
 		}
 	}
@@ -300,20 +319,25 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 //		jedis.zadd(Redis_SortedSet_Count_table_key, score, ext_uuid);
 			//1.读取缓存.当天时间的前一天以前的数据.凌晨1点执行.执行前2天
 			Double score=Double.valueOf(TimeUtils.getCurrentTime(Date_YYYYMMDD));
-			score=score-2;
+			score=score-1;
 			Long countSet=0l;
-			
 			do{
-				Long pageSize=100l;
-				 countSet=jedis.zcount(Redis_SortedSet_Count_table_key, 0l, score);
+				//分页处理,每页最大100
+				Long pageSize=PageSize;
+				//取出2天前,的总数.
+				countSet=jedis.zcount(Redis_SortedSet_Count_table_key, 0l, score);
 				logger.info("min=0,max="+score+",count="+countSet);
+				logger.info("zcount "+Redis_SortedSet_Count_table_key+" 0 "+score+",count="+countSet);
 				Long startTime = System.currentTimeMillis();
-				
+				if(countSet==0l){
+					break;
+				}
 				if(countSet<pageSize){
 					pageSize=countSet;
 				}
-				countSet=countSet-pageSize;
-				logger.info("jedis.zrange:Redis_SortedSet_Count_table_key,min=0,max="+pageSize);
+				pageSize--;//0 99 共一100个
+				//分页取第一页数据,同步到数据库
+				logger.info("zrange "+Redis_SortedSet_Count_table_key+" 0 "+pageSize);
 				 Set<String> set=jedis.zrange(Redis_SortedSet_Count_table_key, 0l, pageSize);
 				 String[] keys=new String[set.size()];
 				 set.toArray(keys);
@@ -325,19 +349,21 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 				 
 				 //3.同步数据成功后从缓存移除.
 				 Pipeline p = jedis.pipelined();
-				  p.hdel(Redis_Hash_Count_table_key, keys);
+				 p.hdel(Redis_Hash_Count_table_key, keys);
 				  p.zremrangeByRank(Redis_SortedSet_Count_table_key,  0l, pageSize);
-				 p.sync();
-				    p.close();
-//			List<Object> results = p.syncAndReturnAll();
-			
-				
+				  p.sync();
+				  p.close();
 				
 				Long endTime = System.currentTimeMillis() - startTime;
 				logger.info(" countService.update_synCountRedisToDb,count time(ms)="+endTime);
+				//
+				countSet=countSet-pageSize;
 			}while(countSet>0);
 			//count==1 表示缓存中没值
 			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		} finally{
 			jedis.close();
 		}
@@ -347,6 +373,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		Jedis jedis=getJedis();
 		try {
 			jedis.hset(Redis_Hash_Count_table_key, ext_uuid, count+"");
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}finally{
 			jedis.close();
 		}
@@ -356,6 +385,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		Jedis jedis=getJedis();
 		try {
 			jedis.hmset(Redis_Hash_Count_table_key, zMap);
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}finally{
 			jedis.close();
 		}
@@ -386,6 +418,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 			    p.close();
 //		    List<Object> results = p.syncAndReturnAll();
 				return pathResponse.get();
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}finally{
 			jedis.close();
 		}
@@ -401,6 +436,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		try {
 			String key=Redis_String_Path+uuid;
 			jedis.setex(key, Redis_String_Path_Expire, path);
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		} finally{
 			jedis.close();
 		}
@@ -424,7 +462,10 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 			    p.close();
 			
 			return pathResponse.get();
-		} finally{
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}finally{
 			jedis.close();
 		}
 	}
@@ -443,6 +484,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 			p.expire(key, Redis_String_TodayNewMsgNumber_Expire);
 			 p.sync();
 			    p.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		} finally{
 			jedis.close();
 		}
@@ -458,6 +502,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		try {
 			String key=Redis_String_TodayNewMsgNumber+uuid;
 			jedis.setex(key, Redis_String_TodayNewMsgNumber_Expire, number);
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		} finally{
 			jedis.close();
 		}

@@ -73,8 +73,8 @@ public class CommonsCache{
 
 	// 获取自动保存内容
 	public static String getUploadFileOfFile_path(String uuid) {
-		
 		String path=null;
+		if(StringUtils.isBlank(uuid))return path;
 		try {
 			path = PxRedisCache.getUploadFilePath(uuid);
 			if(path!=null)return path;
