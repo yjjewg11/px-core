@@ -153,8 +153,9 @@ public class PxRedisCache{
 	 * 获取今日统计数量,缓存延长24小时
 	 * @param uuid
 	 * @return
+	 * @throws Exception 
 	 */
-	public static  String getCountOfNewMsgNumber(String uuid){
+	public static  String getCountOfNewMsgNumber(String uuid) throws Exception{
 		try {
 			if(pxRedisCache==null)return null;
 			return pxRedisCache.getCountOfNewMsgNumber(uuid);
@@ -171,8 +172,9 @@ public class PxRedisCache{
 	 * 今日统计数量加一,缓存延长24小时
 	 * @param uuid
 	 * @return
+	 * @throws Exception 
 	 */
-	public static  void incrCountOfNewMsgNumber(String uuid){
+	public static  void incrCountOfNewMsgNumber(String uuid) throws Exception{
 		try {
 			if(pxRedisCache==null)return ;
 			 pxRedisCache.incrCountOfNewMsgNumber(uuid);

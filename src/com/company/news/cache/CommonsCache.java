@@ -77,6 +77,8 @@ public class CommonsCache{
 		String path=null;
 		try {
 			path = PxRedisCache.getUploadFilePath(uuid);
+			if(path!=null)return path;
+			
 			List list =nSimpleHibernateDao.getHibernateTemplate().find("select file_path from UploadFile4Q where uuid='"+uuid+"'");
 			if (list != null&&list.size()>0){
 				path=(String) list.get(0);

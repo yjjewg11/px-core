@@ -61,13 +61,23 @@ public class NewMsgNumberIservice {
 	   */
 	  public Object today_snsTopic(){
 		  String key="snsTopic_"+TimeUtils.getCurrentTime(Date_YYYYMMDD);
-		  Object count=PxRedisCache.getCountOfNewMsgNumber(key);
+		  Object count=null;
+		try {
+			count = PxRedisCache.getCountOfNewMsgNumber(key);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		  if(count!=null)return count;
 		  String sql = "select count(1) from sns_topic t1 where t1.status=0 and t1.create_time>="+DBUtil.stringToDateYMDByDBType(TimeUtils.getCurrentTime(TimeUtils.YYYY_MM_DD_FORMAT));
 		  Session s = this.nSimpleHibernateDao.getHibernateTemplate()
 					.getSessionFactory().openSession();
 			 count= s.createSQLQuery(sql).uniqueResult();
-			 PxRedisCache.setCountOfNewMsgNumber(key, count+"");
+			 try {
+				PxRedisCache.setCountOfNewMsgNumber(key, count+"");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		return count;
 	  }
 	  
@@ -78,7 +88,12 @@ public class NewMsgNumberIservice {
 	   */
 	  public void today_snsTopic_incrCountOfNewMsgNumber(){
 		  String key="snsTopic_"+TimeUtils.getCurrentTime(Date_YYYYMMDD);
-		  PxRedisCache.incrCountOfNewMsgNumber(key);
+		  try {
+			PxRedisCache.incrCountOfNewMsgNumber(key);
+		} catch (Exception e) {
+			logger.warn("PxRedisCache", e);
+//			e.printStackTrace();
+		}
 	  }
 	  
 	  /**
@@ -87,13 +102,24 @@ public class NewMsgNumberIservice {
 	   */
 	  public Object today_goodArticle(){
 		  String key="goodArticle_"+TimeUtils.getCurrentTime(Date_YYYYMMDD);
-		  Object count=PxRedisCache.getCountOfNewMsgNumber(key);
+		  Object count=null;
+			try {
+				count = PxRedisCache.getCountOfNewMsgNumber(key);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		  if(count!=null)return count;
 		  String sql = "  select count(1) from px_announcements t1 where t1.status=0  and t1.type=3 and t1.create_time>="+DBUtil.stringToDateYMDByDBType(TimeUtils.getCurrentTime(TimeUtils.YYYY_MM_DD_FORMAT));
 		  Session s = this.nSimpleHibernateDao.getHibernateTemplate()
 					.getSessionFactory().openSession();
 			 count= s.createSQLQuery(sql).uniqueResult();
-			 PxRedisCache.setCountOfNewMsgNumber(key, count+"");
+			 try {
+				PxRedisCache.setCountOfNewMsgNumber(key, count+"");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				logger.warn("PxRedisCache", e);
+//				e.printStackTrace();
+			}
 		return count;
 	  }
 	  
@@ -104,7 +130,12 @@ public class NewMsgNumberIservice {
 	   */
 	  public void today_goodArticle_incrCountOfNewMsgNumber(){
 		  String key="goodArticle_"+TimeUtils.getCurrentTime(Date_YYYYMMDD);
-		  PxRedisCache.incrCountOfNewMsgNumber(key);
+		  try {
+			PxRedisCache.incrCountOfNewMsgNumber(key);
+		} catch (Exception e) {
+			logger.warn("PxRedisCache", e);
+//			e.printStackTrace();
+		}
 	  }
 	  
 	  
@@ -115,7 +146,12 @@ public class NewMsgNumberIservice {
 	   */
 	  public Object today_pxbenefit(){
 		  String key="pxbenefit"+TimeUtils.getCurrentTime(Date_YYYYMMDD);
-		  Object count=PxRedisCache.getCountOfNewMsgNumber(key);
+		  Object count=null;
+			try {
+				count = PxRedisCache.getCountOfNewMsgNumber(key);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		  if(count!=null)return count;
 			String crrentTime=TimeUtils.getCurrentTime(TimeUtils.YYYY_MM_DD_FORMAT);
 		  String sql = "  select count(1) from px_announcements t1 where t1.status=0   and t1.type=85 ";
@@ -125,7 +161,12 @@ public class NewMsgNumberIservice {
 		  Session s = this.nSimpleHibernateDao.getHibernateTemplate()
 					.getSessionFactory().openSession();
 			 count= s.createSQLQuery(sql).uniqueResult();
-			 PxRedisCache.setCountOfNewMsgNumber(key, count+"");
+			 try {
+				PxRedisCache.setCountOfNewMsgNumber(key, count+"");
+			} catch (Exception e) {
+				logger.warn("PxRedisCache", e);
+//				e.printStackTrace();
+			}
 		return count;
 	  }
 	  
@@ -136,7 +177,13 @@ public class NewMsgNumberIservice {
 	   */
 	  public void today_pxbenefit_incrCountOfNewMsgNumber(){
 		  String key="pxbenefit_"+TimeUtils.getCurrentTime(Date_YYYYMMDD);
-		  PxRedisCache.incrCountOfNewMsgNumber(key);
+		  try {
+			PxRedisCache.incrCountOfNewMsgNumber(key);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.warn("PxRedisCache", e);
+//			e.printStackTrace();
+		}
 	  }
 	  
 	  /**

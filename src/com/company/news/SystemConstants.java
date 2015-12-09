@@ -183,6 +183,9 @@ public class SystemConstants {
 		static public final String Session_User_Login_Type_Parent="2";//家长
 		static public final String Session_User_Login_Type_Admin="0";//管理员
 		
+		
+		static public final String DB_String_unrelated_Value="0";//没有关联字段的值.
+		
 }
 
 
