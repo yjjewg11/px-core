@@ -10,7 +10,16 @@ public class DBUtil {
 	public static String dbtype = ProjectProperties.getProperty("primary.dbtype", "mysql");
 	private static Log log=LogFactory.getLog(DBUtil.class);
 	
-	
+	/**
+	 *防止sql注入
+	 * @return
+	 */
+	public static String safeToWhereString(String strs){
+		if(StringUtils.isBlank(strs))return strs;
+		strs=strs.replaceAll("'", "''");
+		return strs;
+		
+	}
 	/**
 	 * 修复为空是,拼接的sql报错bug.
 	 * 将逗号分割的多个数据组织成 where条件 in 需要的值
@@ -20,6 +29,7 @@ public class DBUtil {
 	public static String stringsToWhereInValue(String strs){
 		String rstr="";
 		if(StringUtils.isBlank(strs))return "''";
+		strs=strs.replaceAll("'", "''");
 		String[] strArr=strs.split(",");
 		for(int i=0;i<strArr.length;i++){
 			if(StringUtils.isNotBlank(strArr[i]))rstr+="'"+strArr[i]+"',";
