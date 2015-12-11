@@ -101,7 +101,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		 
 		 //加入超时机制
 		 if(tmpTime-faildTime<faildTimeInterval){
-			// return null;
+			return null;
 		 }
 	
 	        try {
