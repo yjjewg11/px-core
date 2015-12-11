@@ -86,6 +86,7 @@ public class CommonsCache{
 				return  path;
 			}
 			return  path;
+		} catch (NullPointerException e1) {//异常情况下,启用当前服务器缓存.
 		} catch (Exception e1) {//异常情况下,启用当前服务器缓存.
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
