@@ -21,6 +21,10 @@ public class SnsTopic extends IdEntity {
 	@Column
 	private String create_useruuid;// 创建人uuid
 	@Column
+	private String create_user;// 创建人
+	@Column
+	private String create_img;// 创建人头像
+	@Column
 	private String title;// 话题板块.128字符
 	@Column
 	private String content;// HTML
@@ -34,6 +38,8 @@ public class SnsTopic extends IdEntity {
 	private Long yes_count;//赞成票数.
 	@Column
 	private Long no_count;//反对票数
+	@Column
+	private Long click_count;//浏览次数
 	 @Column
 	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
 	@Column
@@ -132,6 +138,24 @@ public class SnsTopic extends IdEntity {
 	}
 	public void setImguuids(String imguuids) {
 		this.imguuids = imguuids;
+	}
+	public String getCreate_user() {
+		return create_user;
+	}
+	public void setCreate_user(String create_user) {
+		this.create_user = create_user;
+	}
+	public String getCreate_img() {
+		return create_img;
+	}
+	public void setCreate_img(String create_img) {
+		this.create_img = create_img;
+	}
+	public Long getClick_count() {
+		return click_count;
+	}
+	public void setClick_count(Long click_count) {
+		this.click_count = click_count;
 	}
 
 }

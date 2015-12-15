@@ -36,7 +36,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 	
 	
 	private final static int port = ProjectProperties.getPropertyAsInt("redis.port", 6379);
-	private final static String auth = ProjectProperties.getProperty("redis.auth", "8a29000b512652bf0151337f27fd00e5");//
+	private  static String auth = ProjectProperties.getProperty("redis.auth", "8a29000b512652bf0151337f27fd00e5");//
 	//缺陷100年后,溢出
     public static final String Date_YYYYMMDD = "yyMMdd";
 	public static String Redis_Hash_Count_table_key="Hash_Count";
@@ -319,7 +319,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 //		jedis.zadd(Redis_SortedSet_Count_table_key, score, ext_uuid);
 			//1.读取缓存.当天时间的前一天以前的数据.凌晨1点执行.执行前2天
 			Double score=Double.valueOf(TimeUtils.getCurrentTime(Date_YYYYMMDD));
-			score=score-1;
+			score=score-2;
 			Long countSet=0l;
 			do{
 				//分页处理,每页最大100
@@ -517,7 +517,9 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 		
 		
 		try {
-			hostname="120.24.61.97";
+			//hostname="120.24.61.97";
+			hostname="127.0.0.1";
+			auth="";
 			System.out.println("Redis Server:"+hostname+":"+port+",auth="+auth);
 		final PxRedisCacheImpl pxRedisCacheImpl=new PxRedisCacheImpl();
 		
@@ -526,9 +528,10 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 //		System.out.println(pxRedisCacheImpl.getIncrCountByExt_uuid("aa"));
 //		//pxRedisCacheImpl.setCountByExt_uuid("aa", 20l);
 //		System.out.println(pxRedisCacheImpl.getIncrCountByExt_uuid("aa"));
-		for(int i=0;i<1;i++){
-//			System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//			System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26a2"));
+		long dd=4294967295l;
+		for(long i=0;i<dd;i++){
+			pxRedisCacheImpl.setCountByExt_uuid("ext_uuid_"+i, i);
+			System.out.println(i);
 //			new Thread(new Runnable() {
 //				
 //				@Override
@@ -536,24 +539,7 @@ public class PxRedisCacheImpl  implements PxRedisCacheInterface{
 //					// TODO Auto-generated method stub
 //					try {
 //						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26ad"));
-//						System.out.println(pxRedisCacheImpl.getUploadFilePath("dd615439-d43c-452e-90ba-d99e25fe26a2"));
+//						
 //					} catch (IOException e) {
 //						// TODO Auto-generated catch block
 //						//e.printStackTrace();

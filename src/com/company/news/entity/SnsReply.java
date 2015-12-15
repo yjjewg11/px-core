@@ -23,6 +23,10 @@ public class SnsReply extends IdEntity {
 	@Column
 	private String create_useruuid;// 创建人uuid
 	@Column
+	private String create_user;// 创建人
+	@Column
+	private String create_img;// 创建人头像
+	@Column
 	private String content;// HTML
 	@Column
 	private Long reply_count;//回复数量
@@ -104,6 +108,18 @@ public class SnsReply extends IdEntity {
 	}
 	public void setIllegal_time(Timestamp illegal_time) {
 		this.illegal_time = illegal_time;
+	}
+	public String getCreate_user() {
+		return create_user;
+	}
+	public void setCreate_user(String create_user) {
+		this.create_user = create_user;
+	}
+	public String getCreate_img() {
+		return create_img;
+	}
+	public void setCreate_img(String create_img) {
+		this.create_img = create_img;
 	}
 
 
