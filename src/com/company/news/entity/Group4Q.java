@@ -24,7 +24,8 @@ public class Group4Q extends IdEntity{
 	  private String map_point;//坐标
 	  @Column
 	  private String link_tel;//电话
- 
+	  @Column
+		private String summary;// 摘要,100字内
 	  @Column
 	  private String img;//组织logo
 	  @Column
@@ -118,6 +119,12 @@ public class Group4Q extends IdEntity{
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 

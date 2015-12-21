@@ -58,6 +58,8 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 	  
 	  @Column 
 	private String imgs;// img 的uuid多个逗号分割.
+	  @Column 
+	  private String url;//支持直接复制url方式.长度限制256.
 	@Transient
 	private List imgsList;// 统计浏览次数.//非数据库字段.
 	@Transient
@@ -214,6 +216,14 @@ public class ClassNews extends IdEntity implements CreateUserInterface{
 
 	public void setGroup_name(String group_name) {
 		this.group_name = group_name;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 

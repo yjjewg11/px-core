@@ -12,6 +12,7 @@ import com.company.news.cache.redis.PxRedisCacheImpl;
  * redis缓存
  * px_count 计数缓存.
  * 上传地址缓存.
+ * sns_click_count 话题计数
  * @author liumingquan
  *
  */
@@ -26,6 +27,45 @@ public class PxRedisCache{
 			pxRedisCache=new PxRedisCacheImpl();
 //		}
 	}
+	
+	
+	/**
+	 * 话题计数设置
+	 * @param ext_uuid
+	 * @param count
+	 */
+	public static void setSnsTopicByExt_uuid(String ext_uuid, Long count) {
+		try {
+			if(pxRedisCache==null)return ;
+			pxRedisCache.getSns_topic().setCountByExt_uuid(ext_uuid, count);
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 话题计数增量获取
+	 * null,表示不启用或者失败.1表示缓存没有数据.
+	 * @param ext_uuid
+	 * @return
+	 */
+	public static Long getIncrSnsTopicCountByExt_uuid(String ext_uuid) {
+		// TODO Auto-generated method stub
+		try {
+			if(pxRedisCache==null)return null;
+			return pxRedisCache.getSns_topic().getIncrCountByExt_uuid(ext_uuid);
+		} catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	
 	/**
 	 * null,表示不启用或者失败.1表示缓存没有数据.
 	 * @param ext_uuid
@@ -35,7 +75,7 @@ public class PxRedisCache{
 		// TODO Auto-generated method stub
 		try {
 			if(pxRedisCache==null)return null;
-			return pxRedisCache.getIncrCountByExt_uuid(ext_uuid);
+			return pxRedisCache.getPx_count().getIncrCountByExt_uuid(ext_uuid);
 		} catch (NullPointerException e) {
 			logger.error("redis Connection failure!");
 		} catch (Exception e) {
@@ -54,7 +94,7 @@ public class PxRedisCache{
 		// TODO Auto-generated method stub
 		try {
 			if(pxRedisCache==null)return null;
-			return pxRedisCache.getCountByExt_uuid(ext_uuid);
+			return pxRedisCache.getPx_count().getCountByExt_uuid(ext_uuid);
 		} catch (NullPointerException e) {
 			logger.error("redis Connection failure!");
 		} catch (Exception e) {
@@ -72,7 +112,7 @@ public class PxRedisCache{
 		// TODO Auto-generated method stub
 		try {
 			if(pxRedisCache==null)return null;
-			return pxRedisCache.getCountByExt_uuids(ext_uuids);
+			return pxRedisCache.getPx_count().getCountByExt_uuids(ext_uuids);
 		}catch (NullPointerException e) {
 			logger.error("redis Connection failure!");
 		} catch (Exception e) {
@@ -89,7 +129,7 @@ public class PxRedisCache{
 		// TODO Auto-generated method stub
 		try {
 			if(pxRedisCache==null)return null;
-			return pxRedisCache.getIncrCountByExt_uuids(ext_uuids);
+			return pxRedisCache.getPx_count().getIncrCountByExt_uuids(ext_uuids);
 		}catch (NullPointerException e) {
 			logger.error("redis Connection failure!");
 		} catch (Exception e) {
@@ -105,7 +145,7 @@ public class PxRedisCache{
 	public static void setCountByExt_uuids( Map<String,String> zMap){
 				try {
 					if(pxRedisCache==null)return ;
-					 pxRedisCache.setCountByExt_uuids(zMap);
+					 pxRedisCache.getPx_count().setCountByExt_uuids(zMap);
 				} catch (NullPointerException e) {
 					logger.error("redis Connection failure!");
 				} catch (Exception e) {
@@ -116,7 +156,7 @@ public class PxRedisCache{
 	public static void setCountByExt_uuid(String ext_uuid, Long count) {
 		try {
 			if(pxRedisCache==null)return ;
-			pxRedisCache.setCountByExt_uuid(ext_uuid, count);
+			pxRedisCache.getPx_count().setCountByExt_uuid(ext_uuid, count);
 		}catch (NullPointerException e) {
 			logger.error("redis Connection failure!");
 		} catch (Exception e) {
