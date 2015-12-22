@@ -2,8 +2,6 @@ package com.company.news.rest.util;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Field;
-import java.util.Enumeration;
-import java.util.Properties;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
 
+import com.company.news.ResponseMessageConstants;
 import com.company.news.SystemConstants;
 import com.company.news.rest.RestConstants;
 import com.company.news.vo.ResponseMessage;
@@ -28,7 +27,7 @@ public class RestUtil {
 	 */
 	static public ResponseMessage addNoSessionForResponseMessage(ResponseMessage responseMessage) {
 		responseMessage.setStatus(RestConstants.Return_ResponseMessage_sessionTimeout);
-		responseMessage.setMessage("请注销后重新登录.");
+		responseMessage.setMessage(ResponseMessageConstants.SessionTimeout);
 		return responseMessage;
 	}
 
@@ -53,7 +52,7 @@ public class RestUtil {
 	static public ResponseMessage addNoPowerForResponseMessage(ModelMap model) {
 		ResponseMessage responseMessage = new ResponseMessage();
 		responseMessage.setStatus(RestConstants.Return_ResponseMessage_nopower);
-		responseMessage.setMessage("没有操作权限");
+		responseMessage.setMessage(ResponseMessageConstants.Nopower);
 		model.addAttribute(RestConstants.Return_ResponseMessage, responseMessage);
 		return responseMessage;
 	}
@@ -79,7 +78,7 @@ public class RestUtil {
 	 */
 	static public ResponseMessage addResponseMessageForModelMap(ModelMap model) {
 		ResponseMessage responseMessage = new ResponseMessage();
-		responseMessage.setMessage("操作成功");
+		responseMessage.setMessage(ResponseMessageConstants.success_msg);
 		model.addAttribute(RestConstants.Return_ResponseMessage, responseMessage);
 
 		return responseMessage;
