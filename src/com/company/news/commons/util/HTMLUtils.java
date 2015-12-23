@@ -7,6 +7,7 @@ import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.Renderer;
 import net.htmlparser.jericho.Source;
+import net.htmlparser.jericho.TextExtractor;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -36,11 +37,23 @@ public class HTMLUtils  {
 		 int summaryCount=100;
 		 int maxCount=3;
 		 
+		 
+
+		 
+
+         
 		//不能替换导致多个空格被改成一个空格.
 		Source source = new Source(htmlcontent);
-		Renderer renderer=source.getRenderer();
-		renderer.setMaxLineLength(99999);//设置一行最长个数，默认76字符
-		String text=renderer.toString();
+//		Renderer renderer=source.getRenderer();
+		
+		//修改解析不彻底bug.<http://bbs.mobby.cn/wechat-login.html> <http://bbs.mobby.cn/wechat-login.html> 有的宝宝不会自己小便，经常尿湿裤子，每次幼儿园的老师都会告状“今天又尿裤子了”，听到这样的话家长也会比较尴尬。遇到这样的情况，家长该怎么办呢？
+//
+//		renderer.setMaxLineLength(99999);//设置一行最长个数，默认76字符
+//		String text=renderer.toString();
+		
+		
+		TextExtractor textExtractor=new TextExtractor(source) ;
+		String text=textExtractor.toString();
 		
 		 List<Element> imglist=source.getAllElements(HTMLElementName.IMG);
 		 String url=ProjectProperties.getProperty("share_url_getEmot", "http://kd.wenjienet.com/px-rest/i/emoji/");
