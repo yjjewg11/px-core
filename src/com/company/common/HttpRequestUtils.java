@@ -163,7 +163,8 @@ public class HttpRequestUtils {
 			 return renderer.toString();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			//e1.printStackTrace();
+			logger.error("httpGetHtmlTitle,url="+url);
 		}
          return null;
 //        //get请求返回结果
