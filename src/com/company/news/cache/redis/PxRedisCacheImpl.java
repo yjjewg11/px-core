@@ -363,7 +363,9 @@ public class PxRedisCacheImpl  {
 	public  void setCountOfNewMsgNumber(String uuid,String number){
 		Jedis jedis=getJedis();
 		try {
+			
 			String key=Redis_String_TodayNewMsgNumber+uuid;
+			logger.info("jedis.setex("+key+", "+Redis_String_TodayNewMsgNumber_Expire+", "+number+")");
 			jedis.setex(key, Redis_String_TodayNewMsgNumber_Expire, number);
 		}catch (Exception e) {
 			//e.printStackTrace();
