@@ -24,6 +24,8 @@ public class PushMsgDevice extends IdEntity {
 	private Integer status;//状态:其他或0表示启用.2:表示禁用消息推送.
 	@Column
 	private Timestamp update_time;//状态:其他或0表示启用.2:表示禁用消息推送.
+	@Column
+	private String sessionid;// 保存登录成功后的sessionid
 	public String getUser_uuid() {
 		return user_uuid;
 	}
@@ -65,6 +67,12 @@ public class PushMsgDevice extends IdEntity {
 	}
 	public void setUpdate_time(Timestamp update_time) {
 		this.update_time = update_time;
+	}
+	public String getSessionid() {
+		return sessionid;
+	}
+	public void setSessionid(String sessionid) {
+		this.sessionid = sessionid;
 	}
 	
 	
