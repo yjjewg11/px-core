@@ -109,6 +109,21 @@ public class PushMsgIservice {
 			return this.nSimpleHibernateDao.getHibernateTemplate().find(hql,group_uuid);
 		  
 	  }
+	  
+	  
+	  /**
+	   * 获取设备id用于推送.获取所有,不管状态
+	   * @param device_type
+	   * @param type
+	   * @param group_uuid
+	   * @return
+	   */
+	  private List getChannelIdByAll(String device_type,Integer type){
+		  String hql = "select distinct device_id from PushMsgDevice where  device_type='" + device_type+"'";
+			hql += " and type="+type;
+			return this.nSimpleHibernateDao.getHibernateTemplate().find(hql);
+		  
+	  }
 	  /**
 	   * 获取设备id用于推送.根据uuid
 	   * @param device_type
@@ -389,6 +404,48 @@ public class PushMsgIservice {
 		                        try {
 
 		                        	that.iosPushMsgToSingleDevice_to_parentByChannelId(title, msg, iosList);
+		                        } catch (Exception e) {
+		                            e.printStackTrace();
+		                        }
+		                    }
+		        }).start();
+	  }
+	  
+	  /**
+	   * 广播消息给所有的ios客户端的家长
+	   * @param msg
+	   * @return
+	   */
+	  public void pushMsg_to_all_ios_parent_app(final String title,final String msg)throws Exception{
+			  //1.发布
+			   final List<String> iosList=getChannelIdByAll(SystemConstants.PushMsgDevice_device_type_ios,SystemConstants.PushMsgDevice_type_0);
+			   final PushMsgIservice that=this;
+		        new Thread(new Runnable(){
+		            public void run() {
+		                        try {
+
+		                        	that.iosPushMsgToSingleDevice_to_parentByChannelId(title, msg, iosList);
+		                        } catch (Exception e) {
+		                            e.printStackTrace();
+		                        }
+		                    }
+		        }).start();
+	  }
+	  
+	  
+	  /**
+	   * 广播消息给所有的ios客户端的老师
+	   * @param msg
+	   * @return
+	   */
+	  public void pushMsg_to_all_ios_teacher_app(final String title,final String msg)throws Exception{
+			  //1.发布
+			   final List<String> iosList=getChannelIdByAll(SystemConstants.PushMsgDevice_device_type_ios,SystemConstants.PushMsgDevice_type_1);
+			   final PushMsgIservice that=this;
+		        new Thread(new Runnable(){
+		            public void run() {
+		                        try {
+		                        	that.iosPushMsgToSingleDevice_to_TeacherByChannelId(title, msg, iosList);
 		                        } catch (Exception e) {
 		                            e.printStackTrace();
 		                        }
