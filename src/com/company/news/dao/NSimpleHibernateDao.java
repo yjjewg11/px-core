@@ -69,6 +69,11 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
     return this.getSessionFactory().openSession();
   }
 
+  
+  public Query  createHqlQuery(String hql) {
+	    // TODO Auto-generated method stub
+	    return getSession().createQuery(hql);
+	  }
 
   
   /**
