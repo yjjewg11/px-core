@@ -5,7 +5,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.company.news.ProjectProperties;
-
+@Deprecated
 public class DBUtil {
 	public static String dbtype = ProjectProperties.getProperty("primary.dbtype", "mysql");
 	private static Log log=LogFactory.getLog(DBUtil.class);

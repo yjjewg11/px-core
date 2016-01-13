@@ -11,6 +11,7 @@ import javax.persistence.Table;
 /**
  * 照片已天为集合,自动归类.
  * 家庭照片集合.-关联家庭成员(读写)-关联订阅成员(只读)
+ * FPPhotoDayCollection(1)->FPPhotoItem(N)
  * @author liumingquan
  *
  */
