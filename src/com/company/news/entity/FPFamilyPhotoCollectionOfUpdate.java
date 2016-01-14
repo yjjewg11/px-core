@@ -22,20 +22,18 @@ import javax.persistence.Table;
  * @author liumingquan
  *
  */
-public class FPFamilyPhotoCollection extends IdEntity {
+public class FPFamilyPhotoCollectionOfUpdate extends IdEntity {
 	
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
 	private String create_useruuid;// 创建人uuid
-//	@Column
-//	private String create_user;// 创建人
 	@Column
-	private String herald;// 封面.60字符()
+	private String herald;// 封面.
 	@Column
 	private String title;// 家庭照片集合.128字符.XX的家
-	@Column
-	private Long photo_count=0l;// 照片计数
+//	@Column
+//	private Long photo_count=0l;// 照片计数
 	@Column
 	private Integer status=0;//类型'0:发布,1:未发布.2:屏蔽',
 	public Timestamp getCreate_time() {
@@ -61,12 +59,6 @@ public class FPFamilyPhotoCollection extends IdEntity {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public Long getPhoto_count() {
-		return photo_count;
-	}
-	public void setPhoto_count(Long photo_count) {
-		this.photo_count = photo_count;
 	}
 	public Integer getStatus() {
 		return status;

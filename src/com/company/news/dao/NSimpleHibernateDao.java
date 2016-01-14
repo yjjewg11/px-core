@@ -2,6 +2,7 @@ package com.company.news.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -73,8 +74,27 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
   public Query  createHqlQuery(String hql) {
 	    // TODO Auto-generated method stub
 	    return getSession().createQuery(hql);
+	    
+	    
 	  }
 
+  
+  	public Query  createSqlQuery(String sql) {
+	    // TODO Auto-generated method stub
+	     Query q = getSession().createSQLQuery(sql);
+		return q;
+	  }
+  	/**
+  	 * 查询sql语句,返回map结果集.
+  	 * @param sql
+  	 * @return
+  	 */
+	public List<Map>  queryMapBySql(String sql) {
+	    // TODO Auto-generated method stub
+	     Query q = getSession().createSQLQuery(sql);
+		q.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		return q.list();
+	  }
   
   /**
    * 分页查询,不查询总数提高效率

@@ -148,6 +148,36 @@ public class PxStringUtil {
 		
 		return ProjectProperties.getProperty("img_down_url_pre", "http://kd.wenjienet.com/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
+	
+	
+	private static String imgSmallUrlByRelativePath_sub(String relativePath){
+		if(StringUtils.isBlank(relativePath))return "";
+		if(relativePath.startsWith("http://")){
+			return relativePath;
+		}
+		if (uploadfiletype.equals("oss")) {
+			String s= ProjectProperties.getProperty("oss_Small_img_down_url", "http://img.wenjienet.com/{object}@60h").replace("{object}",relativePath );
+			return s;
+		}
+		return relativePath;
+//		return ProjectProperties.getProperty("img_down_url_pre", "http://kd.wenjienet.com/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
+	}
+	/**
+	 * 根据相对路径返回地址.
+	 * @param relativePath
+	 * @return
+	 */
+	public static String imgMiddleUrlByRelativePath_sub(String relativePath){
+		if(StringUtils.isBlank(relativePath))return "";
+		if(relativePath.startsWith("http://")){
+			return relativePath;
+		}
+		if (uploadfiletype.equals("oss")) {
+			String s= ProjectProperties.getProperty("oss_Small_img_down_url", "http://img.wenjienet.com/{object}@108h").replace("{object}",relativePath );
+			return s;
+		}
+		return relativePath;
+	}
 	/**
 	 * 将图片uuid替换成可以下载的http地址.中等图片
 	 * @param uuid

@@ -33,20 +33,20 @@ public class SnsTopic extends IdEntity {
 	@Column
 	private String imguuids;// 从内容中提取图片uuid,最多3张.3*45+2=137字符
 	@Column
-	private Long reply_count;//话题数量
+	private Long reply_count=0l;//话题数量
 	@Column
-	private Long yes_count;//赞成票数.
+	private Long yes_count=0l;//赞成票数.
 	@Column
-	private Long no_count;//反对票数
+	private Long no_count=0l;//反对票数
 	@Column
-	private Long click_count;//浏览次数
+	private Long click_count=0l;//浏览次数
 	 @Column
-	  private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
+	  private Integer status=0;//类型'0:发布,1:未发布.2:屏蔽',
 	@Column
-	private Integer level;//等级.0:普通.1:热帖,9:精华
+	private Integer level=0;//等级.0:普通.1:热帖,9:精华
 	
 	 @Column
-	  private Long illegal;//举报次数.用于优先审查
+	  private Long illegal=0l;//举报次数.用于优先审查
 	  
 	  @Column
 		private Timestamp illegal_time;// 举报时间
