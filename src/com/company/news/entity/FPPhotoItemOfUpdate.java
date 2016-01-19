@@ -18,6 +18,8 @@ public class FPPhotoItemOfUpdate extends IdEntity {
 	
 	@Column
 	private String family_uuid;// 关联家庭uuid
+	@Column
+	private Timestamp update_time;// 创建时间
 //	@Column
 //	private Timestamp create_time;// 创建时间
 //	@Column
@@ -54,6 +56,12 @@ public class FPPhotoItemOfUpdate extends IdEntity {
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public Timestamp getUpdate_time() {
+		return update_time;
+	}
+	public void setUpdate_time(Timestamp update_time) {
+		this.update_time = update_time;
 	}
 	
 

@@ -23,6 +23,8 @@ public class FPPhotoItem extends IdEntity {
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
+	private Timestamp update_time;// 创建时间
+	@Column
 	private Timestamp photo_time;// 拍摄时间
 	@Column
 	private String create_useruuid;// 创建人uuid
@@ -99,6 +101,12 @@ public class FPPhotoItem extends IdEntity {
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public Timestamp getUpdate_time() {
+		return update_time;
+	}
+	public void setUpdate_time(Timestamp update_time) {
+		this.update_time = update_time;
 	}
 	  
 
