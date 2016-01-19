@@ -10,6 +10,7 @@ import com.company.news.rest.util.StringOperationUtil;
 import com.company.news.vo.ResponseMessage;
 
 
+@Deprecated
 public class DbUtils {
 	public static String dbtype = ProjectProperties.getProperty("primary.dbtype", "mysql");
 	private static Log log=LogFactory.getLog(DBUtil.class);
