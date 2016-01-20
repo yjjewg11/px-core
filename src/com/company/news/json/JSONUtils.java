@@ -21,7 +21,7 @@ public final class JSONUtils {
 
   public static String getJsonString(Object obj) {
 	
-    if ((obj instanceof Array) || (obj instanceof Map) || (obj instanceof Collection))
+    if ((obj instanceof Array) || (obj instanceof Collection))
       return arrayToJSONString(obj);
     else
       return objectToJsonString(obj);

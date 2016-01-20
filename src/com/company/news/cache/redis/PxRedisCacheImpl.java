@@ -2,8 +2,10 @@ package com.company.news.cache.redis;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -15,7 +17,7 @@ import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Response;
 
 import com.company.news.ProjectProperties;
-import com.company.news.cache.PxRedisCacheInterface;
+import com.company.news.json.JSONUtils;
 import com.company.news.rest.util.TimeUtils;
 
 
@@ -375,6 +377,65 @@ public class PxRedisCacheImpl  {
 		}
 	}
 	
+	/**
+	 * 设置对象.转换成String
+	 * @param uuid
+	 * @param path
+	 */
+	public  void setObject(String key,Object obj){
+		Jedis jedis=getJedis();
+		try {
+			 String objectJson = JSONUtils.getJsonString(obj);
+			 
+		      jedis.set(key, objectJson);
+			logger.info("jedis.set("+key+", "+objectJson+")");
+		}catch (Exception e) {
+			//e.printStackTrace();
+			throw e;
+		} finally{
+			jedis.close();
+		}
+	}
+	/**
+	 * 设置对象.转换成String
+	 * @param uuid
+	 * @param path
+	 */
+	public  JSONObject  getJSONObject(String key){
+		Jedis jedis=getJedis();
+		try {
+			
+		      String value = jedis.get(key);
+		      if(StringUtils.isBlank(value))return null;
+		      JSONObject jsonObject = JSONObject.fromObject(value);
+		      return jsonObject;
+		}catch (Exception e) {
+			//e.printStackTrace();
+			throw e;
+		} finally{
+			jedis.close();
+		}
+	}
+	
+	/**
+	 * 设置对象.转换成String
+	 * @param uuid
+	 * @param path
+	 */
+		public  <T> T getObject(String key,Class<T> clazz){
+		Jedis jedis=getJedis();
+		try {
+			
+		      String value = jedis.get(key);
+		      if(StringUtils.isBlank(value))return null;
+		      return (T) JSONUtils.jsonToObject(value, clazz);
+		}catch (Exception e) {
+			//e.printStackTrace();
+			throw e;
+		} finally{
+			jedis.close();
+		}
+	}
 	
 	
 	public static void main(String[] s){
