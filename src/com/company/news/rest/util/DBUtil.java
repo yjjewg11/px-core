@@ -5,10 +5,23 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.company.news.ProjectProperties;
-@Deprecated
+import com.company.news.vo.ResponseMessage;
 public class DBUtil {
 	public static String dbtype = ProjectProperties.getProperty("primary.dbtype", "mysql");
 	private static Log log=LogFactory.getLog(DBUtil.class);
+
+	/**
+	 *防止sql注入
+	 * @return
+	 */
+	public static boolean isSqlInjection(String strs, ResponseMessage responseMessage) {
+		if(StringUtils.isBlank(strs))return false;
+		if(strs.indexOf('\'')>=0){
+			responseMessage.setMessage("包含非法字符:'");
+			return true;
+		}
+		return false;
+	}
 	
 	/**
 	 *防止sql注入
