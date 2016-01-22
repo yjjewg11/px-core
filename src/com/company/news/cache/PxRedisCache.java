@@ -3,9 +3,10 @@ package com.company.news.cache;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 
-import com.company.news.ProjectProperties;
 import com.company.news.cache.redis.PxRedisCacheImpl;
 
 /**
@@ -17,6 +18,8 @@ import com.company.news.cache.redis.PxRedisCacheImpl;
  *
  */
 public class PxRedisCache{
+	//每日话题
+	public static String Key_Name_MainTopic="MainTopic";
 	
 	private static Logger logger = Logger.getLogger("PxRedisCache");
 //	private final static String Redis_type=ProjectProperties.getProperty("Redis_type", "redis");
@@ -240,6 +243,58 @@ public class PxRedisCache{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	/**
+	 * 设置统计数量,缓存延长24小时
+	 * @param uuid
+	 * @param number
+	 */
+	public  static boolean setObject(String key,Object obj){
+		try {
+			if(pxRedisCache==null)return false;
+			pxRedisCache.setObject(key, obj);
+			return true;
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	/**
+	 * 设置统计数量,缓存延长24小时
+	 * @param uuid
+	 * @param number
+	 */
+	public  static  JSONObject  getJSONObject(String key){
+		try {
+			if(pxRedisCache==null)return null;
+			return pxRedisCache.getJSONObject(key);
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	/**
+	 * 设置统计数量,缓存延长24小时
+	 * @param uuid
+	 * @param number
+	 */
+	public  static <T> T getObject(String key,Class<T> clazz){
+		try {
+			if(pxRedisCache==null)return null;
+			return pxRedisCache.getObject(key,clazz);
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 		
 	}
 

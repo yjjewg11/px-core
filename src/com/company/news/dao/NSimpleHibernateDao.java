@@ -79,10 +79,23 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
 	  }
 
   
+	public Query  SqlQuery(String sql) {
+	    // TODO Auto-generated method stub
+	     Query q = getSession().createSQLQuery(sql);
+		return q;
+	  }
+  
   	public Query  createSqlQuery(String sql) {
 	    // TODO Auto-generated method stub
 	     Query q = getSession().createSQLQuery(sql);
 		return q;
+	  }
+  	
+	public List<Map>  queryListMapBySql(String sql) {
+	    // TODO Auto-generated method stub
+	     Query q = getSession().createSQLQuery(sql);
+	     q.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		return q.list();
 	  }
   	/**
   	 * 查询sql语句,返回map结果集.
