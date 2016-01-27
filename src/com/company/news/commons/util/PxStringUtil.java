@@ -179,6 +179,25 @@ public class PxStringUtil {
 		return relativePath;
 	}
 	/**
+	 * 根据相对路径返回地址.
+	 * o.put("path", PxStringUtil.imgUrlByRelativePath_sub((String)o.get("path"),"320w"));
+	 * @param relativePath
+	 * scale:@108h,@320w
+	 * @return
+	 */
+	public static String imgUrlByRelativePath_sub(String relativePath,String scale){
+		if(StringUtils.isBlank(relativePath))return "";
+		if(relativePath.startsWith("http://")){
+			return relativePath;
+		}
+		if (uploadfiletype.equals("oss")) {
+			String s= ProjectProperties.getProperty("oss_img_down_url", "http://img.wenjienet.com/{object}").replace("{object}",relativePath )+scale;
+			//@108h
+			return s;
+		}
+		return relativePath;
+	}
+	/**
 	 * 将图片uuid替换成可以下载的http地址.中等图片
 	 * @param uuid
 	 * @return
