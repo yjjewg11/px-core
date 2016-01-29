@@ -13,11 +13,12 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Response;
 
+import com.company.news.cache.CacheConstants;
 import com.company.news.rest.util.TimeUtils;
 
 
 /**
-基于redis 的计数器.
+基于redis 的计数器.抽象类
  */
 public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 	private  String key=null;
@@ -39,8 +40,8 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 		super();
 		this.key = key;
 		//_hashKeyName="H_Count_key";
-		_hashKeyName="Hash_Count_"+key;
-		_sortKeyName="SortedSet_Count_"+key;
+		_hashKeyName=CacheConstants.Hash_Count_pre+key;
+		_sortKeyName=CacheConstants.SortedSet_Count_pre+key;
 		this.pxRedisCacheImpl = pxRedisCacheImpl;
 		
 		if(StringUtils.isBlank(key)){

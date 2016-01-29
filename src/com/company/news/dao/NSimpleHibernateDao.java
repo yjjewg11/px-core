@@ -174,7 +174,7 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
    
     long total = 0;
     
-    if(pData.getPageNo()==1){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
+    if(pData.getPageNo()<2){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
       if (list.size() < pData.getPageSize()) {// 小于当前页,就不用单独计算总数.
         total = list.size();
       } else {
@@ -236,7 +236,7 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
    endTime = System.currentTimeMillis() - startTime;
    this.logger.info("findByPageForSqlTotal list  count time(ms)="+endTime);
    long total = 0;
-   if(pData.getPageNo()==1){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
+   if(pData.getPageNo()<2){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
      if (list.size() < pData.getPageSize()) {// 小于当前页,就不用单独计算总数.
        total = list.size();
      } else {
@@ -274,7 +274,7 @@ public PageQueryResult findByPageForQueryTotal(Query query ,String countsql, Pag
   endTime = System.currentTimeMillis() - startTime;
   this.logger.info("findByPageForSqlTotal list  count time(ms)="+endTime);
   long total = 0;
-  if(pData.getPageNo()==1){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
+  if(pData.getPageNo()<2){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
     if (list.size() < pData.getPageSize()) {// 小于当前页,就不用单独计算总数.
       total = list.size();
     } else {
@@ -312,7 +312,7 @@ public PageQueryResult findByPageForQueryTotal(Query query ,String countsql, Pag
     endTime = System.currentTimeMillis() - startTime;
     this.logger.info("findByPageForSqlTotal list  count time(ms)="+endTime);
     long total = 0;
-    if(pData.getPageNo()==1){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
+    if(pData.getPageNo()<2){//效率优化,只有第一页查询时,返回总数,其他的时候不在查询总数
       if (list.size() < pData.getPageSize()) {// 小于当前页,就不用单独计算总数.
         total = list.size();
       } else {

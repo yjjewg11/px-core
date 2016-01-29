@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "sns_topic")
@@ -20,9 +21,11 @@ public class SnsTopic extends IdEntity {
 	private Timestamp create_time;// 评价时间
 	@Column
 	private String create_useruuid;// 创建人uuid
-	@Column
+//	@Column
+	@Transient
 	private String create_user;// 创建人
-	@Column
+//	@Column
+	@Transient
 	private String create_img;// 创建人头像
 	@Column
 	private String title;// 话题板块.128字符
@@ -139,12 +142,14 @@ public class SnsTopic extends IdEntity {
 	public void setImguuids(String imguuids) {
 		this.imguuids = imguuids;
 	}
+	@Transient
 	public String getCreate_user() {
 		return create_user;
 	}
 	public void setCreate_user(String create_user) {
 		this.create_user = create_user;
 	}
+	@Transient
 	public String getCreate_img() {
 		return create_img;
 	}

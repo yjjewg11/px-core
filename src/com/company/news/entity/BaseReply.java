@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
-@MappedSuperclass
-public class AbstractReply extends IdEntity {
-
+@Entity
+@Table(name = "px_base_reply")
+public class BaseReply extends IdEntity {
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
@@ -20,14 +20,11 @@ public class AbstractReply extends IdEntity {
 	private String to_useruuid;//给指定人回复的回复.
 	@Column
 	private String create_useruuid;// 回复人(uuid)
-	
-
-	
 	@Column
 	private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
-	
 	@Column
 	private Integer type;//点赞类型 0：互动 1：公告 2：课程表 3：食谱
+	
 	public Timestamp getCreate_time() {
 		return create_time;
 	}

@@ -5,6 +5,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "fp_reply")
-public class FPReply extends AbstractReply {
+public class FPReply extends BaseReply {
 
 }

@@ -298,4 +298,12 @@ public class PxRedisCache{
 		
 	}
 
+	public static PxRedisCacheImpl getPxRedisCache() {
+		return pxRedisCache;
+	}
+
+	public static void setPxRedisCache(PxRedisCacheImpl pxRedisCache) {
+		PxRedisCache.pxRedisCache = pxRedisCache;
+	}
+
 }
