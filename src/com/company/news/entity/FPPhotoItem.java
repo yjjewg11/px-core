@@ -19,7 +19,7 @@ public class FPPhotoItem extends IdEntity {
 	@Column
 	private String family_uuid;// 关联家庭uuid
 	@Column
-	private Integer type;// 类型.1:照片,0:按照天归类集合.
+	private Integer status;// 状态：0，正常,1：修改，2：删除
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
@@ -31,8 +31,8 @@ public class FPPhotoItem extends IdEntity {
 	@Column
 	private String path;// 相对路径.128.fp/uuid.png
 	
-	@Column
-	private String content_type;// [必填]文件类型："image/jpg","image/jpeg","image/png","image/gif"
+//	@Column
+//	private String content_type;// [必填]文件类型："image/jpg","image/jpeg","image/png","image/gif"
 	@Column
 	private Long file_size;// [必填]文件大小
 	@Column
@@ -72,12 +72,6 @@ public class FPPhotoItem extends IdEntity {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	public String getContent_type() {
-		return content_type;
-	}
-	public void setContent_type(String content_type) {
-		this.content_type = content_type;
-	}
 	public Long getFile_size() {
 		return file_size;
 	}
@@ -107,6 +101,12 @@ public class FPPhotoItem extends IdEntity {
 	}
 	public void setUpdate_time(Timestamp update_time) {
 		this.update_time = update_time;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	  
 

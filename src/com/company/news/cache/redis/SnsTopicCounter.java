@@ -5,22 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
 
 import com.company.common.SpringContextHolder;
+import com.company.news.cache.CacheConstants;
 import com.company.news.dao.NSimpleHibernateDao;
 
 
 /**
- * 话题计数
+ * 话题计数.对应表sns_topic
 基于redis 的计数器.
 和同步数据部分.
  */
 public  class SnsTopicCounter extends AbstractRedisCounter {
-	private static String keyConstant="sns_topic";
+	private static String keyConstant=CacheConstants.Count_suffix_sns_topic;
 	private static Logger logger = Logger.getLogger("PxRedisCounter");
 	private static  NSimpleHibernateDao nSimpleHibernateDao=SpringContextHolder.getBean("NSimpleHibernateDao");
 	

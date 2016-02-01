@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "sns_reply")
@@ -22,9 +23,9 @@ public class SnsReply extends IdEntity {
 	private Timestamp create_time;// 评价时间
 	@Column
 	private String create_useruuid;// 创建人uuid
-	@Column
+	@Transient
 	private String create_user;// 创建人
-	@Column
+	@Transient
 	private String create_img;// 创建人头像
 	@Column
 	private String content;// HTML
@@ -109,12 +110,14 @@ public class SnsReply extends IdEntity {
 	public void setIllegal_time(Timestamp illegal_time) {
 		this.illegal_time = illegal_time;
 	}
+	@Transient
 	public String getCreate_user() {
 		return create_user;
 	}
 	public void setCreate_user(String create_user) {
 		this.create_user = create_user;
 	}
+	@Transient
 	public String getCreate_img() {
 		return create_img;
 	}

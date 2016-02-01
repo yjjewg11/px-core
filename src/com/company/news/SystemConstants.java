@@ -188,7 +188,11 @@ public class SystemConstants {
 		
 		
 		static public final String DB_String_unrelated_Value="0";//没有关联字段的值.
-		
+
+
+		static public final Integer FPPhotoItem_Status_0=Integer.valueOf(0);//0:已读
+		static public final Integer FPPhotoItem_Status_1=Integer.valueOf(1);//1:更新
+		static public final Integer FPPhotoItem_Status_2=Integer.valueOf(2);//2:删除
 }
 
 

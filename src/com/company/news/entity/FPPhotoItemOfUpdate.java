@@ -19,6 +19,8 @@ public class FPPhotoItemOfUpdate extends IdEntity {
 	@Column
 	private String family_uuid;// 关联家庭uuid
 	@Column
+	private Integer status;// 状态：0，正常,1：修改，2：删除
+	@Column
 	private Timestamp update_time;// 创建时间
 //	@Column
 //	private Timestamp create_time;// 创建时间
@@ -62,6 +64,12 @@ public class FPPhotoItemOfUpdate extends IdEntity {
 	}
 	public void setUpdate_time(Timestamp update_time) {
 		this.update_time = update_time;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	
 

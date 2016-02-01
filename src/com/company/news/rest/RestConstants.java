@@ -65,7 +65,12 @@ public class RestConstants {
   static public String Return_PAGENO="pageNo";
   static public String Return_PAGESIZE="pageSize";
   static public String Return_TotalCount="totalCount";
-  
+  //最后一条数据的时间.
+  static public String Return_LastTime="lastTime";
+//新数据条数
+  static public String Return_newDataCount="newDataCount";
+//更新数据条数
+  static public String Return_updateDataCount="updateDataCount";
   //请求返回结果中业务对象
   static public String Return_G_entity="data";
   //请求返回图片地址

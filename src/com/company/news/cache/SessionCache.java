@@ -61,6 +61,7 @@ ehcache.xml
 	public static void removePxHttpSession(String jessionid) {
 
 		sessionCache.remove(jessionid);
+		logger.info("pxsessionSize.remove="+sessionCache.getSize());
 	}
 
 }

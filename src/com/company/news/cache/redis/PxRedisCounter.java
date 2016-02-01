@@ -10,15 +10,16 @@ import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
 
 import com.company.common.SpringContextHolder;
+import com.company.news.cache.CacheConstants;
 import com.company.news.dao.NSimpleHibernateDao;
 
 
 /**
-基于redis 的计数器.
+基于redis 的计数器.只用户幼儿园部分.对应表  px_count
 和同步数据部分.
  */
 public  class PxRedisCounter extends AbstractRedisCounter {
-	private static String keyConstant="px_count";
+	private static String keyConstant=CacheConstants.Px_count;
 	private static Logger logger = Logger.getLogger("PxRedisCounter");
 	private static  NSimpleHibernateDao nSimpleHibernateDao=SpringContextHolder.getBean("NSimpleHibernateDao");
 	

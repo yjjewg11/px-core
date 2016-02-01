@@ -51,6 +51,23 @@ public class DBUtil {
 		
 	}
 	
+	
+
+	/**
+	 * 查询时间转成数据库mysql时间
+	 * 时间字符串转成数据库时间字符串
+	 *<p><code>stringToDateByDBType</code></p>
+	 *Description:
+	 * @param dateStr
+	 * @return
+	 */
+	public static String queryDateStringToDateByDBType(String dateStr){
+		
+		String currStringToDate="DATE_FORMAT('aaaa','%Y-%m-%d-%H-%i-%s')";
+		
+		return StringUtils.replace(currStringToDate, "aaaa", dateStr);
+	}
+	
 	/**
 	 * 时间字符串转成数据库时间字符串
 	 *<p><code>stringToDateByDBType</code></p>

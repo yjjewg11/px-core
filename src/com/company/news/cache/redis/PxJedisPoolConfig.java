@@ -2,7 +2,11 @@ package com.company.news.cache.redis;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
-
+/**
+ * 配置基本参数
+ * @author liumingquan
+ *
+ */
 public class PxJedisPoolConfig extends GenericObjectPoolConfig {
 	/*
 jedipool连接池配置推荐的设置（适合v2.5+版本，咨询了用户团队的开发人员）：
