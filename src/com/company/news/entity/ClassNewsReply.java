@@ -20,12 +20,12 @@ public class ClassNewsReply extends IdEntity implements CreateUserInterface {
 	private String newsuuid;// 关联互动id
 	@Column
 	private String content;// 内容(HTML)
-	@Column
+	@Transient
 	private String create_user;// 回复人
 	
 	@Column
 	private String create_useruuid;// 回复人(uuid)
-	@Column
+	@Transient
 	private String create_img;// 创建人头像
 	
 //	@Column
@@ -93,7 +93,7 @@ public class ClassNewsReply extends IdEntity implements CreateUserInterface {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
+	@Transient
 	public String getCreate_user() {
 		return create_user;
 	}
@@ -109,7 +109,7 @@ public class ClassNewsReply extends IdEntity implements CreateUserInterface {
 	public void setCreate_useruuid(String create_useruuid) {
 		this.create_useruuid = create_useruuid;
 	}
-
+	@Transient
 	public String getCreate_img() {
 		return create_img;
 	}

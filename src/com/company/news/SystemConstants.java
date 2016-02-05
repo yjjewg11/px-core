@@ -62,6 +62,9 @@ public class SystemConstants {
 	public static final int common_type_messageKD = 12;//老师和园长交流信件
 	public static final int common_type_signrecord = 13;//孩子签到记录
 	
+	public static final Integer common_type_FPPhotoItem = Integer.valueOf(21);//照片
+	public static final Integer common_type_FPMovie = Integer.valueOf(22);//精品相册(动态相册)
+	
 	public static final int common_type_SnsTopic = 71;//话题
 	public static final int common_type_SnsReply = 72;//话题回复.
 	

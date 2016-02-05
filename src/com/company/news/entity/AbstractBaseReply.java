@@ -3,13 +3,11 @@ package com.company.news.entity;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
+import javax.persistence.Transient;
 
-@Entity
-@Table(name = "px_base_reply")
-public class BaseReply extends IdEntity {
+@MappedSuperclass
+public abstract class AbstractBaseReply extends IdEntity {
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
@@ -20,11 +18,22 @@ public class BaseReply extends IdEntity {
 	private String to_useruuid;//给指定人回复的回复.
 	@Column
 	private String create_useruuid;// 回复人(uuid)
+	
+	@Transient
+	private String create_user;// 创建人
+	@Transient
+	private String create_img;// 创建人头像
+	
 	@Column
 	private Integer status;//类型'0:发布,1:未发布.2:屏蔽',
 	@Column
 	private Integer type;//点赞类型 0：互动 1：公告 2：课程表 3：食谱
 	
+	@Column
+	  private Long illegal;//举报次数.用于优先审查
+	@Column
+	private Timestamp illegal_time;// 举报时间
+	  
 	public Timestamp getCreate_time() {
 		return create_time;
 	}
@@ -66,6 +75,32 @@ public class BaseReply extends IdEntity {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	@Transient
+	public String getCreate_user() {
+		return create_user;
+	}
+	public void setCreate_user(String create_user) {
+		this.create_user = create_user;
+	}
+	@Transient
+	public String getCreate_img() {
+		return create_img;
+	}
+	public void setCreate_img(String create_img) {
+		this.create_img = create_img;
+	}
+	public Long getIllegal() {
+		return illegal;
+	}
+	public void setIllegal(Long illegal) {
+		this.illegal = illegal;
+	}
+	public Timestamp getIllegal_time() {
+		return illegal_time;
+	}
+	public void setIllegal_time(Timestamp illegal_time) {
+		this.illegal_time = illegal_time;
 	}
 
 }

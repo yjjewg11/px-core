@@ -55,7 +55,7 @@ public  class UserRedisCache  {
 			e.printStackTrace();
 //			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 		return null;
 	}
@@ -76,7 +76,7 @@ public  class UserRedisCache  {
 				//e.printStackTrace();
 				throw e;
 			} finally{
-				jedis.close();
+				if(jedis!=null)jedis.close();
 			}
 		}
 
@@ -121,7 +121,7 @@ public  class UserRedisCache  {
 				//e.printStackTrace();
 				throw e;
 			} finally{
-				jedis.close();
+				if(jedis!=null)jedis.close();
 			}
 		}
 
@@ -141,7 +141,7 @@ public  class UserRedisCache  {
 				//e.printStackTrace();
 				throw e;
 			} finally{
-				jedis.close();
+				if(jedis!=null)jedis.close();
 			}
 		}
 		/**
@@ -165,7 +165,7 @@ public  class UserRedisCache  {
 				e.printStackTrace();
 				//throw e;
 			} finally{
-				jedis.close();
+				if(jedis!=null)jedis.close();
 			}
 			return map;
 		}

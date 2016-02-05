@@ -13,13 +13,13 @@ public class Message extends IdEntity{
 	
 	  @Column
 	  private Timestamp create_time;//创建时间
-	  @Column
+	  @Transient
 	  private String send_user;//发送人
 	  @Column
 	  private String send_useruuid;//发送人
-	  @Column
+	  @Transient
 	  private String send_userimg;//发送人头像
-	  @Column
+	  @Transient
 	  private String revice_user;//接收人
 	  @Column
 	  private String revice_useruuid;//接收人
@@ -63,6 +63,7 @@ public class Message extends IdEntity{
 	public void setCreate_time(Timestamp create_time) {
 		this.create_time = create_time;
 	}
+	@Transient
 	public String getSend_user() {
 		return send_user;
 	}
@@ -75,6 +76,7 @@ public class Message extends IdEntity{
 	public void setSend_useruuid(String send_useruuid) {
 		this.send_useruuid = send_useruuid;
 	}
+	@Transient
 	public String getRevice_user() {
 		return revice_user;
 	}
@@ -111,6 +113,7 @@ public class Message extends IdEntity{
 	public void setIsread(Integer isread) {
 		this.isread = isread;
 	}
+	@Transient
 	public String getSend_userimg() {
 		return send_userimg;
 	}

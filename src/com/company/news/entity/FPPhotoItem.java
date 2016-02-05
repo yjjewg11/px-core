@@ -41,6 +41,10 @@ public class FPPhotoItem extends IdEntity {
 	private String note;// 描述.300字符
 	@Column
 	private String md5;// 唯一表示
+	@Column
+	private String phone_type;//手机型号.//iPhone 6s,HTC 123
+	@Column
+	private String phone_uuid;//手机唯一标识
 	
 	public String getFamily_uuid() {
 		return family_uuid;
@@ -107,6 +111,18 @@ public class FPPhotoItem extends IdEntity {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public String getPhone_type() {
+		return phone_type;
+	}
+	public void setPhone_type(String phone_type) {
+		this.phone_type = phone_type;
+	}
+	public String getPhone_uuid() {
+		return phone_uuid;
+	}
+	public void setPhone_uuid(String phone_uuid) {
+		this.phone_uuid = phone_uuid;
 	}
 	  
 

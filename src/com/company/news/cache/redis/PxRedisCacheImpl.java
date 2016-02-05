@@ -194,7 +194,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	 @Deprecated
@@ -253,7 +253,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -287,7 +287,7 @@ public class PxRedisCacheImpl  {
 			////e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	
 	}
@@ -305,7 +305,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -331,7 +331,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -353,7 +353,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 		
 	}
@@ -373,7 +373,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -393,7 +393,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	/**
@@ -413,7 +413,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -433,7 +433,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	

@@ -446,6 +446,18 @@ public class PxStringUtil {
 		if(uuid==null)return null;
 		return ProjectProperties.getProperty("content_url_group", "http://kd.wenjienet.com/px-rest/rest/share/getKDInfo.html?uuid={uuid}").replace("{uuid}", uuid);
 	}
+	
+	
+	/**
+	 * 分享动态相册
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String getFPMovieByUuid(String uuid){
+		if(uuid==null)return null;
+		return ProjectProperties.getProperty("share_url_getAnn", "http://kd.wenjienet.com/px-rest/rest/share/getAnn.html?uuid={uuid}").replace("{uuid}", uuid);
+	}
 	/**
 	 * 根据孩子关联信息,获取父母称呼
 	 * @param str
