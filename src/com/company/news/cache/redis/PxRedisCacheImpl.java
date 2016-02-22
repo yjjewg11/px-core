@@ -106,7 +106,7 @@ public class PxRedisCacheImpl  {
 		
 	}
 
-	 public  Jedis getJedis() {
+	 public static Jedis getJedis() {
 		 long tmpTime=System.currentTimeMillis();
 		 
 		 //加入超时机制
@@ -126,8 +126,9 @@ public class PxRedisCacheImpl  {
 				faildTime=tmpTime;
 				logger.info("getJedis error,Redis Server:"+hostname+":"+port+",auth="+auth);
 				//e.printStackTrace();
-				throw e;
+//				throw e;
 			}
+	        return null;
 	    }
 
 	/**

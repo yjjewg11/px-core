@@ -456,7 +456,7 @@ public class PxStringUtil {
 	 */
 	public static String getFPMovieByUuid(String uuid){
 		if(uuid==null)return null;
-		return ProjectProperties.getProperty("share_url_getAnn", "http://kd.wenjienet.com/px-rest/rest/share/getAnn.html?uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("share_url_getFPMovie", "http://120.25.212.44/px-cc/FPMovie/index.html?movie_uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
 	 * 根据孩子关联信息,获取父母称呼

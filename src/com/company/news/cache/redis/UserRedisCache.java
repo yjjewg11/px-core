@@ -29,10 +29,9 @@ public  class UserRedisCache  {
 	
 	private static Logger logger = Logger.getLogger("UserRedisCache");
 	
-	private static PxRedisCacheImpl pxRedisCacheImpl=PxRedisCache.getPxRedisCache();
 
 	private static  Jedis  getJedis() {
-	 return pxRedisCacheImpl.getJedis();
+	 return PxRedisCacheImpl.getJedis();
     }
 	
 	/**
@@ -54,10 +53,10 @@ public  class UserRedisCache  {
 		}catch (Exception e) {
 			e.printStackTrace();
 //			throw e;
+			return null;
 		} finally{
 			if(jedis!=null)jedis.close();
 		}
-		return null;
 	}
 		
 		/**
@@ -149,21 +148,24 @@ public  class UserRedisCache  {
 		 * @param uuids
 		 */
 		static public  Map<String,UserCache> getUserCache(String[] uuids){
-			Jedis jedis=getJedis();
 			Map<String,UserCache> map=new HashMap();
+			Jedis jedis=getJedis();
 			try {
 				List<String> list= jedis.hmget(_hashKeyName, uuids);
 				for(int i=0;i<uuids.length;i++){
 					String value= list.get(i);
 					UserCache userCache=null;
-					  if(StringUtils.isBlank(value))return null;
-					  userCache= (UserCache) JSONUtils.jsonToObject(value, UserCache.class);
-					 map.put(uuids[i],userCache);
+					  if(StringUtils.isNotBlank(value)){
+						  userCache= (UserCache) JSONUtils.jsonToObject(value, UserCache.class);
+							 map.put(uuids[i],userCache);
+					  }
+					 
 				}
-			    
+			     
 			}catch (Exception e) {
 				e.printStackTrace();
 				//throw e;
+				return map;
 			} finally{
 				if(jedis!=null)jedis.close();
 			}
@@ -194,7 +196,10 @@ public  class UserRedisCache  {
 			}
 			
 			Map<String,UserCache> userMap=getUserCache(userUuids);
-			
+			if(userMap==null){
+				logger.error("redis userCahce.userMap is null");
+				return list;
+			}
 			for(Map o:list){
 				String useruuid=(String)o.get(useruuid_key);
 				if(StringUtils.isBlank(useruuid)){
