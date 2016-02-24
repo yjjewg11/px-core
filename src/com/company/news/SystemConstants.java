@@ -185,9 +185,9 @@ public class SystemConstants {
 		static public final Integer SnsTopic_section_id_Vote=Integer.valueOf(10);//话题分类-投票特殊类型.
 		
 		
-		static public final String Session_User_Login_Type_Teacher="1";//老师
-		static public final String Session_User_Login_Type_Parent="2";//家长
-		static public final String Session_User_Login_Type_Admin="0";//管理员
+		static public final String Session_User_Login_Type_Teacher="0";//老师
+		static public final String Session_User_Login_Type_Parent="1";//家长
+		static public final String Session_User_Login_Type_Admin="9";//管理员
 		
 		
 		static public final String DB_String_unrelated_Value="0";//没有关联字段的值.

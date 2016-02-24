@@ -67,7 +67,7 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
   }
   public Session  getSession() {
     // TODO Auto-generated method stub
-    return this.getSessionFactory().openSession();
+    return getHibernateTemplate().getSessionFactory().getCurrentSession();
   }
 
   

@@ -19,7 +19,7 @@ public class FPPhotoItem extends IdEntity {
 	@Column
 	private String family_uuid;// 关联家庭uuid
 	@Column
-	private Integer status;// 状态：0，正常,1：修改，2：删除
+	private Integer status=0;// 状态：0，正常,1：修改，2：删除
 	@Column
 	private Timestamp create_time;// 创建时间
 	@Column
