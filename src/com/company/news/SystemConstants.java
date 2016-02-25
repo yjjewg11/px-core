@@ -14,6 +14,7 @@ public class SystemConstants {
 	static public final String Sex_female = "1";//女
 	
 	
+	static public final Integer Cookbook_type_groupdefine = Integer.valueOf(6);//幼儿园自定义
 	
 	static public final String Group_uuid_wjd = "group_wjd";//云代理幼儿园,所有注册的老师都默认关联它.
 	

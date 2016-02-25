@@ -45,6 +45,7 @@ ehcache.xml
 	public static void putPxHttpSession(PxHttpSession session) {
 		Element e = new Element(session.getId(), session);
 		e .setTimeToIdle(3600);//设置缓存在失效前的允许闲置时间。仅当缓存不是永久有效时使用(timeToLiveSeconds != 0)  
+		e.setTimeToLive(3600);  
 //		logger.info("MemoryStoreSize1,="+sessionCache.getMemoryStoreSize());
 //		logger.info("putPxHttpSession,id="+session.getId());
 		sessionCache.put(e);

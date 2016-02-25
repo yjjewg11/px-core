@@ -18,6 +18,10 @@ public class Cookbook extends IdEntity{
 	  private Integer type;//类型：1:主食 2:汤&粥 3:炒菜 4:水果 5:奶制品&其他
 	  @Column
 	  private String groupuuid;//机构ID
+	  
+		@Column
+		private Integer status=0;//类型'0:发布,1:未发布.2:屏蔽,9.删除',
+		
 	public String getGroupuuid() {
 		return groupuuid;
 	}
@@ -41,6 +45,12 @@ public class Cookbook extends IdEntity{
 	}
 	public void setType(Integer type) {
 		this.type = type;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 
