@@ -10,8 +10,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "px_pushmsgdevice")
 public class PushMsgDevice extends IdEntity {
-	@Column
-	private String group_uuid;// 组织名
+//	@Column
+//	private String group_uuid;// 组织名
 	@Column
 	private String user_uuid;// 关联用户名
 	@Column
@@ -22,10 +22,10 @@ public class PushMsgDevice extends IdEntity {
 	private String device_id;//设备唯一表示,用户单手机推送.
 	@Column
 	private Integer status;//状态:其他或0表示启用.2:表示禁用消息推送.
-	@Column
-	private Timestamp update_time;//状态:其他或0表示启用.2:表示禁用消息推送.
-	@Column
-	private String sessionid;// 保存登录成功后的sessionid
+//	@Column
+//	private Timestamp update_time;//状态:其他或0表示启用.2:表示禁用消息推送.
+//	@Column
+//	private String sessionid;// 保存登录成功后的sessionid
 	public String getUser_uuid() {
 		return user_uuid;
 	}
@@ -56,25 +56,25 @@ public class PushMsgDevice extends IdEntity {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public String getGroup_uuid() {
-		return group_uuid;
-	}
-	public void setGroup_uuid(String group_uuid) {
-		this.group_uuid = group_uuid;
-	}
-	public Timestamp getUpdate_time() {
-		return update_time;
-	}
-	public void setUpdate_time(Timestamp update_time) {
-		this.update_time = update_time;
-	}
-	public String getSessionid() {
-		return sessionid;
-	}
-	public void setSessionid(String sessionid) {
-		this.sessionid = sessionid;
-	}
-	
+//	public String getGroup_uuid() {
+//		return group_uuid;
+//	}
+//	public void setGroup_uuid(String group_uuid) {
+//		this.group_uuid = group_uuid;
+//	}
+//	public Timestamp getUpdate_time() {
+//		return update_time;
+//	}
+//	public void setUpdate_time(Timestamp update_time) {
+//		this.update_time = update_time;
+//	}
+//	public String getSessionid() {
+//		return sessionid;
+//	}
+//	public void setSessionid(String sessionid) {
+//		this.sessionid = sessionid;
+//	}
+//	
 	
 
 }

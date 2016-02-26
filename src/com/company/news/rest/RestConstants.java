@@ -26,6 +26,8 @@ public class RestConstants {
   static public String Return_ResponseMessage_unchange="unchange";
   //总数
   static public String Return_ResponseMessage_count="count";
+  //总数.评论的总数
+  static public String Return_ResponseMessage_reply_count="reply_count";
   //总数
   static public String Return_ResponseMessage_isFavorites="isFavor";
   //联系电话

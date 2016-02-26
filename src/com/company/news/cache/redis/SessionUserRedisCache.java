@@ -43,7 +43,7 @@ public  class SessionUserRedisCache  {
 			
 			 String value = jedis.hget(_hashKeyName, key);
 		      if(StringUtils.isBlank(value)){
-		    	  logger.error("Sessionid is not exist,Sessionid="+key);
+		    	  logger.warn("Sessionid is not exist,Sessionid="+key);
 		    	  return null;
 		      }
 		      

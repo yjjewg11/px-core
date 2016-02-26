@@ -4,6 +4,8 @@ package com.company.news;
 
 //系统常量
 public class SystemConstants {
+	
+	static public final String DB_String_unrelated_Value="0";//没有关联字段的值.
 	static public final Integer Group_type_0 = Integer.valueOf(0);//管理后台
 	static public final Integer Group_type_1 = Integer.valueOf(1);//幼儿园
 	static public final Integer Group_type_2 = Integer.valueOf(2);//培训机构
@@ -164,9 +166,9 @@ public class SystemConstants {
 		static public final Integer StatMonthAttendance_type_1 = Integer.valueOf(1);//老师
 		
 	//学生状态
-		static public final Integer Student_status_0 = Integer.valueOf(0);//在校
-		static public final Integer Student_status_1 = Integer.valueOf(1);//结业
-		static public final Integer Student_status_2 = Integer.valueOf(2);//离校   中途离校
+		static public final Integer Student_status_InSchool = Integer.valueOf(0);//在校
+		static public final Integer Student_status_finishSchool = Integer.valueOf(2);//结业
+		static public final Integer Student_status_leaveSchool = Integer.valueOf(1);//离校   中途离校
 		
 		
 		
@@ -191,7 +193,6 @@ public class SystemConstants {
 		static public final String Session_User_Login_Type_Admin="9";//管理员
 		
 		
-		static public final String DB_String_unrelated_Value="0";//没有关联字段的值.
 
 
 		static public final Integer FPPhotoItem_Status_0=Integer.valueOf(0);//0:已读

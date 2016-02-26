@@ -201,7 +201,7 @@ public  class UserRedisCache  {
 			
 			Map<String,UserCache> userMap=getUserCache(userUuids);
 			if(userMap==null){
-				logger.error("redis userCahce.userMap is null");
+				logger.warn("redis userCahce.userMap is null");
 				return list;
 			}
 			for(Map o:list){
@@ -212,7 +212,7 @@ public  class UserRedisCache  {
 				
 				UserCache userCahce=userMap.get(useruuid);
 				if(userCahce==null){
-					logger.error("redis userCahce is null,uuid="+useruuid);
+					logger.warn("redis userCahce is null,uuid="+useruuid);
 					continue;
 				}
 				//包装姓名
