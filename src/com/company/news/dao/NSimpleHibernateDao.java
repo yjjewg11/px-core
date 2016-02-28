@@ -493,7 +493,7 @@ public PageQueryResult findByPageForQueryTotal(Query query ,String countsql, Pag
     
   }
  
-  
+
 
 
   /**
@@ -510,6 +510,21 @@ public PageQueryResult findByPageForQueryTotal(Query query ,String countsql, Pag
     }
 
     return null;
+  }
+  
+
+
+ /**
+  * 根据 学校uuid和权限名,获取关联的用户列表
+  * @param groupuuid
+  * @param right
+  * @return
+  */
+  public List<String> getHasRightUserList(String groupuuid,String right) {
+    String sql = "select DISTINCT t0.useruuid from px_roleuserrelation t0 LEFT JOIN px_rolerightrelation t1  on t1.roleuuid=t0.roleuuid  " ;
+    sql+="  where t0.groupuuid='"+groupuuid+"' and t1.rightname='"+right+"'";
+    return this.getSession().createSQLQuery(sql).list();
+  
   }
   
   

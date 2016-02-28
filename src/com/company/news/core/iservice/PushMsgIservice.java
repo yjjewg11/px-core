@@ -214,6 +214,48 @@ public class PushMsgIservice {
 		pushMsgToParentByParentuuidList(type, type_uuid, parentuuidlist, msg);
 	}
 
+
+	/**
+	 * 广播消息给指定老师
+	 * 
+	 * @param msg
+	 * @return
+	 */
+	public void pushMsgToTeacherByuseruuidList(int type, String type_uuid,
+			List<String> useruuid, String msg) throws Exception {
+		this.pushMsgToTeacherByuseruuidList(type, type_uuid, null, useruuid, msg);
+	}
+
+	/**
+	 * 广播消息给指定老师
+	 * 
+	 * @param msg
+	 * @return
+	 */
+	public void pushMsgToTeacherByuseruuidList(int type, String type_uuid,String group_uuid,
+			List<String> useruuid, String msg) throws Exception {
+		String title = getPushMsgTitleByType(type);
+
+		Timestamp nowTime=TimeUtils.getCurrentTimestamp();
+		
+		for (String o : useruuid) {
+			PushMessage pushMessage = new PushMessage();
+			 pushMessage.setGroup_uuid(group_uuid);
+			pushMessage.setRevice_useruuid(o);
+			pushMessage.setType(type);
+			pushMessage.setRel_uuid(type_uuid);
+			pushMessage.setTitle(title);
+			pushMessage.setMessage(PxStringUtil.getSubString(msg,
+					msg_max_length));
+			pushMessage.setCreate_time(nowTime);
+			pushMessage.setIsread(0);
+			this.nSimpleHibernateDao.save(pushMessage);
+		}
+
+		this.logger.info("pushMsgToTeacherByuseruuidList count="
+				+ useruuid.size());
+		this.pushMsgToAPPIservice.pushMsg_to_teacher_app_byUserList(useruuid, title, msg);
+	}
 	/**
 	 * 广播消息给指定家长的家长
 	 * 

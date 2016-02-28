@@ -364,7 +364,55 @@ public class PushMsgToAPPIservice {
 		}).start();
 
 	}
+	/**
+	 * 广播android消息_给指定家长
+	 * 
+	 * @param msg
+	 * @return
+	 */
+	public void pushMsg_to_teacher_app_byUserList(
+			final List<String> user_uuids, final String title, final String msg)
+			throws Exception {
 
+		// String apiKey = ProjectProperties.getProperty("baidu_apiKey_parent",
+		// "p9DUFwCzoUaKenaB5ovHch0G");
+		// String secretKey =
+		// ProjectProperties.getProperty("baidu_secretKey_parent",
+		// "GUHR0mniN15LvML8OWnm3GzMdXsVEGbD");
+		// this.androidPushMsgToAll(msg, apiKey, secretKey);
+
+		final List<String> anroidlist = this.getChannelIdByUserUuids(
+				SystemConstants.PushMsgDevice_device_type_android,
+				SystemConstants.PushMsgDevice_type_1, user_uuids);
+		// 1.发布
+		final List<String> iosList = getChannelIdByUserUuids(
+				SystemConstants.PushMsgDevice_device_type_ios,
+				SystemConstants.PushMsgDevice_type_1, user_uuids);
+		
+		final PushMsgToAPPIservice that = this;
+		new Thread(new Runnable() {
+			public void run() {
+
+				try {
+
+					that.iosPushMsgToSingleDevice_to_TeacherByChannelId(title,
+							msg, iosList);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				try {
+					for (String o : anroidlist) {
+						that.androidPushMsgToSingleDevice_to_TeacherByChannelId(
+								title, msg, o);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		}).start();
+	}
 	/**
 	 * 广播android消息_给指定家长
 	 * 

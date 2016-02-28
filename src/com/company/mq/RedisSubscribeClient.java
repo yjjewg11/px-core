@@ -98,7 +98,8 @@ public class RedisSubscribeClient extends Thread {
 	        }catch(Exception e){
 	            e.printStackTrace();
 	        }finally{
-	            System.out.println("finally===========================================");
+	        	logger.error("finally----------SUBSCRIBE end-------queueNames="+this.queueNames);
+//	            System.out.println("finally===========================================");
 	        }
 
 	    }
@@ -109,7 +110,7 @@ public class RedisSubscribeClient extends Thread {
 	     */
 	    public void stopSubscribe(){
 	    	isRun=false;
-	    	 while(isDoingJob=false){
+	    	 while(isDoingJob==false){
 	    		 try {
 					this.sleep(1000);
 				} catch (InterruptedException e) {

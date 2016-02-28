@@ -38,6 +38,7 @@ public class RedisPubClient {
 	   */
 	    public void publish(String queueName,JobDetails job){
 	    	 String jobJson = JSONUtils.getJsonString(job);
+	    	 this.logger.info("jobJson="+jobJson);
 	    	 connect();
 	    	 jedis.lpush(queueName, jobJson);
 	    	 jedis.close();

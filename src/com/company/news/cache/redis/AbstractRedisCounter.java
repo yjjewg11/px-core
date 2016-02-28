@@ -30,7 +30,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 	//分页同步数据
 	public static long PageSize=100;
 	
-	private static Logger logger = Logger.getLogger("PxRedisCounter");
+	private static Logger logger = Logger.getLogger(AbstractRedisCounter.class);
 	
 	private PxRedisCacheImpl pxRedisCacheImpl;
 	
