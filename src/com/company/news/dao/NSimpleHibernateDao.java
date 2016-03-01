@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
@@ -85,9 +86,16 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
 		return q;
 	  }
   
-  	public Query  createSqlQuery(String sql) {
+  	public SQLQuery  createSqlQuery(String sql) {
 	    // TODO Auto-generated method stub
-	     Query q = getSession().createSQLQuery(sql);
+  		SQLQuery q = getSession().createSQLQuery(sql);
+		return q;
+	  }
+  	
+
+  	public SQLQuery  createSQLQuery(String sql) {
+	    // TODO Auto-generated method stub
+  		SQLQuery q = getSession().createSQLQuery(sql);
 		return q;
 	  }
   	

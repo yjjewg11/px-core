@@ -196,8 +196,8 @@ public class SystemConstants {
 
 
 		static public final Integer FPPhotoItem_Status_0=Integer.valueOf(0);//0:已读
-		static public final Integer FPPhotoItem_Status_1=Integer.valueOf(1);//1:更新
-		static public final Integer FPPhotoItem_Status_2=Integer.valueOf(2);//2:删除
+		static public final Integer FPPhotoItem_Status_update=Integer.valueOf(1);//1:更新
+		static public final Integer FPPhotoItem_Status_delete=Integer.valueOf(2);//2:删除
 }
 
 
