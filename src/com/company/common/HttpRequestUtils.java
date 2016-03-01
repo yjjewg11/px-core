@@ -1,6 +1,7 @@
 package com.company.common;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletResponse;
 
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.Renderer;
@@ -27,9 +30,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.ModelMap;
 
 import com.company.news.SystemConstants;
 import com.company.news.commons.util.PxStringUtil;
+import com.company.news.json.JSONUtils;
  
 public class HttpRequestUtils {
     private static Logger logger = LoggerFactory.getLogger(HttpRequestUtils.class);    //日志记录
@@ -244,6 +249,33 @@ public class HttpRequestUtils {
     {  
         return s.replaceAll("<.*?>", "");  
     }  
+
+    /**
+     * 
+     * @param model
+     * @param response
+     * @param jsObjName 
+     * @throws IOException
+     */
+    public static void responseJSONP(ModelMap model,HttpServletResponse response,String jsObjName) throws IOException  
+    {  
+    	  
+ 	   response.setContentType("text/plain");  
+     response.setHeader("Pragma", "No-cache");  
+     response.setHeader("Cache-Control", "no-cache");  
+     response.setDateHeader("Expires", 0);  
+      
+     PrintWriter out = response.getWriter();       
+     
+//     net.sf.json.JSONObject resultJSON = net.sf.json.JSONObject.fromObject(model); //根据需要拼装json  
+    // if(StringUtils.isBlank(jsonpCallback))jsonpCallback="jsonpCallback";
+     
+     out.println("var "+jsObjName+"="+JSONUtils.getJsonString(model));//返回jsonp格式数据  
+//     out.println(JSONUtils.getJsonString(model));//返回jsonp格式数据  
+     out.flush();  
+     out.close();  
+    }   
+    
       
     public static void main(String[] args) throws MalformedURLException, IOException {  
         String htmlUrl = "https://mp.weixin.qq.com/cgi-bin/loginpage?t=wxm2-login&lang=zh_CN";  

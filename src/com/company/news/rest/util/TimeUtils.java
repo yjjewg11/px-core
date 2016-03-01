@@ -79,6 +79,14 @@ public class TimeUtils
         String timestr = sdf.format(cday);
         return timestr;
     }
+    public static String getDateString(Date date,String parrten)
+    {
+        if(parrten == null || parrten.equals(""))
+            parrten = YYYY_MM_DD_FORMAT;
+        SimpleDateFormat sdf = new SimpleDateFormat(parrten);
+        String timestr = sdf.format(date);
+        return timestr;
+    }
 
     public static boolean isDefaultTimestamp(Timestamp time)
     {
@@ -334,6 +342,7 @@ public class TimeUtils
     public static final long DEFAULT_DATE = -5364691200000L;
     public static final String DEFAULTFORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String YYYY_MM_DD_HH_mm_FORMAT = "yyyy-MM-dd HH:mm";
+    public static final String HH_mm_ss_FORMAT = "HH:mm:ss";
     
     /**
      * 当前时间本月最后一天

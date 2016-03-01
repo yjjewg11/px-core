@@ -4,6 +4,8 @@ package com.company.news;
 
 //系统常量
 public class SystemConstants {
+	
+	static public final String DB_String_unrelated_Value="0";//没有关联字段的值.
 	static public final Integer Group_type_0 = Integer.valueOf(0);//管理后台
 	static public final Integer Group_type_1 = Integer.valueOf(1);//幼儿园
 	static public final Integer Group_type_2 = Integer.valueOf(2);//培训机构
@@ -14,6 +16,7 @@ public class SystemConstants {
 	static public final String Sex_female = "1";//女
 	
 	
+	static public final Integer Cookbook_type_groupdefine = Integer.valueOf(6);//幼儿园自定义
 	
 	static public final String Group_uuid_wjd = "group_wjd";//云代理幼儿园,所有注册的老师都默认关联它.
 	
@@ -61,6 +64,9 @@ public class SystemConstants {
 	public static final int common_type_messageTeaher = 11;//老师和家长交流信件
 	public static final int common_type_messageKD = 12;//老师和园长交流信件
 	public static final int common_type_signrecord = 13;//孩子签到记录
+	
+	public static final Integer common_type_FPPhotoItem = Integer.valueOf(21);//照片
+	public static final Integer common_type_FPMovie = Integer.valueOf(22);//精品相册(动态相册)
 	
 	public static final int common_type_SnsTopic = 71;//话题
 	public static final int common_type_SnsReply = 72;//话题回复.
@@ -160,9 +166,9 @@ public class SystemConstants {
 		static public final Integer StatMonthAttendance_type_1 = Integer.valueOf(1);//老师
 		
 	//学生状态
-		static public final Integer Student_status_0 = Integer.valueOf(0);//在校
-		static public final Integer Student_status_1 = Integer.valueOf(1);//结业
-		static public final Integer Student_status_2 = Integer.valueOf(2);//离校   中途离校
+		static public final Integer Student_status_InSchool = Integer.valueOf(0);//在校
+		static public final Integer Student_status_finishSchool = Integer.valueOf(2);//结业
+		static public final Integer Student_status_leaveSchool = Integer.valueOf(1);//离校   中途离校
 		
 		
 		
@@ -182,12 +188,11 @@ public class SystemConstants {
 		static public final Integer SnsTopic_section_id_Vote=Integer.valueOf(10);//话题分类-投票特殊类型.
 		
 		
-		static public final String Session_User_Login_Type_Teacher="1";//老师
-		static public final String Session_User_Login_Type_Parent="2";//家长
-		static public final String Session_User_Login_Type_Admin="0";//管理员
+		static public final String Session_User_Login_Type_Teacher="0";//老师
+		static public final String Session_User_Login_Type_Parent="1";//家长
+		static public final String Session_User_Login_Type_Admin="9";//管理员
 		
 		
-		static public final String DB_String_unrelated_Value="0";//没有关联字段的值.
 
 
 		static public final Integer FPPhotoItem_Status_0=Integer.valueOf(0);//0:已读

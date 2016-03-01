@@ -1,5 +1,7 @@
 package com.company.news.rest.util;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,7 +53,21 @@ public class DBUtil {
 		
 	}
 	
-	
+	/**
+	 * 修复为空是,拼接的sql报错bug.
+	 * 将逗号分割的多个数据组织成 where条件 in 需要的值
+	 * uuid1,uuid2=>'uuid1','uuid2'
+	 * @return
+	 */
+	public static String stringListToWhereInValue(List<String> list){
+		String rstr="";
+		if(list.isEmpty())return "''";
+		for(String str:list){
+			if(StringUtils.isNotBlank(str))rstr+="'"+str+"',";
+		}
+		return StringOperationUtil.trimSeparatorChars(rstr);
+		
+	}
 
 	/**
 	 * 查询时间转成数据库mysql时间

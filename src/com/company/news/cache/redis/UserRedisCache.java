@@ -11,7 +11,6 @@ import redis.clients.jedis.Jedis;
 
 import com.company.news.SystemConstants;
 import com.company.news.cache.CacheConstants;
-import com.company.news.cache.PxRedisCache;
 import com.company.news.cache.UserCache;
 import com.company.news.commons.util.PxStringUtil;
 import com.company.news.interfaces.SessionUserInfoInterface;
@@ -29,10 +28,9 @@ public  class UserRedisCache  {
 	
 	private static Logger logger = Logger.getLogger("UserRedisCache");
 	
-	private static PxRedisCacheImpl pxRedisCacheImpl=PxRedisCache.getPxRedisCache();
 
 	private static  Jedis  getJedis() {
-	 return pxRedisCacheImpl.getJedis();
+	 return PxRedisCacheImpl.getJedis();
     }
 	
 	/**
@@ -43,6 +41,7 @@ public  class UserRedisCache  {
 		public static  UserCache getUserCache(String key){
 			if(StringUtils.isBlank(key))return null;
 		Jedis jedis=getJedis();
+		if(jedis==null)return null;
 		try {
 			
 			 String value = jedis.hget(_hashKeyName, key);
@@ -54,10 +53,10 @@ public  class UserRedisCache  {
 		}catch (Exception e) {
 			e.printStackTrace();
 //			throw e;
+			return null;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
-		return null;
 	}
 		
 		/**
@@ -67,6 +66,7 @@ public  class UserRedisCache  {
 		 */
 		static public  void setUserCache(String key,UserCache obj){
 			Jedis jedis=getJedis();
+			if(jedis==null)return ;
 			try {
 				 String objectJson = JSONUtils.getJsonString(obj);
 				 
@@ -76,7 +76,7 @@ public  class UserRedisCache  {
 				//e.printStackTrace();
 				throw e;
 			} finally{
-				jedis.close();
+				if(jedis!=null)jedis.close();
 			}
 		}
 
@@ -112,6 +112,7 @@ public  class UserRedisCache  {
 			
 			
 			Jedis jedis=getJedis();
+			if(jedis==null)return ;
 			try {
 				 String objectJson = JSONUtils.getJsonString(obj);
 				 
@@ -121,7 +122,7 @@ public  class UserRedisCache  {
 				//e.printStackTrace();
 				throw e;
 			} finally{
-				jedis.close();
+				if(jedis!=null)jedis.close();
 			}
 		}
 
@@ -133,6 +134,7 @@ public  class UserRedisCache  {
 		 */
 		static public  void setUserCache(Map<String,String> map){
 			Jedis jedis=getJedis();
+			if(jedis==null)return ;
 			try {
 				 
 			      jedis.hmset(_hashKeyName, map);
@@ -141,7 +143,7 @@ public  class UserRedisCache  {
 				//e.printStackTrace();
 				throw e;
 			} finally{
-				jedis.close();
+				if(jedis!=null)jedis.close();
 			}
 		}
 		/**
@@ -149,23 +151,27 @@ public  class UserRedisCache  {
 		 * @param uuids
 		 */
 		static public  Map<String,UserCache> getUserCache(String[] uuids){
-			Jedis jedis=getJedis();
 			Map<String,UserCache> map=new HashMap();
+			Jedis jedis=getJedis();
+			if(jedis==null)return map;
 			try {
 				List<String> list= jedis.hmget(_hashKeyName, uuids);
 				for(int i=0;i<uuids.length;i++){
 					String value= list.get(i);
 					UserCache userCache=null;
-					  if(StringUtils.isBlank(value))return null;
-					  userCache= (UserCache) JSONUtils.jsonToObject(value, UserCache.class);
-					 map.put(uuids[i],userCache);
+					  if(StringUtils.isNotBlank(value)){
+						  userCache= (UserCache) JSONUtils.jsonToObject(value, UserCache.class);
+							 map.put(uuids[i],userCache);
+					  }
+					 
 				}
-			    
+			     
 			}catch (Exception e) {
 				e.printStackTrace();
 				//throw e;
+				return map;
 			} finally{
-				jedis.close();
+				if(jedis!=null)jedis.close();
 			}
 			return map;
 		}
@@ -194,7 +200,10 @@ public  class UserRedisCache  {
 			}
 			
 			Map<String,UserCache> userMap=getUserCache(userUuids);
-			
+			if(userMap==null){
+				logger.warn("redis userCahce.userMap is null");
+				return list;
+			}
 			for(Map o:list){
 				String useruuid=(String)o.get(useruuid_key);
 				if(StringUtils.isBlank(useruuid)){
@@ -203,7 +212,7 @@ public  class UserRedisCache  {
 				
 				UserCache userCahce=userMap.get(useruuid);
 				if(userCahce==null){
-					logger.error("redis userCahce is null,uuid="+useruuid);
+					logger.warn("redis userCahce is null,uuid="+useruuid);
 					continue;
 				}
 				//包装姓名

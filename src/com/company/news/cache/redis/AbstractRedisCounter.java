@@ -30,7 +30,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 	//分页同步数据
 	public static long PageSize=100;
 	
-	private static Logger logger = Logger.getLogger("PxRedisCounter");
+	private static Logger logger = Logger.getLogger(AbstractRedisCounter.class);
 	
 	private PxRedisCacheImpl pxRedisCacheImpl;
 	
@@ -68,7 +68,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -98,7 +98,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -133,7 +133,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -166,7 +166,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 			//e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 
@@ -186,7 +186,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 			//e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 
@@ -198,7 +198,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 			//e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -272,7 +272,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 			//e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 			
 			 Long endTime = System.currentTimeMillis() - startTime;
 				logger.warn("synAllCountRedisToDb start----------count time(ms)="+endTime);
@@ -341,7 +341,7 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 		} finally{
 			Long endTime = System.currentTimeMillis() - startTime;
 			logger.warn("synCountRedisToDb start----------count time(ms)="+endTime);
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	

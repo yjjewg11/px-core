@@ -22,6 +22,8 @@ public abstract class AbstractStudent extends IdEntity {
 	@Column
 	private Date create_time;//创建时间
 	@Column
+	private Date leave_time;//离开学校时间
+	@Column
 	private String headimg;// 头像
 	@Column
 	private String birthday;// 生日.2015-07-14
@@ -280,6 +282,14 @@ public abstract class AbstractStudent extends IdEntity {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Date getLeave_time() {
+		return leave_time;
+	}
+
+	public void setLeave_time(Date leave_time) {
+		this.leave_time = leave_time;
 	}
 
 

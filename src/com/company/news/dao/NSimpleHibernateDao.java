@@ -67,7 +67,7 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
   }
   public Session  getSession() {
     // TODO Auto-generated method stub
-    return this.getSessionFactory().openSession();
+    return getHibernateTemplate().getSessionFactory().getCurrentSession();
   }
 
   
@@ -251,6 +251,32 @@ public class NSimpleHibernateDao extends HibernateDaoSupport {
    }
    endTime = System.currentTimeMillis() - startTime;
   
+   return new PageQueryResult(pData.getPageSize(), pData.getPageNo(), list, total);
+ }
+ 
+ /**
+  * 分页查询(无总数)
+  * selectsql="select b2.studentuuid,b2.cardid,b2.userid,s1.name "
+  *  fromsql=" from px_student "
+  * @param hql
+  * @param pData
+  * @return
+  */
+ public PageQueryResult findMapByPageForSqlNoTotal(String selectsql, PaginationData pData) {
+	  Session s = this.getHibernateTemplate().getSessionFactory().openSession();
+	  Query query= s.createSQLQuery(selectsql);
+	  query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		
+   long startTime = 0;
+   long endTime = 0;
+   startTime = System.currentTimeMillis();
+   List list =
+   		query.setFirstResult(pData.getStartIndex()).setMaxResults(
+           pData.getPageSize()).list();
+   endTime = System.currentTimeMillis() - startTime;
+   this.logger.info("findByPageForSqlTotal list  count time(ms)="+endTime);
+   long  total=999999;
+   
    return new PageQueryResult(pData.getPageSize(), pData.getPageNo(), list, total);
  }
  
@@ -467,7 +493,7 @@ public PageQueryResult findByPageForQueryTotal(Query query ,String countsql, Pag
     
   }
  
-  
+
 
 
   /**
@@ -484,6 +510,21 @@ public PageQueryResult findByPageForQueryTotal(Query query ,String countsql, Pag
     }
 
     return null;
+  }
+  
+
+
+ /**
+  * 根据 学校uuid和权限名,获取关联的用户列表
+  * @param groupuuid
+  * @param right
+  * @return
+  */
+  public List<String> getHasRightUserList(String groupuuid,String right) {
+    String sql = "select DISTINCT t0.useruuid from px_roleuserrelation t0 LEFT JOIN px_rolerightrelation t1  on t1.roleuuid=t0.roleuuid  " ;
+    sql+="  where t0.groupuuid='"+groupuuid+"' and t1.rightname='"+right+"'";
+    return this.getSession().createSQLQuery(sql).list();
+  
   }
   
   

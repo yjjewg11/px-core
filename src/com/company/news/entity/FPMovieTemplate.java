@@ -28,6 +28,9 @@ public class FPMovieTemplate extends IdEntity {
 	@Column
 	private Integer status=0;//类型'0:发布,1:未发布.2:屏蔽',
 	
+	@Column
+	private String mp3;// 背景音乐.256字符
+	
 	public Timestamp getCreate_time() {
 		return create_time;
 	}
@@ -63,6 +66,12 @@ public class FPMovieTemplate extends IdEntity {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public String getMp3() {
+		return mp3;
+	}
+	public void setMp3(String mp3) {
+		this.mp3 = mp3;
 	}
 
 }

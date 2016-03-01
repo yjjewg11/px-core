@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSessionContext;
 import org.apache.log4j.Logger;
 
 import com.company.news.cache.SessionCache;
-import com.company.web.listener.SessionListener;
 
 /**
  * 自定义session

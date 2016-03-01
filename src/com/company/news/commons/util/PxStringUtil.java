@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.company.news.ProjectProperties;
 import com.company.news.cache.CommonsCache;
@@ -11,9 +13,10 @@ import com.company.news.cache.PxConfigCache;
 import com.company.news.entity.AbstractStudentContactRealation;
 import com.company.news.interfaces.CreateUserInterface;
 import com.company.news.interfaces.SessionUserInfoInterface;
+import com.company.news.service.AbstractService;
 
 public class PxStringUtil {
-	
+	 protected static Logger logger = LoggerFactory.getLogger("PxStringUtil");
 	public static final String uploadfiletype = ProjectProperties.getProperty(
 			"uploadfiletype", "oss");
 	//html5 响应式布局模版,替换key定义
@@ -162,6 +165,23 @@ public class PxStringUtil {
 		return relativePath;
 //		return ProjectProperties.getProperty("img_down_url_pre", "http://kd.wenjienet.com/px-moblie/rest/uploadFile/getImgFile.json?uuid={uuid}").replace("{uuid}", uuid);
 	}
+	
+	/**
+	 * 根据相对路径返回地址.照片专用
+	 * @param relativePath
+	 * @return
+	 */
+	public static String imgFPPhotoUrlByRelativePath_sub(String relativePath){
+		if(StringUtils.isBlank(relativePath))return "";
+		if(relativePath.startsWith("http://")){
+			return relativePath;
+		}
+		if (uploadfiletype.equals("oss")) {
+			String s= ProjectProperties.getProperty("oss_Small_img_down_url", "http://img.wenjienet.com/{object}@240h").replace("{object}",relativePath );
+			return s;
+		}
+		return relativePath;
+	}
 	/**
 	 * 根据相对路径返回地址.
 	 * @param relativePath
@@ -289,6 +309,8 @@ public class PxStringUtil {
 				String[] st=url.split("uuid=");
 				if(st.length>1){
 					uuids+=","+ st[st.length-1];
+				}else{
+					logger.error("imgUrlToUuid="+urls);
 				}
 			}else{
 				uuids+=","+url;
@@ -445,6 +467,18 @@ public class PxStringUtil {
 	public static String getGroupContentURLByUuid(String uuid){
 		if(uuid==null)return null;
 		return ProjectProperties.getProperty("content_url_group", "http://kd.wenjienet.com/px-rest/rest/share/getKDInfo.html?uuid={uuid}").replace("{uuid}", uuid);
+	}
+	
+	
+	/**
+	 * 分享动态相册
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
+	public static String getFPMovieByUuid(String uuid){
+		if(uuid==null)return null;
+		return ProjectProperties.getProperty("share_url_getFPMovie", "http://120.25.212.44/px-cc/FPMovie/index.html?movie_uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
 	 * 根据孩子关联信息,获取父母称呼

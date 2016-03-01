@@ -106,7 +106,7 @@ public class PxRedisCacheImpl  {
 		
 	}
 
-	 public  Jedis getJedis() {
+	 public static Jedis getJedis() {
 		 long tmpTime=System.currentTimeMillis();
 		 
 		 //加入超时机制
@@ -126,8 +126,9 @@ public class PxRedisCacheImpl  {
 				faildTime=tmpTime;
 				logger.info("getJedis error,Redis Server:"+hostname+":"+port+",auth="+auth);
 				//e.printStackTrace();
-				throw e;
+//				throw e;
 			}
+	        return null;
 	    }
 
 	/**
@@ -194,7 +195,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	 @Deprecated
@@ -253,7 +254,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -287,7 +288,7 @@ public class PxRedisCacheImpl  {
 			////e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	
 	}
@@ -305,7 +306,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -331,7 +332,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		}finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -353,7 +354,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 		
 	}
@@ -373,7 +374,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -393,7 +394,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	/**
@@ -413,7 +414,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
@@ -433,7 +434,7 @@ public class PxRedisCacheImpl  {
 			//e.printStackTrace();
 			throw e;
 		} finally{
-			jedis.close();
+			if(jedis!=null)jedis.close();
 		}
 	}
 	
