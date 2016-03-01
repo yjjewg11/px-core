@@ -103,7 +103,25 @@ public class DBUtil {
 		
 		return StringUtils.replace(currStringToDate, "aaaa", dateStr);
 	}
-	
+	/**
+	 * 时间字符串转成数据库时间字符串
+	 *<p><code>stringToDateByDBType</code></p>
+	 *Description:
+	 * @param dateStr
+	 * @return
+	 */
+	public static String stringToDateYMD23_59_59ByDBType(String dateStr){
+		dateStr+=" 23:59:59";
+		String mysqlStringToDate="DATE_FORMAT('aaaa','%Y-%m-%d %H:%i:%s')";
+		String currStringToDate=mysqlStringToDate;
+//		if ("mysql".equals(dbtype)){
+//			currStringToDate=mysqlStringToDate;
+//		}else if("db2".equals(dbtype)){
+//			currStringToDate=db2StringToDate;
+//		}
+		
+		return StringUtils.replace(currStringToDate, "aaaa", dateStr);
+	}
 	/**
 	 * 时间字符串转成数据库时间字符串
 	 *<p><code>stringToDateByDBType</code></p>
