@@ -86,6 +86,7 @@ public class SystemConstants {
 	static public final Integer Sms_type_1 = Integer.valueOf(1);//注册短信类型.
 	static public final Integer Sms_type_2 = Integer.valueOf(2);//找回密码短信类型
 	static public final Integer Sms_type_3 = Integer.valueOf(3);//注册教育机构.(已注册用户或者未注册用户)
+	static public final Integer Sms_type_4 = Integer.valueOf(4);//绑定手机
 	
 	//	
 //    static public final String UploadFile_type_myhead = "head";//我的头像
@@ -198,6 +199,15 @@ public class SystemConstants {
 		static public final Integer FPPhotoItem_Status_0=Integer.valueOf(0);//0:已读
 		static public final Integer FPPhotoItem_Status_update=Integer.valueOf(1);//1:更新
 		static public final Integer FPPhotoItem_Status_delete=Integer.valueOf(2);//2:删除
+		
+		
+				//第三分授权
+		
+		  static public String UserThirdLogin_QQ="qq";//
+		  static public String UserThirdLogin_WeiXin="weixin";//
+		  //需要绑定手机号码
+		  static public String UserThirdLogin_needBindTel_1="1";//1需要.0:不需要
+		  static public String UserThirdLogin_needBindTel_0="0";//1需要.0:不需要
 }
 
 
