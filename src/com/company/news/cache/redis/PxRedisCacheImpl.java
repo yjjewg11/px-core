@@ -17,6 +17,7 @@ import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Response;
 
 import com.company.news.ProjectProperties;
+import com.company.news.cache.CacheConstants;
 import com.company.news.json.JSONUtils;
 import com.company.news.rest.util.TimeUtils;
 
@@ -46,7 +47,7 @@ public class PxRedisCacheImpl  {
 	public static String Redis_SortedSet_Count_table_key="SortedSet_Count";
 	
 	//上传图片的路径地址,和过期是24小时后
-	public static String Redis_String_Path="P_";
+
 	public static int Redis_String_Path_Expire=60*60*24;
 	//今日最新总数统计.(数量小),和过期是24小时后
 	public static String Redis_String_TodayNewMsgNumber="TodayNewMsg_";
@@ -274,7 +275,7 @@ public class PxRedisCacheImpl  {
 //		}
 		Response<String> pathResponse;
 		try {
-			String key=Redis_String_Path+uuid;
+			String key=CacheConstants.Redis_String_Path+uuid;
 			
 			//if(true)return jedis.get(key);
 			 Pipeline p = jedis.pipelined();
@@ -300,7 +301,7 @@ public class PxRedisCacheImpl  {
 	public  void setUploadFilePath(String uuid,String path){
 		Jedis jedis=getJedis();
 		try {
-			String key=Redis_String_Path+uuid;
+			String key=CacheConstants.Redis_String_Path+uuid;
 			jedis.setex(key, Redis_String_Path_Expire, path);
 		}catch (Exception e) {
 			//e.printStackTrace();

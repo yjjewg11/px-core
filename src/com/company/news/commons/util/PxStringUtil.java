@@ -1,7 +1,9 @@
 package com.company.news.commons.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -13,7 +15,6 @@ import com.company.news.cache.PxConfigCache;
 import com.company.news.entity.AbstractStudentContactRealation;
 import com.company.news.interfaces.CreateUserInterface;
 import com.company.news.interfaces.SessionUserInfoInterface;
-import com.company.news.service.AbstractService;
 
 public class PxStringUtil {
 	 protected static Logger logger = LoggerFactory.getLogger("PxStringUtil");
@@ -553,7 +554,34 @@ public class PxStringUtil {
 	  }
 	  
 	  
-	  
+	  /**
+		 * 获取Map 列表中的对应key 的值,连接成字符串,逗号分割
+		 * 获取话题模块打开的url.
+		 * date&author: 2009-3-25 
+		 */
+		public static String getMapVaules(List<Map> list,String key){
+			if(list==null||list.isEmpty())return null;
+			StringBuffer sb=new StringBuffer();
+			for(Map o:list){
+				sb.append(o.get(key)).append(',');
+			}
+			return StringDecComma(sb.toString());
+		}
+		
+		/**
+		 * 获取Map 列表中的对应key 的值,连接成字符串,逗号分割
+		 * 获取话题模块打开的url.
+		 * date&author: 2009-3-25 
+		 */
+		public static Map<String,Map> listMapToMapMap(List<Map> list,String key){
+			Map<String,Map> relMap=new HashMap();
+			for(Map o:list){
+				String mapkey=o.get(key)+"";
+				o.remove(key);
+				relMap.put(mapkey, o);
+			}
+			return relMap;
+		}
 
 		/**
 		 * 将图片uuid替换成可以下载的http地址.最小图片

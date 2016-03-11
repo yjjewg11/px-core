@@ -188,7 +188,10 @@ public class PushMsgIservice {
 		String sql = "select DISTINCT parent_uuid from px_studentcontactrealation  where student_uuid in ("+DBUtil.stringsToWhereInValue(student_uuids)+")";
 		Query q = s.createSQLQuery(sql);
 		List<String> parentuuidlist = q.list();
-
+		if(parentuuidlist.isEmpty()){
+			this.logger.warn("no parent data.student_uuid="+student_uuids);
+			return;
+		}
 		this.pushMsgToParentByParentuuidList(type, type_uuid, parentuuidlist,
 				msg);
 	}

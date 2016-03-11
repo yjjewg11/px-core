@@ -21,7 +21,7 @@ public abstract class AbstractClass extends IdEntity {
 	@Column
 	private Timestamp disable_time;//结业时间
 	@Column
-	private Integer isdisable;// 是否已结业 1:已结业
+	private Integer isdisable=0;// 是否已结业 1:已结业
 	
 	private String headTeacher_name;// 班主任
 	

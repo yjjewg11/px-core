@@ -22,7 +22,9 @@ public class Parent extends IdEntity implements SessionUserInfoInterface{
 	@Column
 	private String loginname;// 登录名。手机号码或邮箱
 	@Column
-	private String name;// 昵称
+	private String name;// 昵称.用于幼儿园,1.第1优先级,根据学生关系设置.比如:刘小妈妈.   2.用户修改昵称.
+	@Column
+	private String  nickname;//  普通用户昵称
 	@Column
 	private String password;// 密码，md5加密。（UTF-8）
 	@Column
@@ -168,6 +170,14 @@ public class Parent extends IdEntity implements SessionUserInfoInterface{
 
 	public void setSessionid(String sessionid) {
 		this.sessionid = sessionid;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 }

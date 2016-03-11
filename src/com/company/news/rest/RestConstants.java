@@ -40,6 +40,8 @@ public class RestConstants {
   
 //点赞.null,可以点赞,1:已赞同,2已不赞同
   static public String Return_ResponseMessage_dianZan="dianZan";
+//点赞人名列表
+  static public String Return_ResponseMessage_dianZanNameList="dianZanNameList";
   //分享地址.
   static public String Return_ResponseMessage_share_url="share_url";
   //对象内容详细连接地址
@@ -94,5 +96,9 @@ public class RestConstants {
   static public String Return_MD5CODE="md5";
   static public String Return_ConditionShow="conditionShow";
   
+  //第三分授权
+  //需要绑定手机号码
+  static public String Return_UserThirdLogin_access_token="access_token";//票据
+  static public String Return_UserThirdLogin_needBindTel="needBindTel";//1需要.0:不需要
 
 }
