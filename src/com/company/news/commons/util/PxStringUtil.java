@@ -468,7 +468,7 @@ public class PxStringUtil {
 	public static String getGroupContentURLByUuid(String uuid){
 		if(uuid==null)return null;
 		return ProjectProperties.getProperty("content_url_group", "http://kd.wenjienet.com/px-rest/rest/share/getKDInfo.html?uuid={uuid}").replace("{uuid}", uuid);
-	}
+	} 
 	
 	
 	/**
@@ -479,7 +479,7 @@ public class PxStringUtil {
 	 */
 	public static String getFPMovieByUuid(String uuid){
 		if(uuid==null)return null;
-		return ProjectProperties.getProperty("share_url_getFPMovie", "http://120.25.212.44/px-cc/FPMovie/index.html?movie_uuid={uuid}").replace("{uuid}", uuid);
+		return ProjectProperties.getProperty("share_url_getFPMovie", "http://www.wenjienet.com/px-cc/FPMovie/index.html?movie_uuid={uuid}").replace("{uuid}", uuid);
 	}
 	/**
 	 * 根据孩子关联信息,获取父母称呼
