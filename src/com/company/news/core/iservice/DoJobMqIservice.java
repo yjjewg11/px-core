@@ -160,11 +160,11 @@ public class DoJobMqIservice {
 		String create_useruuid=map.get("create_useruuid");
 		String title=map.get("title");
 		String sql="select  DISTINCT uuid from px_parent where uuid in (";
-		sql+="select user_uuid from fp_family_members where  family_uuid in (select family_uuid from fp_family_members where user_uuid='"+uuid+"'  )";
+		sql+="select user_uuid from fp_family_members where  family_uuid in (select family_uuid from fp_family_members where user_uuid='"+create_useruuid+"'  )";
 		sql+=")";
-		if(StringUtils.isNotBlank(create_useruuid)){
-			sql+="and uuid!='"+create_useruuid+"'";
-		}
+//		if(StringUtils.isNotBlank(create_useruuid)){
+//			sql+="and uuid!='"+create_useruuid+"'";
+//		}
 		List parentuuidlist=this.nSimpleHibernateDao.createSQLQuery(sql).list();
 		
 		pushMsgIservice.pushMsgToParentByParentuuidListFilterNoreadCount(SystemConstants.common_type_FPMovie, uuid, parentuuidlist, title);

@@ -64,6 +64,9 @@ public class PxRedisCacheImpl  {
 	//话题点击次数
 	private SnsTopicCounter sns_topic=null;
 	
+	//话题点击次数
+	private FPFamilyPhotoCollectionCounter fPFamilyPhotoCollectionCounter=null;
+	
 	private static JedisPool jedisPool=null;
 	
 	static{
@@ -103,6 +106,7 @@ public class PxRedisCacheImpl  {
 		super();
 		 px_count=new PxRedisCounter(this);
 		 sns_topic=new SnsTopicCounter(this);
+		 fPFamilyPhotoCollectionCounter=new FPFamilyPhotoCollectionCounter(this);
 		
 		
 	}
@@ -494,6 +498,10 @@ public class PxRedisCacheImpl  {
 
 	public SnsTopicCounter getSns_topic() {
 		return sns_topic;
+	}
+
+	public FPFamilyPhotoCollectionCounter getfPFamilyPhotoCollectionCounter() {
+		return fPFamilyPhotoCollectionCounter;
 	}
 
 }

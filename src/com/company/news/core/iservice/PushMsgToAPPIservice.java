@@ -1,14 +1,10 @@
 package com.company.news.core.iservice;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import net.sf.json.JSONObject;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +23,8 @@ import com.baidu.yun.push.model.PushMsgToAllResponse;
 import com.company.news.ProjectProperties;
 import com.company.news.SystemConstants;
 import com.company.news.commons.util.IOSPushUtils;
-import com.company.news.commons.util.PxStringUtil;
 import com.company.news.dao.NSimpleHibernateDao;
-import com.company.news.entity.PushMessage;
 import com.company.news.rest.util.DBUtil;
-import com.company.news.rest.util.TimeUtils;
 import com.company.pushmsg.PushMsgAndoridInterface;
 import com.company.pushmsg.PushMsgBaiduAndoridImpl;
 import com.company.pushmsg.PushMsgIosInterface;
@@ -264,6 +257,7 @@ public class PushMsgToAPPIservice {
 	 */
 	private List getChannelIdByUserUuids(String device_type, Integer type,
 			List user_uuids) {
+		if(user_uuids.isEmpty())return new ArrayList();
 		String hql = "select distinct device_id from PushMsgDevice where status=0 and device_type='"
 				+ device_type + "'";
 		hql += " and type=" + type;
@@ -422,7 +416,7 @@ public class PushMsgToAPPIservice {
 	public void pushMsg_to_parent_app_byUserList(
 			final List<String> user_uuids, final String title, final String msg)
 			throws Exception {
-
+		if(user_uuids==null||user_uuids.isEmpty())return;
 		// String apiKey = ProjectProperties.getProperty("baidu_apiKey_parent",
 		// "p9DUFwCzoUaKenaB5ovHch0G");
 		// String secretKey =

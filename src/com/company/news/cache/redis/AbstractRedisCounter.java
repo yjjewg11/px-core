@@ -73,6 +73,31 @@ public abstract class AbstractRedisCounter  implements  SynPxRedisToDbInterface{
 	}
 	
 	/**
+	 * 减少
+	 * @param ext_uuid
+	 * @return
+	 * @throws Exception
+	 */
+	public  Long getReduceCountByExt_uuid(String ext_uuid) throws Exception{
+		Jedis jedis=getJedis();
+		try {
+			Double score=Double.valueOf(TimeUtils.getCurrentTime(PxRedisCacheImpl.Date_YYYYMMDD));
+			 Pipeline p = jedis.pipelined();
+			 Response<Long>  countResponse= p.hincrBy(_hashKeyName, ext_uuid,-1l);
+			   p.zadd(_sortKeyName, score, ext_uuid);
+			    p.sync();
+			    p.close();
+			//count==1 表示缓存中没值
+			return countResponse.get();
+		}catch (Exception e) {
+			//e.printStackTrace();
+			throw e;
+		} finally{
+			if(jedis!=null)jedis.close();
+		}
+	}
+	
+	/**
 	 * null 表示没有命中.
 	 * @param ext_uuid
 	 * @return
