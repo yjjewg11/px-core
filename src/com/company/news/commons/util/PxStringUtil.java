@@ -335,7 +335,11 @@ public class PxStringUtil {
 		if(StringUtils.isBlank(uuids))return list;
 		
 		for(String uuid:uuids.split(",")){
-				list.add(imgMiddleUrlByUuid_sub(uuid));
+				String tmp=imgMiddleUrlByUuid_sub(uuid);
+				if(StringUtils.isNotBlank(tmp)){
+					list.add(tmp);
+					
+				}
 		}
 		return list;
 	}

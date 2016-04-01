@@ -41,7 +41,7 @@ public class Parent extends IdEntity implements SessionUserInfoInterface{
 	@Column
 	private Timestamp last_login_time;// 上一次登录时间
 	@Column
-	private Integer type;// '1:妈妈' 2:爸爸 3：爷爷 4：奶奶 5：外公 6：外婆
+	private Integer type=1;// '1:妈妈' 2:爸爸 3：爷爷 4：奶奶 5：外公 6：外婆
 
 	@Column
 	private String email;// email
