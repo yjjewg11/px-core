@@ -65,6 +65,10 @@ public class DBUtil {
 		for(String str:list){
 			if(StringUtils.isNotBlank(str))rstr+="'"+str+"',";
 		}
+		//解决.list中元素是.null 的bug.
+		if("".equals(rstr)){
+			return "''";
+		}
 		return StringOperationUtil.trimSeparatorChars(rstr);
 		
 	}

@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.Renderer;
 import net.htmlparser.jericho.Source;
@@ -21,7 +22,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -165,7 +165,18 @@ public class HttpRequestUtils {
     	 try {
 			Source source=new Source(new URL(url));
 			 Renderer renderer=source.getFirstElement(HTMLElementName.TITLE).getRenderer();
-			 return renderer.toString();
+			 
+			 String title=renderer.toString();
+			  
+		        if(isMessyCode(title)){  
+		            try {  
+		            	title= new String(title.getBytes("ISO8859-1"), "UTF-8");  
+		            } catch (Exception e) {  
+		            	e.printStackTrace();
+		            }  
+		        }  
+		        
+			 return title;
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			//e1.printStackTrace();
@@ -233,6 +244,17 @@ public class HttpRequestUtils {
             title = title + list.get(i);  
         }  
         title=outTag(title);
+        
+        
+        if(isMessyCode(title)){  
+            try {  
+            	title= new String(title.getBytes("ISO8859-1"), "UTF-8");  
+            } catch (Exception e) {  
+            	e.printStackTrace();
+            }  
+        }  
+
+        
         title=PxStringUtil.getSubString(title, 128);
         
         return title;  
@@ -275,8 +297,51 @@ public class HttpRequestUtils {
      out.flush();  
      out.close();  
     }   
-    
+    private static boolean isChinese(char c) {  
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);  
+        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS  
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS  
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A  
+                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION  
+                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION  
+                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {  
+            return true;  
+        }  
+        return false;  
+    }  
       
+ 
+    /**
+     * 是否是乱码
+     * @param strName
+     * @return
+     */
+    public static boolean isMessyCode(String strName) {  
+    	if(strName==null)return false;
+        Pattern p = Pattern.compile("\\s*|\t*|\r*|\n*");  
+        Matcher m = p.matcher(strName);  
+        String after = m.replaceAll("");  
+        String temp = after.replaceAll("\\p{P}", "");  
+        char[] ch = temp.trim().toCharArray();  
+        float chLength = 0 ;  
+        float count = 0;  
+        for (int i = 0; i < ch.length; i++) {  
+            char c = ch[i];  
+            if (!Character.isLetterOrDigit(c)) {  
+                if (!isChinese(c)) {  
+                    count = count + 1;  
+                }  
+                chLength++;   
+            }  
+        }  
+        float result = count / chLength ;  
+        if (result > 0.4) {  
+            return true;  
+        } else {  
+            return false;  
+        }  
+    }  
+
     public static void main(String[] args) throws MalformedURLException, IOException {  
         String htmlUrl = "https://mp.weixin.qq.com/cgi-bin/loginpage?t=wxm2-login&lang=zh_CN";  
        
@@ -284,16 +349,35 @@ public class HttpRequestUtils {
 //        htmlUrl="http://www.wenjienet.com";
         htmlUrl="http://kd.wenjienet.com/px-rest/rest/share/getArticle.html?uuid=11786304-a438-473b-9dab-7e79a28c4e35";
         htmlUrl="http://mp.weixin.qq.com/s?__biz=MjM5MTkxNDM3Mw==&mid=402669189&idx=1&sn=e0711716a1474ba21fafef54eb1cf0df#rd";
+//        htmlUrl= "http://www.wenjienet.com/px-cc/FPMovie/index.html?movie_uuid=1";
         String dd= HttpRequestUtils.httpGetHtmlTitle(htmlUrl);  
         System.out.println(dd);
         
         Source source=new Source(new URL(htmlUrl));
         Renderer renderer=source.getFirstElement(HTMLElementName.TITLE).getRenderer();
-        
+//        List<Element> elList=source.getAllElements(HTMLElementName.META);
+//        for(Element e:elList  ){
+//        	String tt=e.getAttributeValue("charset");
+//        	 System.out.println("charset="+tt);
+//        }
        // Renderer renderer=source.getRenderer();
 		renderer.setMaxLineLength(99999);//设置一行最长个数，默认76字符
 		 dd=renderer.toString();
+//		 dd="sdfdfasdf随风倒 sdfsdf ";
+//		 dd= new String(dd.getBytes("GBK"), "UTF-8");  
+		 String aaa=null;
+		 if(isMessyCode(dd)){  
+	            try {  
+	            	aaa= new String(dd.getBytes("ISO8859-1"), "UTF-8");  
+	            } catch (Exception e) {  
+	            	e.printStackTrace();
+	            }  
+	        }  
+
+//		 String aaa=new String(dd.getBytes("ISO-8859-1"),"UTF-8");
          System.out.println(dd);
+         System.out.println(aaa);
+         
     }  
 
 

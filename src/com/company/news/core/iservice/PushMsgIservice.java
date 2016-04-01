@@ -1,10 +1,12 @@
 package com.company.news.core.iservice;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
@@ -77,7 +79,9 @@ public class PushMsgIservice {
 		TypeNameMap.put(SystemConstants.common_type_jiaoxuejihua, "课程表");
 		TypeNameMap.put(SystemConstants.common_type_pxteachingPlan, "特长课程表");
 		
-		
+		TypeNameMap.put(SystemConstants.common_type_FPFamilyPhotoCollection, "家庭相册");
+		TypeNameMap.put(SystemConstants.common_type_FPPhotoItem, "家庭照片");
+		TypeNameMap.put(SystemConstants.common_type_FPMovie, "精品照片");
 	}
 	
 	
@@ -103,6 +107,10 @@ public class PushMsgIservice {
 		Timestamp nowTime=TimeUtils.getCurrentTimestamp();
 		
 		for (String o : list) {
+			
+			
+			if(StringUtils.isBlank(o))continue;
+			
 			PushMessage pushMessage = new PushMessage();
 			pushMessage.setGroup_uuid(group_uuid);
 			pushMessage.setRevice_useruuid(o);
@@ -268,12 +276,126 @@ public class PushMsgIservice {
 	public void pushMsgToParentByParentuuidList(int type, String type_uuid,
 			List<String> parentuuidlist, String msg) throws Exception {
 		String title = getPushMsgTitleByType(type);
-
+		
+		
 		Timestamp nowTime=TimeUtils.getCurrentTimestamp();
 		
-		for (String o : parentuuidlist) {
+		for (int i=parentuuidlist.size()-1;i>=0;i--) {
+			
+			String o =parentuuidlist.get(i);
+			if(StringUtils.isNotBlank(o)){
+				PushMessage pushMessage = new PushMessage();
+				pushMessage.setRevice_useruuid(o);
+				pushMessage.setType(type);
+				pushMessage.setRel_uuid(type_uuid);
+				pushMessage.setTitle(title);
+				pushMessage.setMessage(PxStringUtil.getSubString(msg,
+						msg_max_length));
+				pushMessage.setCreate_time(nowTime);
+				pushMessage.setIsread(0);
+
+				this.nSimpleHibernateDao.save(pushMessage);
+			}
+		
+		}
+
+		this.logger.info("pushMsgToParentByClass count="
+				+ parentuuidlist.size());
+		this.pushMsgToAPPIservice.pushMsg_to_parent_app_byUserList(parentuuidlist, title, msg);
+	}
+	
+	/**
+	 * 广播消息给指定家长的家长(过滤掉重复消息没有阅读的),避免发送多次
+	 * 
+	 * @param msg
+	 * @return
+	 */
+	public void pushMsgToParentByParentuuidListFilterNoreadCount(int type, String type_uuid,
+			List<String> parentuuidlist, String msg) throws Exception {
+		
+		if(parentuuidlist.isEmpty()){
+			logger.warn("pushMsgToParentByParentuuidListFilterNoreadCount parentuuidlist isEmpty,msg= "+msg);
+			return;
+		}
+		String title = getPushMsgTitleByType(type);
+		//添加不在发送推送消息的bug.
+		List<String> noReadUserlist=new ArrayList();
+			List<PushMessage>	pushMessageList=this.getPushMessageList(type, type_uuid, parentuuidlist);
+		
+		for(PushMessage pushMessage:pushMessageList){
+			
+			noReadUserlist.add(pushMessage.getRevice_useruuid());
+			if (SystemConstants.Read_flag_0.equals(pushMessage.getIsread())) {// 未读情况下,推送消息不在发送.
+				if (pushMessage.getCount() == null) {// 计数.
+					pushMessage.setCount(1);
+				} else {
+					pushMessage.setCount(pushMessage.getCount() + 1);
+				}
+			} else {//
+				pushMessage.setCount(1);
+			}
+			pushMessage.setRel_uuid(type_uuid);
+			pushMessage.setTitle(title+"(" + pushMessage.getCount() + ")");
+			pushMessage.setMessage(PxStringUtil.getSubString(msg, 128));
+		}
+		
+		Timestamp nowTime=TimeUtils.getCurrentTimestamp();
+		
+		for (int i=parentuuidlist.size()-1;i>=0;i--) {
+			
+			String o =parentuuidlist.get(i);
+			if(noReadUserlist.contains(o)){//没有阅读的信息,只发一次.
+				parentuuidlist.remove(i);
+				continue;
+			}
+			
+			
+			if(StringUtils.isNotBlank(o)){
+				PushMessage pushMessage = new PushMessage();
+				pushMessage.setRevice_useruuid(o);
+				pushMessage.setType(type);
+				pushMessage.setRel_uuid(type_uuid);
+				pushMessage.setTitle(title);
+				pushMessage.setMessage(PxStringUtil.getSubString(msg,
+						msg_max_length));
+				pushMessage.setCreate_time(nowTime);
+				pushMessage.setIsread(0);
+
+				this.nSimpleHibernateDao.save(pushMessage);
+			}
+			
+		}
+
+		this.logger.info("pushMsgToParentByClass count="
+				+ parentuuidlist.size());
+		
+		this.pushMsgToAPPIservice.pushMsg_to_parent_app_byUserList(parentuuidlist, title, msg);
+	}
+	/**
+	 * 广播消息给指定家长的家长(过滤掉重复消息没有阅读的),避免发送多次
+	 * 
+	 * @param msg
+	 * @return
+	 */
+	public void pushMsgToParentByParentuuidListFilterNoread(int type, String type_uuid,
+			List<String> parentuuidlist, String msg) throws Exception {
+		String title = getPushMsgTitleByType(type);
+		List<String> noReadUserlist=this.getPushMessageRevice_useruuidList(type, type_uuid, parentuuidlist);
+		
+		
+		Timestamp nowTime=TimeUtils.getCurrentTimestamp();
+		
+		for (int i=parentuuidlist.size()-1;i>=0;i--) {
+			
+			String o =parentuuidlist.get(i);
+			if(noReadUserlist.contains(o)){//没有阅读的信息,只发一次.
+				parentuuidlist.remove(i);
+				continue;
+			}
+			
+			
+			if(StringUtils.isBlank(o))continue;
 			PushMessage pushMessage = new PushMessage();
-			// pushMessage.setGroup_uuid(group_uuid);
 			pushMessage.setRevice_useruuid(o);
 			pushMessage.setType(type);
 			pushMessage.setRel_uuid(type_uuid);
@@ -290,7 +412,6 @@ public class PushMsgIservice {
 				+ parentuuidlist.size());
 		this.pushMsgToAPPIservice.pushMsg_to_parent_app_byUserList(parentuuidlist, title, msg);
 	}
-	
 
 	/**
 	 *获取幼儿园关联所有家长
@@ -353,7 +474,7 @@ public class PushMsgIservice {
 	public void pushMsg_to_teacher(int type, String type_uuid,
 			String user_uuid, String msg) throws Exception {
 		String title = getPushMsgTitleByType(type);
-
+		if(StringUtils.isBlank(user_uuid))return;
 		PushMessage pushMessage = new PushMessage();
 		// pushMessage.setGroup_uuid(group_uuid);
 		pushMessage.setRevice_useruuid(user_uuid);
@@ -377,6 +498,8 @@ public class PushMsgIservice {
 	 */
 	public void pushMsg_to_parent(int type, String type_uuid, String user_uuid,
 			String msg) throws Exception {
+		
+		if(StringUtils.isBlank(user_uuid))return;
 		String title = getPushMsgTitleByType(type);
 
 		PushMessage pushMessage = new PushMessage();
@@ -394,7 +517,45 @@ public class PushMsgIservice {
 
 	}
 
+	/**
+	 * 获取用户同一个消息,如果没有看过,就不在发推送消息
+	 * @param type
+	 * @param rel_uuid
+	 * @param create_useruuids
+	 * @return
+	 */
+	public List<String> getPushMessageRevice_useruuidList(Integer type,String rel_uuid,List create_useruuids){
+		String hql="select revice_useruuid from PushMessage where isread=0 and  type=:type and rel_uuid=:rel_uuid and revice_useruuid in(:revice_useruuids) ";
+		    List l = this.nSimpleHibernateDao.createHqlQuery(hql)
+		    		.setInteger("type", type)
+		    		.setString("rel_uuid", rel_uuid)
+		    		.setParameterList("revice_useruuids", create_useruuids).list();
+		    
+		return l;
+	}
+	
+	
 
+	/**
+	 * 获取用户同一个消息,如果没有看过,就不在发推送消息
+	 * @param type
+	 * @param rel_uuid
+	 * @param create_useruuids
+	 * @return
+	 */
+	public List<PushMessage> getPushMessageList(Integer type,String rel_uuid,List create_useruuids){
+		if(create_useruuids.isEmpty()){
+			return new ArrayList();
+		}
+		String hql="from PushMessage where isread=0 and  type=:type and rel_uuid=:rel_uuid and revice_useruuid in(:revice_useruuids) ";
+		    List l = this.nSimpleHibernateDao.createHqlQuery(hql)
+		    		.setInteger("type", type)
+		    		.setString("rel_uuid", rel_uuid)
+		    		.setParameterList("revice_useruuids", create_useruuids)
+		    		.list();
+		    
+		return l;
+	}
 	/**
 	 * 根据回复内容,推送给对应老师或家长
 	 * 
@@ -404,8 +565,7 @@ public class PushMsgIservice {
 	public void pushMsg_replay_to_classNews_to_teacherOrParent(
 			String type_uuid, String msg) throws Exception {
 
-		Session session = this.nSimpleHibernateDao.getHibernateTemplate()
-				.getSessionFactory().openSession();
+		Session session = this.nSimpleHibernateDao.getSession();
 		String sql = " SELECT t1.uuid,t1.create_useruuid,t1.usertype,t1.groupuuid";
 		sql += " FROM px_classnews t1 ";
 		sql += " where t1.uuid='" + type_uuid + "'  ";
@@ -428,9 +588,16 @@ public class PushMsgIservice {
 		}
 
 		boolean isSendPushMsg = true;
-
-		PushMessage pushMessage = (PushMessage) this.nSimpleHibernateDao
-				.getObjectByAttribute(PushMessage.class, "rel_uuid", type_uuid);
+		List users=new ArrayList();
+		users.add(obj.get("create_useruuid"));
+		
+		List<PushMessage> listPushMessage=this.getPushMessageList(SystemConstants.common_type_hudong, type_uuid, users);
+		PushMessage pushMessage =null;
+		if(listPushMessage.size()>0){
+			pushMessage=listPushMessage.get(0);
+		}
+//		PushMessage pushMessage = (PushMessage) this.nSimpleHibernateDao
+//				.getObjectByAttribute(PushMessage.class, "rel_uuid", type_uuid);
 		if (pushMessage == null) {
 			pushMessage = new PushMessage();
 			pushMessage.setCount(1);
