@@ -172,13 +172,14 @@ public class PxStringUtil {
 	 * @param relativePath
 	 * @return
 	 */
+	@Deprecated
 	public static String imgFPPhotoUrlByRelativePath_sub(String relativePath){
 		if(StringUtils.isBlank(relativePath))return "";
 		if(relativePath.startsWith("http://")){
 			return relativePath;
 		}
 		if (uploadfiletype.equals("oss")) {
-			String s= ProjectProperties.getProperty("oss_Small_img_down_url", "http://img.wenjienet.com/{object}@240h").replace("{object}",relativePath );
+			String s= ProjectProperties.getProperty("oss_RelativePath_img_down_url", "http://img.wenjienet.com/{object}@240h").replace("{object}",relativePath );
 			return s;
 		}
 		return relativePath;
@@ -194,7 +195,7 @@ public class PxStringUtil {
 			return relativePath;
 		}
 		if (uploadfiletype.equals("oss")) {
-			String s= ProjectProperties.getProperty("oss_Small_img_down_url", "http://img.wenjienet.com/{object}@108h").replace("{object}",relativePath );
+			String s= ProjectProperties.getProperty("oss_RelativePath_img_down_url", "http://img.wenjienet.com/{object}@108h").replace("{object}",relativePath );
 			return s;
 		}
 		return relativePath;
@@ -211,11 +212,15 @@ public class PxStringUtil {
 		if(relativePath.startsWith("http://")){
 			return relativePath;
 		}
-//		if (uploadfiletype.equals("oss")) {
+		if (uploadfiletype.equals("oss")) {
 			String s= ProjectProperties.getProperty("oss_original_img_down_url", "http://img.wenjienet.com/{object}").replace("{object}",relativePath )+scale;
 			//@108h
 			return s;
-//		}
+		}
+		
+		String s= ProjectProperties.getProperty("disk_img_down_url", "http://localhost:8080/px-rest/rest/kDPhotoItem/down/{object}.do").replace("{object}",relativePath );
+		//@108h
+		return s;
 //		return relativePath;
 	}
 	/**
