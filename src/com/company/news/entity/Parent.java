@@ -26,6 +26,8 @@ public class Parent extends IdEntity implements SessionUserInfoInterface{
 	@Column
 	private String  nickname;//  普通用户昵称
 	@Column
+	private String  realname;//  真实姓名
+	@Column
 	private String password;// 密码，md5加密。（UTF-8）
 	@Column
 	private String tel;// 电话号码。
@@ -178,6 +180,14 @@ public class Parent extends IdEntity implements SessionUserInfoInterface{
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 
 }
