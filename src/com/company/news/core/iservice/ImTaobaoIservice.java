@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.company.im.taobao.ImTaoBaoConstants;
+import com.company.news.ProjectProperties;
 import com.company.news.commons.util.PxStringUtil;
 import com.company.news.commons.util.UUIDGenerator;
 import com.company.news.dao.NSimpleHibernateDao;
@@ -35,16 +36,20 @@ import com.taobao.api.response.OpenimUsersUpdateResponse;
 public class ImTaobaoIservice {
 	
     static String url = "http://gw.api.taobao.com/router/rest";
+    
+//    正式环境	http://gw.api.taobao.com/router/rest	https://eco.taobao.com/router/rest
+//    	沙箱环境	http://gw.api.tbsandbox.com/router/rest	https://gw.api.tbsandbox.com/router/rest
 
     /**
      这是一个测试App
      */
-    static String appkey="23285145";
-    static String secret="df45389c86d51a64f91b6f3e386d0685";
+    static String appkey=ProjectProperties.getProperty(
+			"IM_taobao_appkey", "23285145");
+    static String secret=ProjectProperties.getProperty(
+			"IM_taobao_secret", "123123");
     static TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
     
-    
-    
+
 	  protected static Logger logger = LoggerFactory.getLogger(ImTaobaoIservice.class);
 	  @Autowired
 	  @Qualifier("NSimpleHibernateDao")
@@ -121,7 +126,7 @@ public class ImTaobaoIservice {
 	   * @return
 	   * @throws ApiException
 	   */
-	  public Userinfos   getImUserByUser(SessionUserInfoInterface user,ResponseMessage responseMessage) throws ApiException {
+	  public List<Userinfos>    getImUserByUser(SessionUserInfoInterface user,ResponseMessage responseMessage) throws ApiException {
 		  OpenimUsersGetRequest req = new OpenimUsersGetRequest();
 		  req.setUserids(user.getUuid());
 		  
@@ -130,7 +135,7 @@ public class ImTaobaoIservice {
 		  	//有则返回,没有则创建
 	        if (rsp.getErrorCode() == null) {
 	        	List<Userinfos> userinfos=rsp.getUserinfos();
-	          if(userinfos!=null&&userinfos.size()>0)return userinfos.get(0);
+	          if(userinfos!=null&&userinfos.size()>0)return userinfos;
 
 	        } 
 	        
@@ -175,7 +180,7 @@ public class ImTaobaoIservice {
 	   * @return
 	   * @throws ApiException
 	   */
-	  public Userinfos   addOpenImUserByUser(SessionUserInfoInterface user,ResponseMessage responseMessage) throws ApiException {
+	  public List<Userinfos>   addOpenImUserByUser(SessionUserInfoInterface user,ResponseMessage responseMessage) throws ApiException {
 		  
 		  List<Userinfos> list2 = new ArrayList<Userinfos>();
 		  Userinfos obj3 = new Userinfos();
@@ -199,7 +204,7 @@ public class ImTaobaoIservice {
 //		  obj3.setQq("demo");
 //		  obj3.setWeibo("demo");
 		  if( addOpenImUser(list2,responseMessage)){
-			  return obj3;
+			  return list2;
 		  }
 		 return null;
 	  }

@@ -6,6 +6,7 @@ public class ImTaoBaoConstants {
 	static public final String Response_sub_code_service_error="isp.service-error";//isp.service-error	服务内部错误。 当内部服务调用失败时。返回该错误。	请稍后重试。 或者将返回的错误信息反馈给技术支持。由技术支持解决。
 	
 	
+	static public final String Return_userinfos="userinfos";//
 	
 	
 	
