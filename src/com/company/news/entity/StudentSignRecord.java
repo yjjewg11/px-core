@@ -34,6 +34,9 @@ public class StudentSignRecord extends IdEntity {
 	private String sign_name;// 签到人
 	@Column
 	private String sign_uuid;// 签到人uuid
+	
+	@Column
+	private Date createtime;// 最后一次登录时间。
 	public Integer getType() {
 		return type;
 	}
@@ -87,6 +90,12 @@ public class StudentSignRecord extends IdEntity {
 	}
 	public void setSign_uuid(String sign_uuid) {
 		this.sign_uuid = sign_uuid;
+	}
+	public Date getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
 	}
 	
 	

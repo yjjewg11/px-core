@@ -213,7 +213,7 @@ public class PxStringUtil {
 			return relativePath;
 		}
 		if (uploadfiletype.equals("oss")) {
-			String s= ProjectProperties.getProperty("oss_original_img_down_url", "http://img.wenjienet.com/{object}").replace("{object}",relativePath )+scale;
+			String s= ProjectProperties.getProperty("oss_original_img_down_url", "http://img.wenjienet.com/{object}@").replace("{object}",relativePath )+scale;
 			//@108h
 			return s;
 		}
