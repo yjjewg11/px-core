@@ -4,8 +4,11 @@ import java.io.InputStream;
 
 import org.apache.log4j.Logger;
 
+import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.model.PutObjectResult;
 import com.company.common.PxStringUtils;
 import com.company.news.ProjectProperties;
 
@@ -25,15 +28,29 @@ public class OssIUploadFile implements IUploadFile {
 	
 	@Override
 	public boolean uploadFile(InputStream input,String key,Integer type) {
-		logger.info("uploadFile:"+key);
-		// TODO Auto-generated method stub
-        ObjectMetadata objectMeta = new ObjectMetadata();
-        //objectMeta.setContentLength(input.);
-        // 可以在metadata中标记文件类型
-        objectMeta.setContentType("image/jpeg");		
-
-		client.putObject(bucketName, key, input, objectMeta);
-
+		try {
+		
+			// TODO Auto-generated method stub
+			ObjectMetadata objectMeta = new ObjectMetadata();
+			//objectMeta.setContentLength(input.);
+			// 可以在metadata中标记文件类型
+			objectMeta.setContentType("image/jpeg");		
+      
+			PutObjectResult putObject = client.putObject(bucketName, key, input, objectMeta);
+			
+		
+		} catch (OSSException e) {
+			logger.info("uploadFile:"+key);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (ClientException e) {
+			logger.info("uploadFile:"+key);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
 		return true;
        
 	}
