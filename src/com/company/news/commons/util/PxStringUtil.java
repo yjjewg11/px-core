@@ -486,6 +486,16 @@ public class PxStringUtil {
 	 * @return
 	 * date&author: 2009-3-25 
 	 */
+	public static String getKDMovieByUuid(String uuid){
+		if(uuid==null)return null;
+		return ProjectProperties.getProperty("share_url_getKDMovie", "http://www.wenjienet.com/px-cc/FPMovie/index.html?v=1&kdmovie_uuid={uuid}").replace("{uuid}", uuid);
+	}
+	/**
+	 * 分享动态相册
+	 * @param str
+	 * @return
+	 * date&author: 2009-3-25 
+	 */
 	public static String getFPMovieByUuid(String uuid){
 		if(uuid==null)return null;
 		return ProjectProperties.getProperty("share_url_getFPMovie", "http://www.wenjienet.com/px-cc/FPMovie/index.html?movie_uuid={uuid}").replace("{uuid}", uuid);
