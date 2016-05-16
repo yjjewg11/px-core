@@ -146,7 +146,7 @@ public class PushMsgIservice {
 
 		// from StudentContactRealation where student_uuid in( select uuid from
 		// Student where classuuid =?)
-		String sql = "select DISTINCT parent_uuid from px_studentcontactrealation  where student_uuid in ( select uuid from px_student where  classuuid in("
+		String sql = "select DISTINCT parent_uuid from px_studentcontactrealation  where parent_uuid is not null and student_uuid in ( select uuid from px_student where  classuuid in("
 				+ DBUtil.stringsToWhereInValue(class_uuids) + "))";
 		Query q = s.createSQLQuery(sql);
 		List<String> parentuuidlist = q.list();
@@ -424,7 +424,7 @@ public class PushMsgIservice {
 		
 		Session s = this.nSimpleHibernateDao.getHibernateTemplate()
 				.getSessionFactory().openSession();
-		String sql = "select DISTINCT parent_uuid from px_studentcontactrealation  where groupuuid='"
+		String sql = "select DISTINCT parent_uuid from px_studentcontactrealation  where  parent_uuid is not null and groupuuid='"
 				+ group_uuid + "'";
 		
 		return  this.nSimpleHibernateDao.createSqlQuery(sql).list();
