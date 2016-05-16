@@ -193,7 +193,7 @@ public class PushMsgIservice {
 
 		// from StudentContactRealation where student_uuid in( select uuid from
 		// Student where classuuid =?)
-		String sql = "select DISTINCT parent_uuid from px_studentcontactrealation  where student_uuid in ("+DBUtil.stringsToWhereInValue(student_uuids)+")";
+		String sql = "select DISTINCT parent_uuid from px_studentcontactrealation  where  parent_uuid is not null and student_uuid in ("+DBUtil.stringsToWhereInValue(student_uuids)+") ";
 		Query q = s.createSQLQuery(sql);
 		List<String> parentuuidlist = q.list();
 		if(parentuuidlist.isEmpty()){
