@@ -33,7 +33,7 @@ public class StudentBind extends IdEntity {
 	@Column
 	private String create_useruuid;// 绑定人 uuid
 	@Column
-	private Integer type;// 
+	private Integer type;// 0老师 1学生
 	@Column
 	private Date createtime;// 最后一次登录时间。
 	@Column
