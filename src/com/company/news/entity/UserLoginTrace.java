@@ -16,7 +16,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "px_user_login_trace")
 public class UserLoginTrace extends IdEntity{
-
+	public static String Type_account="account";
+	public static String Type_wenxin="wenxin";
+	public static String Type_qq="qq";
 	@Column
 	private String user_uuid;// 用户uuid，45
 	@Column
