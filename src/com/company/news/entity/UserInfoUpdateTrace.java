@@ -14,9 +14,10 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "px_user_login_trace")
+@Table(name = "px_user_info_update_trace")
 public class UserInfoUpdateTrace extends IdEntity{
-
+	public static String Type_info="info";
+	public static String Type_password="password";
 	@Column
 	private String user_uuid;// 用户uuid，45
 	@Column
@@ -26,7 +27,7 @@ public class UserInfoUpdateTrace extends IdEntity{
 	@Column
 	private String  address;//  地址。256
 	@Column
-	private String  type;//  登录类型,45。info：资料。password.密码。
+	private String  type;// 修改类型,45。info：资料。password.密码。
 	@Column
 	private String name;// 昵称
 	@Column
