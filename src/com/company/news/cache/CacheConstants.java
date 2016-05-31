@@ -22,4 +22,8 @@ public class CacheConstants {
 	
 	public static String Redis_String_PhotoPath="H_";
 	public static int Redis_String_PhotoPath_Expire=60*60*24;
+	
+	
+	
+	static  public final String Key_YS7_accessToken="Key_YS7_accessToken";
 }

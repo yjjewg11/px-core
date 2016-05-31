@@ -280,6 +280,42 @@ public class PxRedisCache{
 		return null;
 		
 	}
+	
+	/**
+	 * 设置统计数量,缓存延长24小时
+	 * @param uuid
+	 * @param number
+	 */
+	public  static boolean setString(String key,String obj){
+		try {
+			if(pxRedisCache==null)return false;
+			pxRedisCache.setString(key, obj);
+			return true;
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**
+	 * 设置统计数量,缓存延长24小时
+	 * @param uuid
+	 * @param number
+	 */
+	public  static  String  getString(String key){
+		try {
+			if(pxRedisCache==null)return null;
+			return pxRedisCache.getString(key);
+		}catch (NullPointerException e) {
+			logger.error("redis Connection failure!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 	/**
 	 * 设置统计数量,缓存延长24小时
 	 * @param uuid

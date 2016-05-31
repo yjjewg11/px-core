@@ -491,6 +491,43 @@ public class PxRedisCacheImpl  {
 		}
 		
 	}
+	
+	
+
+	/**
+	 * 设置对象.转换成String
+	 * @param uuid
+	 * @param path
+	 */
+	public  void setString(String key,String obj){
+		Jedis jedis=getJedis();
+		try {
+		      jedis.set(key, obj);
+			logger.info("jedis.set("+key+", "+obj+")");
+		}catch (Exception e) {
+			//e.printStackTrace();
+			throw e;
+		} finally{
+			if(jedis!=null)jedis.close();
+		}
+	}
+	/**
+	 * 设置对象.转换成String
+	 * @param uuid
+	 * @param path
+	 */
+	public  String  getString(String key){
+		Jedis jedis=getJedis();
+		try {
+		      return jedis.get(key);
+		}catch (Exception e) {
+			//e.printStackTrace();
+			throw e;
+		} finally{
+			if(jedis!=null)jedis.close();
+		}
+	}
+	
 
 	public PxRedisCounter getPx_count() {
 		return px_count;

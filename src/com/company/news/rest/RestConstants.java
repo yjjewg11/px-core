@@ -99,6 +99,9 @@ public class RestConstants {
   //第三分授权
   //需要绑定手机号码
   static public String Return_UserThirdLogin_access_token="access_token";//票据
+  
+  static public String Return_YS7_accessToken="accessToken";//访问令牌，由server返回给client用于认证
+  static public String Return_YS7_AppKey="appKey";//应用程序key
   static public String Return_UserThirdLogin_needBindTel="needBindTel";//1需要.0:不需要
 
 }
