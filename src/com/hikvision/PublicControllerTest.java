@@ -16,15 +16,18 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.company.news.ProjectProperties;
+import com.company.news.service.AbstractService;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 
 public class PublicControllerTest {
 	
-	
+	 protected static Logger logger = LoggerFactory.getLogger(PublicControllerTest.class);
 	static public String key= ProjectProperties.getProperty(
 			"hikvision_key", "44b89d0bea824201ad557c48f73635d9");
 
@@ -91,9 +94,11 @@ static public String secret= ProjectProperties.getProperty(
             client.executeMethod(method);
 
             InputStream inputStream = method.getResponseBodyAsStream();
-             restult = IOUtils.toString(inputStream);
+    
+            restult =IOUtils.toString(inputStream, "UTF-8");
+//             restult = IOUtils.toString(inputStream);
             
-            System.out.println(restult);
+            logger.info("ys7:"+restult);
             return restult;
         } catch (Exception e) {
             e.printStackTrace();

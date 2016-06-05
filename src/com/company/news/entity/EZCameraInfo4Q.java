@@ -27,6 +27,8 @@ public class EZCameraInfo4Q extends IdEntity {
 	@Column
 	private String channelNo;// 电话
 	@Column
+	private String cameraName;// 坐标
+	@Column
 	private String deviceSerial;// 
 	@Column
 	private Boolean isEncrypt;// 
@@ -78,6 +80,12 @@ public class EZCameraInfo4Q extends IdEntity {
 	}
 	public void setIsOnline(Boolean isOnline) {
 		this.isOnline = isOnline;
+	}
+	public String getCameraName() {
+		return cameraName;
+	}
+	public void setCameraName(String cameraName) {
+		this.cameraName = cameraName;
 	}
 
 

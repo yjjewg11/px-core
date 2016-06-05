@@ -12,6 +12,11 @@ public class CameraInfo {
 	private Integer isEncrypt;
 	private Integer defence;
 	private Integer videoLevel;
+	
+	
+	private String deviceSerial;
+	private String deviceName;
+	
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -77,6 +82,18 @@ public class CameraInfo {
 	}
 	public void setVideoLevel(Integer videoLevel) {
 		this.videoLevel = videoLevel;
+	}
+	public String getDeviceSerial() {
+		return deviceSerial;
+	}
+	public void setDeviceSerial(String deviceSerial) {
+		this.deviceSerial = deviceSerial;
+	}
+	public String getDeviceName() {
+		return deviceName;
+	}
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName;
 	}
 	
 }

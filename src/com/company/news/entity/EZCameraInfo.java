@@ -32,6 +32,8 @@ public class EZCameraInfo extends IdEntity {
 	@Column
 	private String cameraId;// 坐标
 	@Column
+	private String cameraName;// 坐标
+	@Column
 	private String channelNo;// 电话
 	@Column
 	private String deviceSerial;// 
@@ -102,6 +104,12 @@ public class EZCameraInfo extends IdEntity {
 	}
 	public void setClass_uuid(String class_uuid) {
 		this.class_uuid = class_uuid;
+	}
+	public String getCameraName() {
+		return cameraName;
+	}
+	public void setCameraName(String cameraName) {
+		this.cameraName = cameraName;
 	}
 
 
