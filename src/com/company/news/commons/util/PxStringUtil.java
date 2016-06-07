@@ -614,7 +614,28 @@ public class PxStringUtil {
 		public static String getSnsTopicWebViewURL(String uuid){
 			return PxConfigCache.getConfig_sns_url()+"&topic_uuid="+uuid;
 		}
-	
+		/**
+		 * 将图片uuid替换成可以下载的http地址.最小图片
+		 * @param 复制这条信息，打开👉手机淘宝 👈即可看到【新款唐诗新唱幼儿舞蹈服装男女童演出服现代舞比赛服表演服装批发】￥AAFdsCag￥http://tmqd.me/h.zO8Ru?cv=AAFdsCag
+		 * @return
+		 * http://tmqd.me/h.zO8Ru?cv=AAFdsCag
+		 * =>
+		 * 获取话题模块打开的url.
+		 * date&author: 2009-3-25 
+		 */
+		public static String getURLInString(String str){
+			
+			if(str==null)return null;
+			
+			int start=str.indexOf("http://");
+			
+			if(start<0)start=str.indexOf("https://");
+			
+			if(start<0)return null;
+			
+			return str.substring(start);
+			
+		}
 	  public static void main(String[] s){
 		  String s1="180 123 123123";
 		  repairCellphone(s1);
@@ -623,5 +644,9 @@ public class PxStringUtil {
 		  s1="(180) 123 123123";
 		  s1=repairCellphone(s1);
 		  s1=repairCellphone(s1);
+		  
+		  s1="复制这条信息，打开👉手机淘宝 👈即可看到【新款唐诗新唱幼儿舞蹈服装男女童演出服现代舞比赛服表演服装批发】￥sAAFdsCag￥https://tmqd.me/h.zO8Ru?cv=AAFdsCag  123123123";
+		  s1=getURLInString(s1);
+		  System.out.println(s1);
 	  }
 }

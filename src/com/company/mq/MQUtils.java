@@ -47,7 +47,13 @@ public class MQUtils {
 		
 	}
 	public static  void publish(JobDetails job){
-		pubClient.publish(job);
+		try {
+			pubClient.publish(job);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("pubClient="+e.getMessage());
+		}
 	}
 	/**
 	 * 停止订阅服务器,让已经在执行的服务结束后,在停止
