@@ -343,6 +343,20 @@ public class TimeUtils
     public static final String DEFAULTFORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String YYYY_MM_DD_HH_mm_FORMAT = "yyyy-MM-dd HH:mm";
     public static final String HH_mm_ss_FORMAT = "HH:mm:ss";
+
+    /**
+     * 获取1年的第一天.
+     * @param sDate1
+     * @return
+     */
+    public static Date getFirstDayOfYear(int year) { 
+    	Calendar cDay1 = Calendar.getInstance(); 
+    	cDay1.set(year, 1, 1);
+    	cDay1.set(Calendar.HOUR_OF_DAY, 0);
+    	cDay1.set(Calendar.MINUTE, 0);
+    	cDay1.set(Calendar.SECOND, 0);
+    	return cDay1.getTime();
+    } 
     
     /**
      * 当前时间本月最后一天
