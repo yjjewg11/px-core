@@ -1,0 +1,13 @@
+
+2017-2-4
+¼à¿ØÊý¾Ý¿âÉý¼¶¡£
+
+ALTER TABLE `ez_camera_info`
+ADD COLUMN `device_id`  varchar(128) NULL AFTER `is_online`,
+ADD COLUMN `camera_no`  integer NULL AFTER `device_id`,
+ADD COLUMN `status`  integer NULL AFTER `camera_no`,
+ADD COLUMN `display`  integer NULL AFTER `status`,
+ADD COLUMN `defence`  integer NULL AFTER `display`,
+ADD COLUMN `video_level`  integer NULL AFTER `defence`,
+ADD COLUMN `device_name`  varchar(128) NULL AFTER `video_level`;
+
