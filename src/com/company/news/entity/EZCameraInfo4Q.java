@@ -39,6 +39,23 @@ public class EZCameraInfo4Q extends IdEntity {
 	@Column
 	private Boolean isOnline;// 坐标
 	
+	@Column
+	private String deviceId;
+	@Column
+	private Integer cameraNo;
+	@Column
+	private Integer status;
+	@Column
+	private Integer display;
+	@Column
+	private Integer defence;
+	@Column
+	private Integer videoLevel;
+	@Column
+	private String deviceName;
+	
+	
+	
 	public String getCameraId() {
 		return cameraId;
 	}
@@ -86,6 +103,48 @@ public class EZCameraInfo4Q extends IdEntity {
 	}
 	public void setCameraName(String cameraName) {
 		this.cameraName = cameraName;
+	}
+	public String getDeviceId() {
+		return deviceId;
+	}
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
+	}
+	public Integer getCameraNo() {
+		return cameraNo;
+	}
+	public void setCameraNo(Integer cameraNo) {
+		this.cameraNo = cameraNo;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public Integer getDisplay() {
+		return display;
+	}
+	public void setDisplay(Integer display) {
+		this.display = display;
+	}
+	public Integer getDefence() {
+		return defence;
+	}
+	public void setDefence(Integer defence) {
+		this.defence = defence;
+	}
+	public Integer getVideoLevel() {
+		return videoLevel;
+	}
+	public void setVideoLevel(Integer videoLevel) {
+		this.videoLevel = videoLevel;
+	}
+	public String getDeviceName() {
+		return deviceName;
+	}
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName;
 	}
 
 
