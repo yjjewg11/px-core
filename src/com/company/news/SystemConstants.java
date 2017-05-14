@@ -207,7 +207,8 @@ public class SystemConstants {
 				//第三分授权
 		
 		  static public String UserThirdLogin_QQ="qq";//
-		  static public String UserThirdLogin_WeiXin="weixin";//
+		  static public String UserThirdLogin_WeiXin="weixin";//微信开放平台
+		  static public String UserThirdLogin_WeiXinApp="weixinApp";//微信小程序
 		  //需要绑定手机号码
 		  static public String UserThirdLogin_needBindTel_1="1";//1需要.0:不需要
 		  static public String UserThirdLogin_needBindTel_0="0";//1需要.0:不需要
